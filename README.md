@@ -1,5 +1,9 @@
-# MATH406
-University of Maryland MATH406 (Introduction to Number Theory) Spring 2021 Lecture Notes and Homeworks.
+# MATH406 Introduction to Number Theory
+
+![Ulam's Spiral](ulams-spiral.png)
+
+
+University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
 
 ## Course Topics
 * Integers
