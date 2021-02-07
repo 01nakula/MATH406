@@ -1,6 +1,6 @@
 # MATH406 Introduction to Number Theory
 
-![Ulam's Spiral](ulams-spiral.png)
+![Ulam's Spiral](Notes/ulams-spiral.png)
 
 
 University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
