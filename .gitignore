@@ -1,0 +1,15 @@
+*~
+
+##core latex aux files:
+*.aux
+*.fdb_latexmk
+*.fls
+*.ilg
+*.log
+*.maf
+*.mtc
+*.mtc0
+*.out
+*.sta
+*.synctex.gz
+*.toc
