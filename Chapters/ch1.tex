@@ -141,12 +141,85 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 		\item[] Thus, by weak induction $$\inlinesum{i=1}{n}i = \frac{n(n+1)}{2}$$
 	\end{enumerate}
 \end{proof}
-
+\noindent\textbf{Ex.} Prove $2^n > n!$ for all $n\geq 4$.
+\begin{proof}
+	$ $\\
+	\begin{enumerate}
+		\item[] \textbf{Base Case:}
+			\begin{enumerate}
+				\item[] Let $n=4$, $2^4 = 16$ and $4!=24$ so the base case is valid.
+			\end{enumerate} 
+		\item[] \textbf{Inductive Step:}
+			\begin{enumerate}
+				\item[] Assume that it is true for some $k\geq 4$. That is, assume $$2^k < k!$$
+				\item[] Then consider the equation to $k+1$
+					\begin{align*}
+						2^{k+1} &= 2 \cdot 2^k < 2k! < (k+1)k! = (k+1)!
+					\end{align*}
+			\end{enumerate}
+		\item[] Thus, by weak induction $$2^k < k!$$
+	\end{enumerate}
+\end{proof}
+\noindent\textbf{Strong Mathematical Induction.} Here, for the inductive step, instead of just assuming its true for $k$
+, we assume it is true for $1,2,\cdots,k$. Then we show it is true for $k+1$. (The nice thing is we get to assume more for the inductive hypothesis.)\\
+Why would we need to do this alternative form? Often, to prove it is true for $k+1$, it is insufficient to assume it is true
+for $k$. We may need earlier values.
+\textbf{Ex.} Suppose we only have 3 cent and 7 cent stamps. We claim that we can make any cent postage of 12 or more cents.
+Observe that, for example, knowing we can do 50 cents does not tell us we can do 51 cents! However, we know that if we can do
+50 cents we can do 53 cents. Assume we can do $12,\cdots,k$. How can we do $k+1$? Well, since we can do $12$ to $k$, we
+know can do $k-2$. So we just add a 3 cent stamp to $k-2$. But this only hold if $k-2\geq 12$, which is only true if $k\geq 14$.
+So the inductive step is only valid for $k=14,15,16,\cdots$. So as our base case, we must do 12,13, and 14 as base cases!
+Thus, for strong induction, you actually would want to do the inductive step first to know how you should setup you base case!
+In this case we have, 
+\begin{align*}
+	12 &= 4 (3\text{-cent}) \\
+	13 &= 2 (3\text{-cent}) + 1 (7\text{-cent}) \\
+	14 &= 2 (7\text{-cent})
+\end{align*}
+Thus, by strong induction, we can form any cent postage greater than or equal to 12 with 3 and 7 cent stamps.
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Divisibility}
-
+Divisibility underlies much of what is done in number theory.\\\\
+\textbf{Definition.} Given $a,b\in\integers$ with $a\neq 0$, we say $a$ \emph{divides} $b$ if there exists $c\in\integers$
+such that $ac=b$. When this happens, we say $a\mid b$, otherwise we say $a\nmid b$.\\
+\textbf{Ex.}
+\begin{itemize}
+	\item $5\mid 20$ because $5(4) =20$.
+	\item $7\nmid 10$ because $7c\neq 10, \forall c\in\integers$.
+\end{itemize}
+Note, we may have $b=0$. In fact $a\mid 0$ for all $a$ because $a(0)=0$ for all $a\in\integers$. We don't talk about
+either $0\mid b$ nor $0\nmid b$.\\\\
+\textbf{Theorem.} If $a\mid b$ and $a\mid c$ then $a\mid (\alpha b + \beta c)$ for any $\alpha, \beta\in\integers$.
+\begin{proof}
+	$a\mid b$ so $\exists x\in\integers$ such that $ax=b$. Additionally, $a\mid c$ so $\exists y\in\integers$ such that
+	$ay=c$. Then $\alpha b + \beta c = \alpha(ax) + \beta(ay) = a(\alpha x + \beta y)$. So since $\alpha x + \beta y \in \integers$,
+	we have $a\mid (\alpha b + \beta c)$.
+\end{proof}
+\noindent\textbf{Theorem.} If $a\mid b$ and $b\mid c$ then $a\mid c$.
+\begin{proof}
+	Since $a\mid b$, there $\exists x\in\integers$ such that $ax=b$. Additionally, $b\mid c$, there $\exists y\in\integers$
+	such that $by=c$. Then $c=by=axy=a(xy)$. So $a\mid c$.
+\end{proof}
+\noindent\textbf{The Division Algorithm.} If $a,b\in\integers$ and $b>0$ then $!\exists q,r\in\integers$ with $0\leq r<b$
+such that $a=bq+r$.
+\begin{proof}
+	First we'll prove that $q,r$ exist. Define the set $S$ as follows, $$S = \{a-bk \mid k\in\integers \text{ and } a-bk\geq 0\}$$
+	Then $S\subset \integers^{+}$, therefore $S$ has a least element. Let $r$ be the least element and $q$ be the $k$-value
+	which yields it. So $r=a-bq$ is the smallest element in $S$. Therefore $a=bq+r$. We now need to show $0\leq r<b$.\\\\
+	We know $r\geq 0$ because $r\in S$. Suppose $r\geq b$. Then note $r\geq b$ implies that $r-b\geq 0$. Separately, $r-b<r$
+	because $b>0$. Therefore $0\leq r-b=(a-bq)-b=a-b(q+1)$. Therefore $r-b\in S$, but this means that $r$ is not the least element!
+	This is a contradiction. Therefore $0\leq r<b$.\\\\
+	What remains to be shown is uniqueness. By way of contradiction, assume $$a=bq_1 + r_1$$ $$a=bq_2 + r_2$$ for
+	$0\leq r_1<b$ and $0\leq r_2<b$. Subtracting the equations, we get $0=b(q_1-q_2)+(r_1-r_2)$ which implies
+	$(r_2-r_1) = b(q_1-q_2)$. Therefore $b\mid (r_2-r_1)$ but $-b<r_2-r_1<b$. So $r_2-r_1=0$, which means $r_2=r_1$.
+	Therefore $0=b(q_1 -q_2)$ which implies $q_1-q_2=0$ because $b>0$. So $q_1=q_2$.
+\end{proof}
+\noindent\textbf{Definition.} Suppose $a,b\in\integers$ with at least one nonzero. We define the \emph{greatest common divisor}
+gcd($a,b$), to be the largest integer dividing both.\\\\
+\noindent\textbf{Definition.} For $a,b\in\integers$, with at least one nonzero. We say that $a$ and $b$ are \emph{relatively prime}
+(or \emph{coprime}) if gcd($a,b$)$=1$.
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
@@ -211,7 +284,6 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 		\end{itemize}
 		It follows that $l'\in S$ but $l' < l$ which contradicts $l$ being the least element in $S$.
 	  \end{proof}
-	  \pagebreak
 	
 	%%%%%%%%%%%%%%%%%%%%%
 	%%%%% Problem 4 %%%%%
@@ -227,7 +299,7 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 	
 		\begin{align*}
 		  \inlinesum{k=2}{10}\frac{1}{k^2-1} &=\inlinesum{k=2}{10}\frac{1}{2}\left(\frac{1}{k-1}-\frac{1}{k+1}\right)= \frac{1}{2}\inlinesum{k=2}{10}\left(\frac{1}{k-1}-\frac{1}{k+1}\right) \\
-		  &= \frac{1}{2}\left[\left(\frac{1}{1}-\frac{1}{3}\right) + \left(\frac{1}{2}-\frac{1}{4}\right) + \left(\frac{1}{3}-\frac{1}{5}\right) + \cdots + \left(\frac{1}{8}-\frac{1}{10}\right) + \left(\frac{1}{9}-\frac{1}{11}\right)\right] \\
+		  &= \frac{1}{2}\left[\left(\frac{1}{1}-\frac{1}{3}\right) + \cdots + \left(\frac{1}{8}-\frac{1}{10}\right) + \left(\frac{1}{9}-\frac{1}{11}\right)\right] \\
 		  &= \frac{1}{2}\left[\frac{1}{1} + \frac{1}{2} - \frac{1}{10} - \frac{1}{11}\right] \\
 		  &= \frac{1}{2}\left(\frac{72}{55}\right) = \frac{36}{55}
 		\end{align*}
@@ -258,7 +330,7 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 		$\inlineprod{j=2}{7}\left(1-\frac1j\right)$
 	
 		\begin{align*}
-		  \inlineprod{j=2}{7}\left(1-\frac1j\right) &= \left[\left(1-\frac{1}{2}\right)\cdot \left(1-\frac{1}{3}\right)\cdot \left(1-\frac{1}{4}\right)\cdot \left(1-\frac{1}{5}\right)\cdot \left(1-\frac{1}{6}\right)\cdot \left(1-\frac{1}{7}\right)\right] \\
+		  \inlineprod{j=2}{7}\left(1-\frac1j\right)
 		&= \left[\frac{1}{2}\cdot\frac{2}{3}\cdot\frac{3}{4}\cdot\frac{4}{5}\cdot\frac{5}{6}\cdot\frac{6}{7}\right] \\
 		&= \frac{1}{7}
 		\end{align*}
@@ -283,6 +355,7 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 	  Use weak mathematical induction to prove that
 	  $$\inlinesum{j=1}{n}j(j+1)=\frac{n(n+1)(n+2)}3$$
 	  for every positive integer $n$.
+	  \pagebreak
 	  \begin{proof}
 		$ $
 		\begin{enumerate}
@@ -301,7 +374,7 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 			  \item[] Then consider the sum to $n+1$:
 			  \begin{align*}
 				\sum_{j=1}^{n+1}j(j+1) &= \sum_{j=1}^{n}j(j+1) + (n+1)((n+1)+1) \\
-				&= \left[\frac{n(n+1)(n+2)}{3}\right] + (n+1)((n+1)+1) \hspace{5mm}\text{by IH} \\
+				&= \left[\frac{n(n+1)(n+2)}{3}\right] + (n+1)((n+1)+1) \text{ by IH} \\
 				&= \frac{1}{3}\left(n(n+1)(n+2) + 3(n+1)(n+2)\right) \\
 				&= \frac{1}{3}\left(n^3 + 3n^2 + 2n + 3n^2 + 9n + 6\right) \\
 				&= \frac{1}{3}\left(n^3 + 6n^2 + 11n + 6\right) \\
@@ -416,6 +489,7 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 			  \item[] Assume from the inductive hypothesis that the conclusion is true for some $n$. \\
 			  This implies that $\inlinesum{j=1}{2^n}\frac1j \leq 1+n$.
 			\end{enumerate}
+			\pagebreak
 		  \item[] \textbf{Inductive Step:}
 			\begin{enumerate}
 			  \item[] Then consider the equation to $n+1$:
@@ -425,7 +499,6 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 				  &\leq \left[1+n\right] + \sum_{j=2^n +1}^{2^{n+1}} \frac{1}{j} \hspace{5mm}\text{by IH} \\
 				  &\leq \left[1+n\right] + \frac{1}{2^n +1}+\cdots +\frac{1}{2^{n+1}}\\
 				  &\leq \left[1+n\right] + 2^n\cdot \frac{1}{2^{n+1}} \\
-				  &\leq 1 + n + \frac{1}{2} \\
 				  &\leq \frac{3}{2} + n \leq 2 + n
 				\end{align*}
 			\end{enumerate}
@@ -446,7 +519,7 @@ Then we can conclude that it is true for $n=1,2,3,\cdots$\\
 			\begin{enumerate}
 			  \item[]
 			  Assume we can do $54,\cdots,k$. Because $k-6$ is in the $54,\cdots,k$ we can do $k-6$ then add a $7$-cent stamp.
-			  $k-6$ is in $54,\cdots,k$ only if $k-6\geq 54 \equiv k\geq60$.\\
+			  $k-6$ is in $54,\cdots,k$ only if $k-6\geq 54 \equiv k\geq60$.
 			  Thus, the inductive step is only valid for $k=60,61,\cdots$ to get to the next $k+1$.
 			\end{enumerate} 
 		  \item[] \textbf{Base Case:}
