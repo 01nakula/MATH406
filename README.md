@@ -6,8 +6,8 @@
 University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
 
 ## Course Topics
-* Integers
-* Divisibility
+* Integers `complete`
+* Divisibility `complete`
 * Prime Numbers
 * Unique Factorization
 * Congruences
