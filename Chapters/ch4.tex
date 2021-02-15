@@ -21,11 +21,73 @@
 \def\inlinesum#1#2{\overset{#2}{\underset{#1}{\sum}}}
 \def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
 
-
 \begin{document}
     
-\section{Introduction to Congruences}
+\section{The Basics of Modular Arithmetic}
 
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Introduction to Congruences}
+Suppose you wished to find $x,y\in\integers$ satisfying $2x^2 -8y=11$. There is no solution
+because no matter what, $2x^2 -8y$ is even and $11$ is odd. What if even/odd does not work...
+what else might? $\underbrace{3x^2-15y}_{3\mid\text{this}}=\underbrace{8}_{3\nmid\text{this}}$
+If even/odd or divided by 3 works, there is no guarantee that it works 
+$\underbrace{3x^2-15y=9}_{\text{might work}}$.
+The idea of modular arithmetic formalizes all of this.\\\\
+\textbf{Definition.} For $a,b,m\in\integers$ with $m\geq2$ we write $a\equiv b\mbox{ mod }m$ which is
+read as "$a$ and $b$ are congruent modulo $m$." to mean that $m\mid (a-b)$. A few notes on this,
+\begin{itemize}
+	\item[-] Equivalent to saying $m\mid (b-a)$.
+	\item[-] Equivalent to saying $\exists c\in\integers$ such that $mc=a-b$ or $\exists x\in\integers$
+	such that $mc=b-a$ (definition of divisibility).
+	\item[-] Equivalent to saying that if we divide $a$ and $b$ by $m$, the remainders are the same.
+\end{itemize}
+\textbf{Ex.} $8\equiv 18\mbox{ mod } 5$ in fact $8\equiv18\equiv3\equiv-2\equiv23\equiv\cdots\mbox{ mod }5$.
+Here with remainder 3. Also note $5\mid (18-8)$ and $5\mid (8-18)$.\\\\
+Even/odd is the same as $m=2$.\\\\
+\textbf{CS Note.} In computer science we often define $\mbox{mod}(a,m)= $ remainder when $a/m=a\%m$.
+It is not uncommon to see $a=b\mbox{ mod }m$ or $a\equiv_m b$ (strongly discouraged).\\\\
+Moving forward, please use $a\equiv b\mbox{ mod }m$.\\\\
+\textbf{Theorem.} Congruence acts like an equals sign in the following sense:
+\begin{enumerate}[(i)]
+	\item $a\equiv a\mbox{ mod }m$ (Reflexive).
+	\item if $a\equiv b\mbox{ mod }m$ then $b\equiv a\mbox{ mod }m$ (Symmetric).
+	\item If $a\equiv b\mbox{ mod }m$ and $b\equiv c\mbox{ mod }m$ then $a\equiv c\mbox{ mod }m$ (Transitivity).
+		\begin{proof}
+			$a\equiv b\mbox{ mod }m \implies \exists x$ such that $a-b=mx$,
+			$b\equiv c\mbox{ mod }m \implies \exists y$ such that $b-c=my$. Then 
+			$a-c = (a-b)+(b-c) =mx+my = m(x+y)$ so $m\mid (a-c)$ so $a\equiv c\mbox{ mod }m$.
+		\end{proof}
+	\item If $a\equiv b\mbox{ mod }m$ and $c\equiv \mbox{ mod }m$ then $a\pm c \equiv b\pm d \mbox{ mod }m$.
+		\begin{itemize}
+			\item[i.e.] If we know $x\equiv y\mbox{ mod } 5$ we can conclude $x+7\equiv y+7\mbox{ mod }5$ and also
+				$x+7 \equiv y+12 \mbox{ mod }5$.  
+		\end{itemize}
+	\item If $a\equiv b\mbox{ mod }m$ and $c\equiv d\mbox{ mod }m$ then $ac\equiv bd\mbox{ mod }m$
+		\begin{itemize}
+			\item[i.e.] If we know $x\equiv y\mbox{ mod }5$ then we can conclude $17x\equiv 17y\mbox{ mod }5$
+				but we can also conclude $17x\equiv 12y\mbox{ mod }5$  
+		\end{itemize}
+	\item If $a\equiv b\mbox{ mod }m$ and $k\in\integers, k\geq 1$ then $a^k \equiv b^k \mbox{ mod }m$.
+		(Note: we can \emph{not} use different powers!)
+\end{enumerate}
+\textbf{Division Issues.} First everything must be an integer, so does
+$2\equiv 8\mbox{ mod }6\implies \frac{2}{3} \equiv \frac{8}{3} \mbox{ mod }6$ this is garbage because $\frac{2}{3}, \frac{8}{3}\notin\integers$.
+However, is $2\equiv 8\mbox{ mod }6\implies \frac{2}{2}\equiv \frac{8}{2}\mbox{ mod }6$ true? No! because
+$1\equiv 4\mbox{ mod }6$ is not true. The point is even if division makes both sides integers there is no guarantee
+that the congruence is preserved!\\\\
+\textbf{Theorem.} Suppose we have $ac \equiv bc\mbox{ mod } m$ then $a\equiv b\mbox{ mod } m/\mbox{gcd}(m,c)$.
+In other words we may cancel an integer from both sides provided we divide the modulus by the gcd of the
+modulus and the integer we're canceling.
+\begin{proof}
+	Suppose $ac\equiv bc\mbox{ mod }m$, $\exists k\in\integers$ with $mk=ac-bc$. So
+	$mk=c(b-a)$, $$\frac{m}{\mbox{gcd}(c,m)}k = \frac{c}{\mbox{gcd}(c,m)}(a-b)$$
+	Note that from a previous theorem we know that: $$\mbox{gcd}\left(\frac{m}{\mbox{gcd}(c,m)},\frac{c}{\mbox{gcd}(c,m)}\right) = 1$$
+	Then the above statement says that $\frac{m}{\mbox{gcd}(c,m)} \Big| \frac{c}{\mbox{gcd}(c,m)}(a-b)$
+	which implies $\frac{m}{\mbox{gcd(c,m)}}\Big|a-b$.
+	Therefore, $a\equiv b\mbox{ mod }\frac{m}{\mbox{gcd}(c,m)}$.
+\end{proof}
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
