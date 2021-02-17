@@ -23,12 +23,13 @@
 
 \begin{document}
     
-\section{Primes and GCDs}
+\section{Primes and Greatest Common Divisors}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Pime Numbers}
+\rule{\textwidth}{1pt}
 Primes are important in number theory because they are the building blocks for the positive integers.
 Many things about $\integers^+$ have been proven by focusing on primes (this is done all the time in abstract algebra).\\\\
 \textbf{Definition.} An integer greater than $1$ is called \emph{prime} if its only positive divisors are 
@@ -74,6 +75,7 @@ as the proof.)\\
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{The Distribution of Primes}
+\rule{\textwidth}{1pt}
 We know there are infinitely many primes, but how are they distributed? Is there a formula for the $n^{th}$
 prime or do we have to go looking for it? Unfourtunately, there is no such formula. (If we knew a formula,
 then the idea of 'finding' the next largest prime would not be very interesting!)\\\\
@@ -115,6 +117,7 @@ is a string of 6 consecutive composites. Observe that this is nowhere near the m
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Greatest Common Divisors}
+\rule{\textwidth}{1pt}
 \textbf{Theorem.} Suppose $d=$gcd($a,b$). Then gcd$\left(\frac{a}{d}, \frac{b}{d}\right)=1$.\\\\
 \textbf{Theorem.} gcd($a,b$)=gcd($a+\alpha b,b$), with $\alpha\in\integers$ and gcd($a,b$)=gcd($a, b+\alpha a$).\\
 \textbf{Ex.} gcd($18,7$)=gcd($18, 7+42(18))$
@@ -175,6 +178,7 @@ $d$ has these two properties:
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{The Euclidean Algorithm}
+\rule{\textwidth}{1pt}
 The goal of this section is to talk about the Euclidean Algorithm from a computational perspective and see what it can
 be used for. It is not theoretically significant, but it is a useful tool. Suppose $a,b\in\integers$, not both
 zero. Two things we would like to do are (1) calculate gcd($a,b$) and (2) find $\alpha, \beta$ such that 
@@ -222,6 +226,7 @@ where $\alpha = 4$ and $\beta = -5$.
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Fundamental Theorem of Arithmetic}
+\rule{\textwidth}{1pt}
 We want to work our way up to proving the Fundamental Theorem of Arithmetic. To prove this, we will need a few
 lemmas.\\
 \textbf{Lemma.} Suppose $a,b,c\in\integers^+$ with $a\mid bc$ and gcd($a,b)=1$ then $a\mid c$.
@@ -312,6 +317,49 @@ then $d=d_1 d_2$ where gcd$(d_1, d_2)=1$ and $d_1\mid n_1$ and $d_2\mid n_2$.
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Homework}
+\subsection{Problems}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+
+\item
+ Use the Euclidean Algorithm to calculate $d=\mbox{gcd}(510,140)$
+  and then use the result to find $\alpha$ and $\beta$ so
+  that $d=510\alpha+140\beta$.
+
+\item
+  Use the Euclidean Algorithm to show that if $k\in\integers^+$ that
+  $3k+2$ and $5k+3$ are relatively prime.
+
+\item
+  How many zeros are there at the end of $(1000!)$?  Do not do this
+  by brute force.  Explain your method.
+
+\item
+  Let $a=1038180$ and $b=92950$.
+  First find the prime factorizations of $a$ and $b$.
+  Then use these to calculate $\mbox{gcd}(a,b)$ and $\mbox{lcm}(a,b)$.
+
+\item
+  Which pairs of integers have gcd of 18 and lcm of 540?  Explain.
+
+\item
+  Suppose that $a\in\integers$ is a perfect square
+  divisible by at least two distinct primes.
+  Show that $a$ has at least seven distinct factors.
+
+\item
+  Show that if $a,b\in\integers^+$ with $a^3\big|b^2$ then $a\big|b$.
+
+\item For which positive integers $m$ is each of the following statements true:
+\begin{enumerate}
+\item
+  $34\equiv 10 \mod m$
+\item
+  $1000\equiv 1 \mod m$
+\item
+  $100\equiv 0 \mod m$
+\end{enumerate}
+	
+\end{enumerate}
 
 \end{document}

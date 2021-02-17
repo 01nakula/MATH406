@@ -7,12 +7,12 @@ University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
 
 ## Course Topics
 * Integers `complete`
-* Divisibility `complete`
-* Prime Numbers
-* Unique Factorization
-* Congruences
-* Quadratic Reciprocity
-* Diophantine Equations
-* Arithmetic Functions
+* Primes and Greatest Common Divisors `complete`
+* Congruences `in progress`
+* Special Congruences
+* Multiplicative Functions
+* Primitive Roots
+* Quadratic Residues
+* Cryptology
 
 Taught by Professor [Justin Wyss-Gallifent](https://www.math.umd.edu/~immortal/) with notes compiled by [Neelam Akula](https://nakula.dev/).

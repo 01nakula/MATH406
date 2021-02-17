@@ -10,6 +10,7 @@
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
 \usepackage{epsfig,amssymb,amsmath,multicol,tikz,pgfplots,amsthm,enumerate}
+\usepackage{xcolor}
 
 \def\naturals{{\mathbb N}}
 \def\reals{{\mathbb R}}
@@ -23,74 +24,186 @@
 
 \begin{document}
     
-\section{The Basics of Modular Arithmetic}
+\section{Congruences}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Introduction to Congruences}
-Suppose you wished to find $x,y\in\integers$ satisfying $2x^2 -8y=11$. There is no solution
-because no matter what, $2x^2 -8y$ is even and $11$ is odd. What if even/odd does not work...
-what else might? $\underbrace{3x^2-15y}_{3\mid\text{this}}=\underbrace{8}_{3\nmid\text{this}}$
-If even/odd or divided by 3 works, there is no guarantee that it works 
-$\underbrace{3x^2-15y=9}_{\text{might work}}$.
-The idea of modular arithmetic formalizes all of this.\\\\
-\textbf{Definition.} For $a,b,m\in\integers$ with $m\geq2$ we write $a\equiv b\mbox{ mod }m$ which is
-read as "$a$ and $b$ are congruent modulo $m$." to mean that $m\mid (a-b)$. A few notes on this,
-\begin{itemize}
-	\item[-] Equivalent to saying $m\mid (b-a)$.
-	\item[-] Equivalent to saying $\exists c\in\integers$ such that $mc=a-b$ or $\exists x\in\integers$
-	such that $mc=b-a$ (definition of divisibility).
-	\item[-] Equivalent to saying that if we divide $a$ and $b$ by $m$, the remainders are the same.
-\end{itemize}
-\textbf{Ex.} $8\equiv 18\mbox{ mod } 5$ in fact $8\equiv18\equiv3\equiv-2\equiv23\equiv\cdots\mbox{ mod }5$.
-Here with remainder 3. Also note $5\mid (18-8)$ and $5\mid (8-18)$.\\\\
-Even/odd is the same as $m=2$.\\\\
-\textbf{CS Note.} In computer science we often define $\mbox{mod}(a,m)= $ remainder when $a/m=a\%m$.
-It is not uncommon to see $a=b\mbox{ mod }m$ or $a\equiv_m b$ (strongly discouraged).\\\\
-Moving forward, please use $a\equiv b\mbox{ mod }m$.\\\\
-\textbf{Theorem.} Congruence acts like an equals sign in the following sense:
-\begin{enumerate}[(i)]
-	\item $a\equiv a\mbox{ mod }m$ (Reflexive).
-	\item if $a\equiv b\mbox{ mod }m$ then $b\equiv a\mbox{ mod }m$ (Symmetric).
-	\item If $a\equiv b\mbox{ mod }m$ and $b\equiv c\mbox{ mod }m$ then $a\equiv c\mbox{ mod }m$ (Transitivity).
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item \textbf{Introduction:} Suppose you wished to find $x,y\in\integers$ satisfying $2x^2 -8y=11$. There is no solution
+	because no matter what, $2x^2 -8y$ is even and $11$ is odd. What if even/odd does not work...
+	what else might? $3x^2-15y=8$, 3 divides the left side but not the right.
+	If even/odd or divided by 3 works, there is no guarantee that it works 
+	$\underbrace{3x^2-15y=9}_{\text{might work}}$.
+	The idea of modular arithmetic formalizes all of this.
+
+	\item \textbf{Definition and Equivalencies:} 
+	For $a,b,m\in\integers$ with $m\geq2$ we write $a\equiv b\mbox{ mod }m$ which is
+	read as "$a$ and $b$ are congruent modulo $m$." to mean that $m\mid (a-b)$. A few notes on this,
+	\begin{itemize}
+		\item[-] Equivalent to saying $m\mid (b-a)$.
+		\item[-] Equivalent to saying $\exists c\in\integers$ such that $mc=a-b$ or $\exists x\in\integers$
+		such that $mc=b-a$ (definition of divisibility).
+		\item[-] Equivalent to saying that if we divide $a$ and $b$ by $m$, the remainders are the same.
+	\end{itemize}
+	\textbf{Ex.} $8\equiv 18\mbox{ mod } 5$ in fact $8\equiv18\equiv3\equiv-2\equiv23\equiv\cdots\mbox{ mod }5$.
+	Here with remainder 3. Also note $5\mid (18-8)$ and $5\mid (8-18)$.\\\\
+	Even/odd is the same as $m=2$.\\\\
+	\textbf{CS Note.} In computer science we often define $\mbox{mod}(a,m)= $ remainder when $a/m=a\%m$.
+	It is not uncommon to see $a=b\mbox{ mod }m$ or $a\equiv_m b$ (strongly discouraged).\\\\
+	Moving forward, please use $a\equiv b\mbox{ mod }m$.
+	
+	\item \textbf{Properties:}
+	\begin{enumerate}[(a)]
+		\item \textbf{Theorem.} Congruence acts like an equals sign in the following sense:
+		\begin{enumerate}[(i)]
+			\item $a\equiv a\mbox{ mod }m$ (Reflexive).
+			\item if $a\equiv b\mbox{ mod }m$ then $b\equiv a\mbox{ mod }m$ (Symmetric).
+			\item If $a\equiv b\mbox{ mod }m$ and $b\equiv c\mbox{ mod }m$ then $a\equiv c\mbox{ mod }m$ (Transitivity).
+				\begin{proof}
+					$a\equiv b\mbox{ mod }m \implies \exists x$ such that $a-b=mx$,
+					$b\equiv c\mbox{ mod }m \implies \exists y$ such that $b-c=my$. Then 
+					$a-c = (a-b)+(b-c) =mx+my = m(x+y)$ so $m\mid (a-c)$ so $a\equiv c\mbox{ mod }m$.
+				\end{proof}
+			\item If $a\equiv b\mbox{ mod }m$ and $c\equiv \mbox{ mod }m$ then $a\pm c \equiv b\pm d \mbox{ mod }m$.
+				\begin{itemize}
+					\item[i.e.] If we know $x\equiv y\mbox{ mod } 5$ we can conclude $x+7\equiv y+7\mbox{ mod }5$ and also
+						$x+7 \equiv y+12 \mbox{ mod }5$.  
+				\end{itemize}
+			\item If $a\equiv b\mbox{ mod }m$ and $c\equiv d\mbox{ mod }m$ then $ac\equiv bd\mbox{ mod }m$
+				\begin{itemize}
+					\item[i.e.] If we know $x\equiv y\mbox{ mod }5$ then we can conclude $17x\equiv 17y\mbox{ mod }5$
+						but we can also conclude $17x\equiv 12y\mbox{ mod }5$  
+				\end{itemize}
+			\item If $a\equiv b\mbox{ mod }m$ and $k\in\integers, k\geq 1$ then $a^k \equiv b^k \mbox{ mod }m$.
+				(Note: we can \emph{not} use different powers!)
+		\end{enumerate}
+
+		\item \textbf{Division Issues.} First everything must be an integer, so does
+		$2\equiv 8\mbox{ mod }6\implies \frac{2}{3} \equiv \frac{8}{3} \mbox{ mod }6$ this is garbage because $\frac{2}{3}, \frac{8}{3}\notin\integers$.
+		However, is $2\equiv 8\mbox{ mod }6\implies \frac{2}{2}\equiv \frac{8}{2}\mbox{ mod }6$ true? No! because
+		$1\equiv 4\mbox{ mod }6$ is not true. The point is even if division makes both sides integers there is no guarantee
+		that the congruence is preserved!\\\\
+		\textbf{Theorem.} Suppose we have $ac \equiv bc\mbox{ mod } m$ then $a\equiv b\mbox{ mod } m/\mbox{gcd}(m,c)$.
+		In other words we may cancel an integer from both sides provided we divide the modulus by the gcd of the
+		modulus and the integer we're canceling.
 		\begin{proof}
-			$a\equiv b\mbox{ mod }m \implies \exists x$ such that $a-b=mx$,
-			$b\equiv c\mbox{ mod }m \implies \exists y$ such that $b-c=my$. Then 
-			$a-c = (a-b)+(b-c) =mx+my = m(x+y)$ so $m\mid (a-c)$ so $a\equiv c\mbox{ mod }m$.
+			Suppose $ac\equiv bc\mbox{ mod }m$, $\exists k\in\integers$ with $mk=ac-bc$. So
+			$mk=c(b-a)$, $$\frac{m}{\mbox{gcd}(c,m)}k = \frac{c}{\mbox{gcd}(c,m)}(a-b)$$
+			Note that from a previous theorem we know that: $$\mbox{gcd}\left(\frac{m}{\mbox{gcd}(c,m)},\frac{c}{\mbox{gcd}(c,m)}\right) = 1$$
+			Then the above statement says that $\frac{m}{\mbox{gcd}(c,m)} \Big| \frac{c}{\mbox{gcd}(c,m)}(a-b)$
+			which implies $\frac{m}{\mbox{gcd(c,m)}}\Big|a-b$.
+			Therefore, $a\equiv b\mbox{ mod }\frac{m}{\mbox{gcd}(c,m)}$.
 		\end{proof}
-	\item If $a\equiv b\mbox{ mod }m$ and $c\equiv \mbox{ mod }m$ then $a\pm c \equiv b\pm d \mbox{ mod }m$.
+		\noindent\textbf{Note.} Don't think division, think cancelation when dealing with modulo.\\
+		\textbf{Ex.} If we know that $4x\equiv 8y\mbox{ mod }50$ then we can conclude that\\
+		$x\equiv 2y\mbox{ mod }50/\mbox{gcd}(50,4)$ and so $x\equiv 2y\mbox{ mod }25$ (think
+		\emph{cancel} the 4).\\
+		\textbf{Corollary.} If $ac \equiv bc\mbox{ mod }m$ and $\mbox{gcd}(c,m)=1$ then $a\equiv b\mbox{ mod }m$.\\
+		\textbf{Ex.} $15x \equiv 20y\mbox{ mod }27$, note that $\mbox{gcd}(5,27)=1$ so we may cancel the $5$. So
+		$3x\equiv 4y\mbox{ mod }27$.
+	\end{enumerate}
+	
+	\item \textbf{Residue Classes:}
+	\begin{enumerate}[(a)]
+		\item \textbf{Introduction:} Suppose we are working $\mbox{ mod }m=5$. We know $0\equiv 5\equiv10\equiv-5\equiv\cdots\mbox{ mod }5$,
+		we also know $1\equiv6\equiv11\equiv-4\equiv\cdots\mbox{ mod }5$, all of $\integers$ fall into one out of
+		$m=5$ classes.
+		\begin{align*}
+			\{\cdots,-15,-10,-5,&0,5,10,15,\cdots\}\\
+			\{\cdots,-16,-9,-4,&1,6,11,16,\cdots\}\\
+			\{\cdots, -13,-8,-3,&2,7,12,17,\cdots\}\\
+			\{\cdots,-12,-7,-2,&3,8,13,18,\cdots\}\\
+			\{\cdots, -11,-6,-1,&4,9,14,19,\dots\}
+		\end{align*}
+
+		\item \textbf{Definition.} For a given $m\geq 2$ there are $m$ congruence classes.
+		
+		\item \textbf{Definition.} From each we may pick a representative of the class so those would be $m$
+		representatives.\\ \textbf{Ex.} $m=5: \{0,1,2,3,4\}$ (the obvious one) or you could use $m=5: \{0,2,4,6,8\}$ (all even) 
+		or $m=5:\{0,2,4,8,16\}$ (all powers of 2, except 0).\\
+		\textbf{Ex.} $m=5: \{0,1,2,3,4\}$ (the obvious one) or you could use $m=5: \{0,2,4,6,8\}$ (all even) 
+		or $m=5:\{0,2,4,8,16\}$ (all powers of 2, except 0).
+		
+		\item \textbf{Definition.} The set of representatives $\{0,\cdots,m-1\}=$ the complete set of least
+		non-negative residues.
+
+		\item[] 
+		\noindent In $\reals$, $17^x = 48246319\implies x=\log_17(48246319)$. Now consider $\integers\mbox{ mod }100$,
+		$6^x\equiv 88\mbox{ mod }100$ is \emph{significantly} harder to solve (the discrete logarithm problem).
+
+		\item \textbf{Definition.} A complete set of residues (CSOR) $\mbox{ mod }m$ is a set of $m$ integers, no two of which
+		are congruent mod $m$.\\
+		\textbf{Ex.} $m=5$: here are 3 CSORs: $\{0,1,2,3,4\}$, $\{0,2,4,6,8\}$, $\{0,2,4,8,16\}$, and more!
+
+		\item \textbf{Theorem.} A subset $S$ of $\integers$ is a CSOR mod $m$ if and only if every integer is
+		congruent to exactly one element in $S$.\\
+		\noindent\textbf{Ex.} $m=4$: $S=\{0,9,14,3\}$ some observations:
 		\begin{itemize}
-			\item[i.e.] If we know $x\equiv y\mbox{ mod } 5$ we can conclude $x+7\equiv y+7\mbox{ mod }5$ and also
-				$x+7 \equiv y+12 \mbox{ mod }5$.  
+			\item $m=4$ of them.
+			\item No two are congruent to each other.
+			\item Any $a\in\integers$ is congruent to exactly one of these.
 		\end{itemize}
-	\item If $a\equiv b\mbox{ mod }m$ and $c\equiv d\mbox{ mod }m$ then $ac\equiv bd\mbox{ mod }m$
-		\begin{itemize}
-			\item[i.e.] If we know $x\equiv y\mbox{ mod }5$ then we can conclude $17x\equiv 17y\mbox{ mod }5$
-				but we can also conclude $17x\equiv 12y\mbox{ mod }5$  
-		\end{itemize}
-	\item If $a\equiv b\mbox{ mod }m$ and $k\in\integers, k\geq 1$ then $a^k \equiv b^k \mbox{ mod }m$.
-		(Note: we can \emph{not} use different powers!)
+
+		\item \textbf{Theorem.} If $\{r_1,r_2,\cdots, r_m\}$ is a CSOR mod $m$ and if $a,b\in\integers$ with 
+		gcd($a,m)=1$ then $\{ar_1+b, ar_2+b,\cdots, ar_m+b\}$ if also a CSOR mod $m$.
+		\begin{proof}
+			We will show that no two are congruent mod $m$. Suppose $ar_i+b\equiv ar_j+b\mbox{ mod }m$ with
+			$i\neq j$. Then $ar_i\equiv ar_j\mbox{ mod }m \implies r_i\equiv r_j\mbox{ mod }m$ because
+			gcd$(a,m)=1$. Contradiction because the $r_i, r_j$ came from a CSOR mod $m$.
+		\end{proof}
+		\noindent\textbf{Ex.} $\{0,1,2,3,4\}$ CSOR mod $5$. Pick $a=9, b=42$,
+		$\{0\cdot9 +42,1\cdot9 +42, 2\cdot9 +42, 3\cdot9 +42, 4\cdot9 +42\}$ is also a CSOR mod $5$.
+	\end{enumerate}
+
+	\item \textbf{Fast Arithmetic - Fast Exponentiation.} Suppose we wished to calculate $2^{503}\equiv a\mbox{ mod }5$,
+	$a=0,1,2,3,4$ but which one? 
+	{\color{red} Warning:} Do not reduce exponent mod $5$! $2^{503}\equiv 2^x \mbox{ mod }5$.
+	\begin{enumerate}[(a)]
+		\item Look for patterns: $2^1 = 2\mbox{ mod }5$, $2^2\equiv 4\mbox{ mod }5$, $2^3\equiv 3\mbox{ mod }5$,
+		$2^4\equiv 1\mbox{ mod }5$, $2^5\equiv 2\mbox{ mod }5$. This last one is a repeat, so it repeats
+		every 4. Note $503=4(125)+1$ so 
+		\begin{align*}
+			2^{503} &\equiv(2^4)^{503}2^3\\
+			&\equiv (1)^{125} 2^3\mbox{ mod }5\\
+			&\equiv (1) 8 \mbox{ mod }5\\
+			&\equiv 3\mbox{ mod }5
+		\end{align*}
+		\item Use binary expansions. Suppose we want $3^{81}\equiv a\mbox{ mod }5$.
+		$3^1\equiv 3$, $3^2\equiv 4$, $3^4\equiv 1$, $3^8\equiv 1$, $3^{16}\equiv 1$,
+		$3^{32}\equiv 1$, $3^{64}\equiv 1$. Then $81=64+16+1$ so 
+		\begin{align*}
+			3^{81}&=3^{64}3^{16}3^1 \\
+			&\equiv 1\cdot 1\cdot 3 \\
+			&\equiv 4\mbox{ mod }5
+		\end{align*}
+	\end{enumerate}
 \end{enumerate}
-\textbf{Division Issues.} First everything must be an integer, so does
-$2\equiv 8\mbox{ mod }6\implies \frac{2}{3} \equiv \frac{8}{3} \mbox{ mod }6$ this is garbage because $\frac{2}{3}, \frac{8}{3}\notin\integers$.
-However, is $2\equiv 8\mbox{ mod }6\implies \frac{2}{2}\equiv \frac{8}{2}\mbox{ mod }6$ true? No! because
-$1\equiv 4\mbox{ mod }6$ is not true. The point is even if division makes both sides integers there is no guarantee
-that the congruence is preserved!\\\\
-\textbf{Theorem.} Suppose we have $ac \equiv bc\mbox{ mod } m$ then $a\equiv b\mbox{ mod } m/\mbox{gcd}(m,c)$.
-In other words we may cancel an integer from both sides provided we divide the modulus by the gcd of the
-modulus and the integer we're canceling.
-\begin{proof}
-	Suppose $ac\equiv bc\mbox{ mod }m$, $\exists k\in\integers$ with $mk=ac-bc$. So
-	$mk=c(b-a)$, $$\frac{m}{\mbox{gcd}(c,m)}k = \frac{c}{\mbox{gcd}(c,m)}(a-b)$$
-	Note that from a previous theorem we know that: $$\mbox{gcd}\left(\frac{m}{\mbox{gcd}(c,m)},\frac{c}{\mbox{gcd}(c,m)}\right) = 1$$
-	Then the above statement says that $\frac{m}{\mbox{gcd}(c,m)} \Big| \frac{c}{\mbox{gcd}(c,m)}(a-b)$
-	which implies $\frac{m}{\mbox{gcd(c,m)}}\Big|a-b$.
-	Therefore, $a\equiv b\mbox{ mod }\frac{m}{\mbox{gcd}(c,m)}$.
-\end{proof}
+
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Homework}
+\subsection{Solving Linear Congruences}
+\rule{\textwidth}{1pt}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{The Chinese Remainder Theorem}
+\rule{\textwidth}{1pt}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Factoring Using Pollard's Rho Method}
+\rule{\textwidth}{1pt}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Problems}
+\rule{\textwidth}{1pt}
 
 \end{document}

@@ -32,6 +32,7 @@
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Numbers and Sequences}
+\rule{\textwidth}{1pt}
 This section will set the stage for what's to come. It is primarily about numbers.\\\\
 Mostly we will be working with the \emph{integers} $\mathbb{Z} = \{\cdots, -3,-2,-1,0,1,2,3,\cdots\}$.
 Additionally, we have the \emph{natural numbers} $\mathbb{N} = \{0,1,2,3,\cdots\}$ which are a subset of $\mathbb{Z}^+$.\\\\
@@ -98,6 +99,7 @@ which is uncountable, we must have uncountably transcendental numbers (because t
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Sum and Products}
+\rule{\textwidth}{1pt}
 Here is a quick review of sums and products.
 \begin{enumerate}[1.]
 	\item Recall $\inlinesum{i=1}{n}a_i = a_1 + a_2 + \cdots + a_n$.
@@ -112,6 +114,7 @@ Here is a quick review of sums and products.
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Mathematical Induction}
+\rule{\textwidth}{1pt}
 \textbf{Weak Mathematical Induction.} Suppose we wish to prove some statement is true for all $n=1,2,3,\cdots$.
 Induction works as follows. We prove two things
 \begin{enumerate}[1.]
@@ -181,6 +184,7 @@ Thus, by strong induction, we can form any cent postage greater than or equal to
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Divisibility}
+\rule{\textwidth}{1pt}
 Divisibility underlies much of what is done in number theory.\\\\
 \textbf{Definition.} Given $a,b\in\integers$ with $a\neq 0$, we say $a$ \emph{divides} $b$ if there exists $c\in\integers$
 such that $ac=b$. When this happens, we say $a\mid b$, otherwise we say $a\nmid b$.\\
@@ -223,321 +227,107 @@ gcd($a,b$), to be the largest integer dividing both.\\\\
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Homework}
+\subsection{Problems}
+\rule{\textwidth}{1pt}
 \begin{enumerate}
+\item
+  Determine whether each of the following sets is well-ordered.  If
+  so, give a proof which relies on the fact that $\integers^+$ is well-ordered.
+  If not, give an example of a subset with no least element.
+  \begin{enumerate}
+  \item $\left\{a\,\big|\, a\in\integers,a>3\right\}$
 
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 1 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Determine whether each of the following sets is well-ordered.  If
-	  so, give a proof which relies on the fact that $\integers^+$ is well-ordered.
-	  If not, give an example of a subset with no least element.
-	  \begin{enumerate}
-	  \item
-		$\left\{a\,\big|\, a\in\integers,a>3\right\}$
-	
-		Is a subset of $\integers^+$ and therefore is well-ordered.
-	  \item
-		$\left\{a\,\big|\, a\in\rationals,a>3\right\}$
-	
-		There is no least element so the set is not well-ordered.
-	  \item
-		$\left\{\frac a2\,\big|\, a\in\integers,a\geq 10\right\}$
-	
-		Consider the set $\left\{a\,\big|\, a\in\integers,a\geq 10\right\}$, it is apparent that this is a subset of $\integers^+$ and therefore is well-ordered.
-		So the set $\left\{\frac a2\,\big|\, a\in\integers,a\geq 10\right\}$ is also well-ordered because it holds a least element ($\frac{10}{5}$).
-	  \item
-		$\left\{\frac 2a\,\big|\, a\in\integers,a>10\right\}$
-	
-		There is no least element so the set is not well-ordered.
-	  \end{enumerate}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 2 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Suppose $a,b\in\integers^+$ are unknown.  Let
-	  $S=\left\{a-bk\,\big|\, k\in\integers,a-bk>0\right\}$.
-	  Explain why $S$ has a smallest element but no largest element.
-	
-	  Since $S$ is a subset of $\integers^+$ by well-ordering we know that $S$ has a least element, and because $k\in\integers$,
-	  $k$ can be $0$ and therefore there is no most element.
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 3 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Use the well-ordering property to show that
-	  $\sqrt 5$ is irrational.
-	  \begin{proof}
-		Suppose $\sqrt{5}$ is rational and is of the form $\frac{a}{b}$ where $a,b\in\mathbb{Z}^+$ and $b\neq 0$.
-		Consider the set $S$,
-		$$S = \left\{ k \mid k, k\sqrt{5}\in\mathbb{Z}^+ \right\}$$
-		We know that $S$ is a subset of $\mathbb{Z}^+$ and that $b\in S$, by well-ordering this implies that $S$ has a least element.
-		Let $l$ be the least element in $S$.\\
-		Consider the properties of $l'$ where $l' = l\sqrt{5}-2l$,
-		\begin{itemize}
-		  \item $l'=l\sqrt{5}-2l= l(\sqrt{5}-2) \implies 0 < l' < l$.
-		  \item Since $l\in S$ and $S\subset \mathbb{Z}^+$, both $l \text{ and }l\sqrt{5}\in\mathbb{Z}^+$ which implies $l'\in\mathbb{Z}^+$.
-		  \item Since $l\in\mathbb{Z}^+$ we have $5l\in\mathbb{Z}^+$ and since $l\sqrt{5}\in\mathbb{Z}^+$ we have $l'\sqrt{5}= (l\sqrt{5}-2l)\sqrt{5}= 5l-2l\sqrt{5}\in\mathbb{Z}^+$.
-		\end{itemize}
-		It follows that $l'\in S$ but $l' < l$ which contradicts $l$ being the least element in $S$.
-	  \end{proof}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 4 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Use the identity
-	  $$\frac1{k^2-1}=\frac12\left(\frac1{k-1}-\frac1{k+1}\right)$$
-	  to evaluate the following:
-	  \begin{enumerate}
-	
-	  \item
-		$\inlinesum{k=2}{10}\frac1{k^2-1}$
-	
-		\begin{align*}
-		  \inlinesum{k=2}{10}\frac{1}{k^2-1} &=\inlinesum{k=2}{10}\frac{1}{2}\left(\frac{1}{k-1}-\frac{1}{k+1}\right)= \frac{1}{2}\inlinesum{k=2}{10}\left(\frac{1}{k-1}-\frac{1}{k+1}\right) \\
-		  &= \frac{1}{2}\left[\left(\frac{1}{1}-\frac{1}{3}\right) + \cdots + \left(\frac{1}{8}-\frac{1}{10}\right) + \left(\frac{1}{9}-\frac{1}{11}\right)\right] \\
-		  &= \frac{1}{2}\left[\frac{1}{1} + \frac{1}{2} - \frac{1}{10} - \frac{1}{11}\right] \\
-		  &= \frac{1}{2}\left(\frac{72}{55}\right) = \frac{36}{55}
-		\end{align*}
-	
-	  \item
-		$\inlinesum{k=2}{n}\frac1{k^2-1}$
-	
-		$$\inlinesum{k=2}{n}\frac1{k^2-1}= \frac{1}{2}\left[\frac{1}{1}+\frac{1}{2} - \frac{1}{n} - \frac{1}{n+1}\right]$$
-	
-	  \item
-		$\inlinesum{k=1}{n}\frac1{k^2+2k}$
-		\hspace{10pt}Hint: $k^2+2k=(???)^2-1$
-	
-		$$\inlinesum{k=1}{n} \frac{1}{k^2+2k} = \inlinesum{k=1}{n}\frac{1}{(k+1)^2 - 1} = \inlinesum{k=2}{n+1}\frac{1}{k^2 - 1}$$
-		$$\inlinesum{k=2}{n+1}\frac{1}{k^2 - 1} = \frac{1}{2} \left[\frac{1}{1} + \frac{1}{2} - \frac{1}{n+1} - \frac{1}{n+2}\right]$$
-	
-	  \end{enumerate}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 5 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%  
-	\item
-	  Find the value of each of the following:
-	
-	  \begin{enumerate}
-	
-	  \item
-		$\inlineprod{j=2}{7}\left(1-\frac1j\right)$
-	
-		\begin{align*}
-		  \inlineprod{j=2}{7}\left(1-\frac1j\right)
-		&= \left[\frac{1}{2}\cdot\frac{2}{3}\cdot\frac{3}{4}\cdot\frac{4}{5}\cdot\frac{5}{6}\cdot\frac{6}{7}\right] \\
-		&= \frac{1}{7}
-		\end{align*}
-		
-	  \item
-		$\inlineprod{j=2}{n}\left(1-\frac1j\right)$
-	
-		$$\inlineprod{j=2}{n}\left(1-\frac1j\right) = \frac{1}{n}$$
-	
-	  \item
-		$\inlineprod{j=2}{n}\left(1-\frac1{j^2}\right)$
-		\hspace{10pt}Hint: Be sneaky!
-	
-		$$\inlineprod{j=2}{n}\left(1-\frac1{j^2}\right) = \frac{n+1}{2n}$$
-	
-	  \end{enumerate}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 6 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Use weak mathematical induction to prove that
-	  $$\inlinesum{j=1}{n}j(j+1)=\frac{n(n+1)(n+2)}3$$
-	  for every positive integer $n$.
-	  \pagebreak
-	  \begin{proof}
-		$ $
-		\begin{enumerate}
-		  \item[] \textbf{Base Case:}
-			\begin{enumerate}
-			  \item[] Let $n=1$, $\sum_{j=1}^{1} j(j+1) = 2$ and $\frac{1(1+1)(1+2)}{3} = 2$, so the
-			  base case is valid.
-			\end{enumerate}
-		  \item[] \textbf{Inductive Hypothesis:}
-			\begin{enumerate}
-			  \item[] Assume from the inductive hypothesis that the conclusion is true for some $n$.\\
-			  This implies that $\sum_{j=1}^{n} j(j+1) = \frac{n(n+1)(n+2)}{3}$.
-			\end{enumerate}
-		  \item[] \textbf{Inductive Step:}
-			\begin{enumerate}
-			  \item[] Then consider the sum to $n+1$:
-			  \begin{align*}
-				\sum_{j=1}^{n+1}j(j+1) &= \sum_{j=1}^{n}j(j+1) + (n+1)((n+1)+1) \\
-				&= \left[\frac{n(n+1)(n+2)}{3}\right] + (n+1)((n+1)+1) \text{ by IH} \\
-				&= \frac{1}{3}\left(n(n+1)(n+2) + 3(n+1)(n+2)\right) \\
-				&= \frac{1}{3}\left(n^3 + 3n^2 + 2n + 3n^2 + 9n + 6\right) \\
-				&= \frac{1}{3}\left(n^3 + 6n^2 + 11n + 6\right) \\
-				&= \frac{1}{3}\left((n+1)(n+2)(n+3)\right)
-			  \end{align*}  
-			\end{enumerate}
-		  \item[] Thus for all $n\geq 1$, $$\sum_{j=1}^{n} j(j+1) = \frac{n(n+1)(n+2)}{3}$$     
-		\end{enumerate}
-	  \end{proof}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 7 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Use Weak Mathematical Induction
-	  to show that $f_nf_{n+2}=f_{n+1}^2+(-1)^{n+1}$ for all $n\geq 1$.
-	  \begin{proof}
-		$ $
-		\begin{enumerate}
-		  \item[] \textbf{Base Case:}
-			\begin{enumerate}
-			  \item[] Rewrite the statement $f_nf_{n+2}=f_{n+1}^2+(-1)^{n+1}$ to be $f_nf_{n+2}-f_{n+1}^2 =(-1)^{n+1}$. \\
-			  Let $n=1$, $f_1 f_{1+2} - f_{1+1}^2 = 1\cdot2 - 1 = 1$ and $(-1)^{1+1} = 1$, so the base case is valid.
-			\end{enumerate} 
-		  \item[] \textbf{Inductive Hypothesis:}
-			\begin{enumerate}
-			  \item[] Assume from the inductive hypothesis that the conclusion is true for some $n$.\\
-			  This implies that $f_nf_{n+2}-f_{n+1}^2 =(-1)^{n+1}$
-			\end{enumerate}
-		  \item[] \textbf{Inductive Step:}
-			\begin{enumerate}
-			  \item[] Then consider the equation to $n+1$:
-				\begin{align*}
-				  f_{(n+1)} f_{(n+1)+2} - f_{(n+1)+1}^2 &= f_{n+1} f_{n+3} - f_{n+2}^2 \\
-				  &= f_{n+1} \left(f_{n+1} + f_{n+2}\right) - f_{n+2}^2 \\
-				  &= f_{n+1}^2 + f_{n+1}f_{n+2} - f_{n+2}^2 \\
-				  &= f_{n+1}^2 + f_{n+2} \left(f_{n+1} - f_{n+2}\right) \\
-				  &= f_{n+1}^2 + f_{n+2} \left( - f_{n}\right) \\
-				  &= -\left(f_n f_{n+2} - f_{n+1}^2\right) \\
-				  &= - (-1)^{n+1} \hspace{5mm}\text{by IH} \\
-				  &= (-1)^{n+2}
-				\end{align*} 
-			\end{enumerate}
-		  \item[] Thus for all $n\geq 1$, $$f_nf_{n+2}-f_{n+1}^2 =(-1)^{n+1}$$
-		\end{enumerate}
-	  \end{proof}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 8 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%  
-	\item
-	  Use weak mathematical induction to show that
-	  a $2^n\times2^n$ chessboard with a corner missing can be tiled
-	  with pieces shaped like
-	  \begin{picture}(20,20)
-		\put(0,-5){\line(0,1){20}}
-		\put(10,-5){\line(0,1){20}}
-		\put(20,-5){\line(0,1){10}}
-		\put(0,-5){\line(1,0){20}}
-		\put(0,5){\line(1,0){20}}
-		\put(0,15){\line(1,0){10}}
-	  \end{picture}
-	  \,
-	  for every integer $n\geq 0$.
-	  \begin{proof}
-		$ $
-		\begin{enumerate}
-		  \item[] \textbf{Base Case:}
-			\begin{enumerate}
-			  \item[] Let $n=1$, $2^1 \times 2^1$ is a $2\times2$ chessboard with a corner missing and can 
-			  be tiled by one tromino, so the base case is valid.
-			\end{enumerate} 
-		  \item[] \textbf{Inductive Hypothesis:}
-			\begin{enumerate}
-			  \item[] Assume from the inductive hypothesis that the conclusion is true for some $n$. This implies that any
-			  $2^n \times 2^n$ chessboard with a corner missing can be tiled with trominoes.
-			\end{enumerate}
-		  \item[] \textbf{Inductive Step:}
-			\begin{enumerate}
-			  \item[] Then consider a $2^{n+1} \times 2^{n+1}$ chessboard.
-			  \begin{itemize}
-				\item Divide the $2^{n+1}\times 2^{n+1}$ chessboard into four quadrants of size $2^n \times 2^n$.
-				\item By the Inductive Hypothesis we know that each $2^n\times 2^n$ has one corner missing.
-				\item There are then four empty squares in the $2^{n+1}\times 2^{n+1}$ board.
-				\item Rotate each quadrant such that the four empty squares are in the center of the board.
-				\item Add another tromino into the board leaving only one empty square.
-				\item Rotate the quadrant with the empty square such that the empty square is in the corner of the board.
-				\item Therefore the $2^{n+1}\times 2^{n+1}$ chessboard can be tiled by trominoes with a corner missing.
-			  \end{itemize} 
-			\end{enumerate}
-		  \item[] Thus, every $2^n \times 2^n$ chessboard with a corner missing can be tiled with trominoes.
-		\end{enumerate}    
-	  \end{proof}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 9 %%%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Define:
-	  $$H_{2^n}=\inlinesum{j=1}{2^n}\frac1j$$
-	  Use weak mathematical induction to prove that
-	  for all $n\geq 1$ we have $H_{2^n}\leq 1+n$.
-	  \begin{proof}
-		$ $
-		\begin{enumerate}
-		  \item[] \textbf{Base Case:}
-			\begin{enumerate}
-			  \item[] Let $n=1$, $H_{2^1}=\inlinesum{j=1}{2^n}\frac1j = \frac32$ and $\frac32 \leq 2$, so the base case is valid.
-			\end{enumerate} 
-		  \item[] \textbf{Inductive Hypothesis:}
-			\begin{enumerate}
-			  \item[] Assume from the inductive hypothesis that the conclusion is true for some $n$. \\
-			  This implies that $\inlinesum{j=1}{2^n}\frac1j \leq 1+n$.
-			\end{enumerate}
-			\pagebreak
-		  \item[] \textbf{Inductive Step:}
-			\begin{enumerate}
-			  \item[] Then consider the equation to $n+1$:
-				\begin{align*}
-				  H_{2^{n+1}} &= \sum_{j=1}^{2^{n+1}} \frac{1}{j} \\
-				  &= \sum_{j=1}^{2^n} \frac{1}{j} + \sum_{j=2^n +1}^{2^{n+1}} \frac{1}{j} \\
-				  &\leq \left[1+n\right] + \sum_{j=2^n +1}^{2^{n+1}} \frac{1}{j} \hspace{5mm}\text{by IH} \\
-				  &\leq \left[1+n\right] + \frac{1}{2^n +1}+\cdots +\frac{1}{2^{n+1}}\\
-				  &\leq \left[1+n\right] + 2^n\cdot \frac{1}{2^{n+1}} \\
-				  &\leq \frac{3}{2} + n \leq 2 + n
-				\end{align*}
-			\end{enumerate}
-		  \item[] Thus for all $n\geq 1$, $$H_{2^n}\leq 1+n$$
-		\end{enumerate}
-	  \end{proof}
-	
-	%%%%%%%%%%%%%%%%%%%%%
-	%%%%% Problem 10 %%%%
-	%%%%%%%%%%%%%%%%%%%%%
-	\item
-	  Use strong mathematical induction to prove that every amount of
-	  postage over $53$ cents can be formed using $7$-cent and $10$-cent stamps.
-	  \begin{proof}
-		$ $
-		\begin{enumerate}
-		  \item[] \textbf{Inductive Step:}
-			\begin{enumerate}
-			  \item[]
-			  Assume we can do $54,\cdots,k$. Because $k-6$ is in the $54,\cdots,k$ we can do $k-6$ then add a $7$-cent stamp.
-			  $k-6$ is in $54,\cdots,k$ only if $k-6\geq 54 \equiv k\geq60$.
-			  Thus, the inductive step is only valid for $k=60,61,\cdots$ to get to the next $k+1$.
-			\end{enumerate} 
-		  \item[] \textbf{Base Case:}
-			\begin{enumerate}
-			  \item[] Must do $54,55,56,57,58,59,60$ as base cases.
-			  \begin{align*}
-				54 &= 2(7\text{-cent}) + 4(10\text{-cent})\\
-				55 &= 5(7\text{-cent}) + 2(10\text{-cent})\\
-				56 &= 8(7\text{-cent})\\
-				57 &= 1(7\text{-cent}) + 5(10\text{-cent})\\
-				58 &= 4(7\text{-cent}) + 3(10\text{-cent})\\
-				59 &= 7(7\text{-cent}) + 1(10\text{-cent})\\
-				60 &= 6(10\text{-cent})
-			  \end{align*} 
-			\end{enumerate}
-		\end{enumerate}
-	  \end{proof}
-	
-	\end{enumerate}
+  \item
+	$\left\{a\,\big|\, a\in\rationals,a>3\right\}$
+
+  \item
+	$\left\{\frac a2\,\big|\, a\in\integers,a\geq 10\right\}$
+
+
+  \item
+	$\left\{\frac 2a\,\big|\, a\in\integers,a>10\right\}$
+
+  \end{enumerate}
+
+\item
+  Suppose $a,b\in\integers^+$ are unknown.  Let
+  $S=\left\{a-bk\,\big|\, k\in\integers,a-bk>0\right\}$.
+  Explain why $S$ has a smallest element but no largest element.
+
+\item
+  Use the well-ordering property to show that
+  $\sqrt 5$ is irrational.
+
+\item
+  Use the identity
+  $$\frac1{k^2-1}=\frac12\left(\frac1{k-1}-\frac1{k+1}\right)$$
+  to evaluate the following:
+
+  \begin{enumerate}
+
+  \item
+	$\inlinesum{k=2}{10}\frac1{k^2-1}$
+
+  \item
+	$\inlinesum{k=2}{n}\frac1{k^2-1}$
+
+  \item
+	$\inlinesum{k=1}{n}\frac1{k^2+2k}$
+	\hspace{10pt}Hint: $k^2+2k=(???)^2-1$
+
+  \end{enumerate}
+
+\item
+  Find the value of each of the following:
+
+  \begin{enumerate}
+
+  \item
+	$\inlineprod{j=2}{7}\left(1-\frac1j\right)$
+
+  \item
+	$\inlineprod{j=2}{n}\left(1-\frac1j\right)$
+
+  \item
+	$\inlineprod{j=2}{n}\left(1-\frac1{j^2}\right)$
+	\hspace{10pt}Hint: Be sneaky!
+
+  \end{enumerate}
+
+\item
+  Use weak mathematical induction to prove that
+  $$\inlinesum{j=1}{n}j(j+1)=\frac{n(n+1)(n+2)}3$$
+  for every positive integer $n$.
+
+\item
+  Use Weak Mathematical Induction
+  to show that $f_nf_{n+2}=f_{n+1}^2+(-1)^{n+1}$ for all $n\geq 1$.
+
+\item
+  Use weak mathematical induction to show that
+  a $2^n\times2^n$ chessboard with a corner missing can be tiled
+  with pieces shaped like
+  \begin{picture}(20,20)
+	\put(0,-5){\line(0,1){20}}
+	\put(10,-5){\line(0,1){20}}
+	\put(20,-5){\line(0,1){10}}
+	\put(0,-5){\line(1,0){20}}
+	\put(0,5){\line(1,0){20}}
+	\put(0,15){\line(1,0){10}}
+  \end{picture}
+  \,
+  for every integer $n\geq 0$.
+
+\item
+  Define:
+  $$H_{2^n}=\inlinesum{j=1}{2^n}\frac1j$$
+  Use weak mathematical induction to prove that
+  for all $n\geq 1$ we have $H_{2^n}\leq 1+n$.
+
+\item
+  Use strong mathematical induction to prove that every amount of
+  postage over $53$ cents can be formed using $7$-cent and $10$-cent stamps.
+
+\end{enumerate}
 
 \end{document}
