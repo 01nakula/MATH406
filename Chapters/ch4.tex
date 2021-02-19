@@ -187,6 +187,80 @@
 %%%%%%%%%%%%%%%
 \subsection{Solving Linear Congruences}
 \rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item \textbf{Introduction:} The idea is that we would ideally like to solve "equations" like
+	$3x^2+x\equiv 5\mbox{ mod }72$, $8^x\equiv 12\mbox{ mod }5$, etc... So let's go back to basics.\\
+	\textbf{Definition:} A linear congruence has the form $ax\equiv b\mbox{ mod }m$. We would like to
+	find all possible solutions, whatever that means.\\
+	\textbf{Process:}
+	\begin{enumerate}[(a)]
+		\item Do solutions exist?
+		\item If so, can we find just one?
+		\item Can we find more?
+		\item When are they "different"
+	\end{enumerate}
+	
+	\item \textbf{Do Solutions Exist:} To say that $ax\equiv b\mbox{ mod }m$ has a solution means,
+	$\exists x$ such that $ax\equiv b\mbox{ mod }m$ which in turn means $\exists x, \exists y$ such
+	that $ax+my=b$ ($ax\equiv b\mbox{ mod }m \implies m \mid (ax-b)\implies my=ax-b \implies ax-my=b$).
+	This means that $b$ is a linear combination of $a,m$.\\
+	\textbf{Recall:} \{Linear combination of $a,m\} = \{$ multiples of gcd$(a,m)\}$.\\
+	Thus, $b$ is a linear combination of $a,m$ when $b=$multiple of gcd$(a,m)$, so 
+	$ax\equiv b\mbox{ mod }m$ has solution(s) if and only if gcd($a,m)\mid b$.\\
+	\textbf{Ex.} $2x\equiv 8\mbox{ mod }18$ has solutions, because gcd(2,18)=$2\mid8$.\\
+	$6x\equiv 8\mbox{ mod }36$ does not, because gcd(6,36)=$6\nmid 8$.
+	
+	\item \textbf{Finding One Solution:} We would like to solve $ax+my=b$, with $b$ as a multiple of
+	gcd($a,m$). Well, we can solve $ax'+my'=\mbox{gcd}(a,m)$! But how? With the Euclidean Algorithm.
+	Use the Euclidean Algorithm to solve $ax'+my'=\mbox{gcd}(a,m)$ then multiple both sides to get $b$ on the right.\\
+	\textbf{Ex.} Consider $4x\equiv 6\mbox{ mod }50$. We have gcd(4,50)=$2\mid 6$ so solutions exist.
+	First we use the Euclidean Algorithm to solve: $$4x'+50y'=2$$
+	This gives us $4 \underbrace{(-12)}_{x'}+50\underbrace{(1)}_{y'}=2$, we want to get a $6$ on the right hand side so multiple by $3$.
+	So then we get $4 \underbrace{(-36)}_{x}+50\underbrace{(3)}_{y}=6$, so $4(-36)\equiv 6\mbox{ mod }50$.
+	Typically, we will use the least non-negative residue (add until you get a non-negative). So here
+	the solution is $x_0 = (-36)+50 = 14$.
+	
+	\item \textbf{Finding All Solutions:} Suppose we have our one solution, $x_0 \implies ax_0 \equiv b\mbox{ mod }m$.
+	Suppose now $x$ is another, this implies $ax\equiv b\mbox{ mod }m$. So we subtract the second from the first
+	\begin{align*}
+		a(x)-a(x_0) &\equiv b-b \mbox{ mod } m\\
+		a(x-x_0) &\equiv 0\mbox{ mod } m\\
+		x-x_0 &\equiv 0 \mbox{ mod } \frac{m}{\mbox{gcd}(a,m)}
+	\end{align*}
+	So, $$x=x_0 +k\left(\frac{m}{\mbox{gcd}(a,m)}\right)$$
+	{\color{red} Warning!} Solutions must look like this but are all things which look like this actually
+	solutions? \\\\
+	We would like $ax\equiv b\mbox{ mod }m$.
+	\begin{align*}
+		ax&\equiv a\left(x_0 +k\left(\frac{m}{\mbox{gcd}(a,m)}\right)\right) \mbox{ mod }m\\
+		ax&\equiv \underbrace{ax_0}_{b} + \underbrace{k\left(\frac{m}{\mbox{gcd}(a,m)}\right)}_{\mbox{lcm}} \mbox{ mod }m \\
+		ax&\equiv b + k\mbox{lcm}(a,m) \mbox{ mod }m\\
+		ax&\equiv b\mbox{ mod }m 
+	\end{align*}
+	Therefore all solutons can be gained by doing, $x=x_0 +k\left(\frac{m}{\mbox{gcd}(a,m)}\right), \forall k\in\integers$.\\\\
+	Lastly, when are they unique mod $m$?\\
+	Consider that two of them with $k_1$ and $k_2$ are identical mod $m$ when:
+	\begin{align*}
+		x_0 + k_1\left(\frac{m}{\mbox{gcd}(a,m)}\right) &\equiv x_0 +k_2\left(\frac{m}{\mbox{gcd}(a,m)}\right) \mbox{ mod }m\\
+		k_1\left(\frac{m}{\mbox{gcd}(a,m)}\right) &\equiv k_2\left(\frac{m}{\mbox{gcd}(a,m)}\right) \mbox{ mod }m\\
+		k_1 &\equiv k_2\mbox{ mod }\frac{m}{m/\mbox{gcd}(a,m)} \\
+		k_1 &\equiv k_2\mbox{ mod }\mbox{gcd}(a,m)
+	\end{align*}
+	Therefore, it follows that solutions will be congruent mod $m$ when $k$-values are congruent mod gcd($a,m)$.
+	So solutions are not congruent mod $m$ by ensuring that the $k$-values are not congruent mod gcd$(a,m)$.
+	This can be done using $k=0,1,2,\cdots, \mbox{gcd}(a,m)-1$.
+
+	\item \textbf{Summary Theorem:} The linear congruence $ax\equiv b\mbox{ mod }m$ has solutions
+	if and only if gcd$(a,m)\mid b$. If it has solutions then it has gcd($a,m)$ unique solutions mod $m$.
+	If $x_0$ is one of those then all are $$x=x_0 + k\cdot \frac{m}{\mbox{gcd}(a,m)}, \text{ for } k=0,1,2,\cdots, \mbox{gcd}(a,m)-1$$
+	\textbf{Ex.} $20x\equiv 15\mbox{ mod }65$, gcd(20,65)=$5\mid 15$ so $\exists$5 incongruent solutions mod 65.
+	The Euclidean Algorithm gives us a solution $x_0 \equiv 56\mbox{ mod }65$. So all solutions are then
+	$$x\equiv 56 + k\cdot \frac{65}{\mbox{gcd}(20,65)}\mbox{ mod }m, \text{ for } k=0,1,2,3,4$$
+	$$x\equiv 56+13k\mbox{ mod }65, k=0,1,2,3,4$$
+	That is $x\equiv 56,4,17,30,43 \mbox{ mod }65$.\\\\
+	\textbf{Note:} If gcd($a,m)=1$ there exists only one solution mod $m$.
+	
+\end{enumerate}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
@@ -205,5 +279,69 @@
 %%%%%%%%%%%%%%%
 \subsection{Problems}
 \rule{\textwidth}{1pt}
+\begin{enumerate}
+\item
+  Calculate the least positive residues modulo 47 of each of
+  the following with justification:
+  \begin{enumerate}
+  \item $2^{543}$
+  \item $32^{932}$
+  \item $46^{327349287323}$
+  \end{enumerate}
+
+\item
+  Exhibit a complete set of residues mod 17 composed entirely of
+  multiples of 3.
+
+\item
+  Show that if $a,b,m\in\integers$ with $m>0$ and if
+  $a\equiv b\mod m$ then $\gcd(a,m)=\gcd(b,m)$.
+
+\item
+  Suppose $p$ is prime and $x\in\integers$ satisfies
+  $x^2\equiv x\mod p$.  Prove that $x\equiv 0\mod p$ or $x\equiv 1\mod p$.
+  Show with a counterexample that this fails if $p$ is not prime.
+
+\item
+  Show that if $n$ is an odd positive integer or if $n$ is a positive
+  integer divisible by $4$ that:
+  $$1^3+2^3+...+(n-1)^3\equiv 0\mod n$$
+
+\item
+  Find all solutions (mod the given value) to each of the following.
+  \begin{enumerate}
+  \item $10x \equiv 25\mod 75$
+  \item $9x \equiv 8\mod 12$
+  \end{enumerate}
+
+\item
+  Solve each of the following linear congruences using inverses.
+  \begin{enumerate}
+  \item $3x \equiv 5\mod 17$
+  \item $10x \equiv 3\mod 11$
+  \end{enumerate}
+
+\item
+  What could the prime factorization of $m$ look like so that
+  $6x\equiv 10\mod m$ has at least one solution?  Explain.
+
+\item
+  Use the Chinese Remainder Theorem to solve:
+  \\A troop of monkeys has a store of bananas.
+  When they arrange them into 7 piles, none remain.
+  When they arrange them into 10 piles there are 3 left over.
+  When they arrange them into 11 piles there are 2 left over.
+  What is the smallest positive number of bananas they can have?
+  What is the second smallest positive number?
+
+\item
+  Solve the system of linear congruences:
+  \begin{align*}
+	2x+1 & \equiv 3\mod 10 \\
+	x+2 & \equiv 7\mod 9 \\
+	4x & \equiv 1\mod 7
+  \end{align*}
+
+\end{enumerate}
 
 \end{document}
