@@ -15,4 +15,4 @@ University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
 * Quadratic Residues
 * Cryptology
 
-Taught by Professor [Justin Wyss-Gallifent](https://www.math.umd.edu/~immortal/) with notes compiled by [Neelam Akula](https://nakula.dev/).
+Taught by Professor [Justin Wyss-Gallifent](https://www.math.umd.edu/~immortal/) with notes compiled by Neelam Akula.
