@@ -1,6 +1,6 @@
 *~
 
-##core latex aux files:
+## core latex aux files:
 *.aux
 *.fdb_latexmk
 *.fls
@@ -13,3 +13,6 @@
 *.sta
 *.synctex.gz
 *.toc
+
+## exclude hw answers:
+answers.pdf
