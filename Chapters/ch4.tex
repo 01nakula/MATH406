@@ -269,11 +269,98 @@
 \rule{\textwidth}{1pt}
 \begin{enumerate}[1.]
 	\item \textbf{Introduction:}
+	How can we solve systems of linear congruences? For example,
+	suppose we wished to find $x$ satisfying all of these:
+	\begin{align*}
+		x &\equiv 2\mod 6 \\
+		x &\equiv 4\mod 7 \\
+		x &\equiv 3\mod 25
+	\end{align*}
+	Is it always possible to find a solution to something like this? No!
+	However, under certain circumstances, yes!
 	
-	
-	\item \textbf{Lemma:}
-	
-	\item \textbf{The Chinese Remainder Theorem:}
+	\item \textbf{Chinese Remainder Theorem:}
+	Suppose we have a system of the form
+	\begin{align*}
+		x &\equiv a_1\mod m_1 \\
+		x &\equiv a_2\mod m_2 \\
+		&\vdots \\
+		x &\equiv a_n\mod m_n
+	\end{align*}
+	If all the $m_i$ are pairwise coprime (so gcd($m_i, m_j)=1, \forall i, j$), then
+	$\exists !$ solution mod $M=m_1 m_2\cdots m_n$. So for our example, since 
+	$6,7,25$ are all pairwise coprime, $\exists!$ solution mod $(6)(7)(25)=1050$.
+	\begin{proof}
+		For each $i$ define $M_i = M/m_i$, then consider the equation:
+		$$M_i y_i \equiv 1\mod m_i$$
+		Note that $\gcd (M_i, m_i)=1$
+		\footnote{Recall: $ax\equiv b\mod m$ solutions if and only if $\gcd(a,m)|b$
+		$\exists\gcd(a,m)$ solutions.}. because the $m_i$ are all coprime.
+		Since $\gcd(M_i, m_i)=1\mid 1, \exists!$ solution mod $m_i$. Let $y_i$ be that solution.
+		Take all $y_i$ and construct the integer:
+		$$x=a_1M_1y_1 + a_2M_2y_2+ \cdots + a_nM_ny_n$$
+		Claim that this is a solution to the system. Pick some $i$ and observe that
+		\begin{align*}
+			x &\equiv a_1M_1y_1 + a_2M_2y_2+ \cdots + a_nM_ny_n \mod m_i \\
+			&\equiv 0 + 0 +\cdots + a_iM_iy_i + \cdots + 0 \mod m_i \\
+			&\left(\text{because } M_i\equiv 0\mod m_i \text{ when } j\neq i\right) \\
+			x &\equiv a_i (1) \mod m_i \\
+			x &\equiv a_i \mod m_i
+		\end{align*}
+		Claim $x$ is unique mod $M$. Suppose $x_1, x_2$ are both solutions to the original system.
+		$$x_1\equiv a_1\mod m_1\text{ and } x_2\equiv a_1\mod m_1$$
+		$$\vdots$$
+		$$x_1\equiv a_n\mod m_n\text{ and } x_2\equiv a_n\mod m_n$$
+		From here we get,
+		\begin{align*}
+			x_1 &\equiv x_2\mod m_1 \implies m_1\mid (x_1-x_2) \\
+			x_1 &\equiv x_2\mod m_2 \implies m_2\mid (x_1-x_2) \\
+			&\vdots \\
+			x_1 &\equiv x_2\mod m_n \implies m_n\mid (x_1-x_2)
+		\end{align*}
+		Since the $m_i$ are all pairwise coprime, we get
+		$$m_1 m_2\cdots m_n \mid (x_1 - x_2)$$
+		Thus, $x_1\equiv x_2\mod M$.
+	\end{proof}
+
+	\item \textbf{Example:} Take a look at
+	\begin{align*}
+		x &\equiv 2\mod 6 \\
+		x &\equiv 4\mod 7 \\
+		x &\equiv 3\mod 25
+	\end{align*}
+	This means that $M=(6)(7)(25)=1050$ and that $M_1 = \frac{1050}{6}=175$, $M_2 = \frac{1050}{7}=150$,
+	$M_3 = \frac{1050}{25}=42$.
+	\begin{itemize}
+		\item[] Solve for $y_1$:
+		\begin{align*}
+			M_1 y_1 &\equiv 1\mod m_1 \\
+			175 y_1 &\equiv 1\mod 6 \\
+			1y_1 &\equiv 1\mod 6 \\
+			y_1 &= 1
+		\end{align*}
+		
+		\item[] Solve $y_2$: \begin{align*}
+			M_2 y_2 &\equiv 1\mod m_2 \\
+			150 y_2 &\equiv 1\mod 7 \\
+			3y_2 &\equiv 1\mod 7 \\
+			y_2 &\equiv 5\mod 7 \\
+			y_2 &= 5
+		\end{align*}
+
+		\item[] Solve $y_3$: \begin{align*}
+			M_3 y_3 &\equiv 1\mod m_3 \\
+			42 y_3 &\equiv 1\mod 25 \\
+			17y_3 &\equiv 1\mod 25 \\
+			y_3 &\equiv 3\mod 25 \\
+			y_3 &= 3
+		\end{align*}
+	\end{itemize}
+	Now for the solution,
+	\begin{align*}
+		x&\equiv(2)(175)(1) + (4)(150)(5) + (3)(42)(3)\mod 1050 \\
+		x &\equiv 3728\equiv 578\mod 1050
+	\end{align*}
 	
 \end{enumerate}
 

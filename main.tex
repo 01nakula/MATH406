@@ -10,7 +10,7 @@
 \usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
-\usepackage[margin=1.5in]{geometry}
+%\usepackage[margin=1.5in]{geometry}
 
 \newcommand\blankpage{
     \null,
@@ -19,7 +19,10 @@
     \newpage}
 
 \newif\ifanswers
+\newif\ifintro
+
 \answersfalse
+\introfalse
 
 \title{Introduction to Number Theory}
 \author{Neelam Akula}
@@ -52,6 +55,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Introduction Content  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifintro
 \section*{Introduction}
 \rule{\textwidth}{1pt}
 \vspace{1.5in}
@@ -69,6 +73,7 @@
     \href{https://www.math.umd.edu/~immortal/MATH406/}{here}.
 \addcontentsline{toc}{section}{Introduction}
 \newpage
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Import Chapter Content %%
