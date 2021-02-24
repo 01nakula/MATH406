@@ -1,0 +1,124 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
+\usepackage{epsfig,amssymb,amsmath,multicol,tikz,pgfplots,amsthm,enumerate}
+
+\def\naturals{{\mathbb N}}
+\def\reals{{\mathbb R}}
+\def\complex{{\mathbb C}}
+\def\poly{{\mathbb P}}
+\def\integers{{\mathbb Z}}
+\def\rationals{{\mathbb Q}}
+\def\irrationals{{\mathbb I}}
+\def\inlinesum#1#2{\overset{#2}{\underset{#1}{\sum}}}
+\def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
+
+
+\begin{document}
+
+\section{Practice Exams}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Exam 1 Spring 2020}
+\rule{\textwidth}{1pt}
+Note: I have ordered these in terms of what I think is increasing difficulty.
+You may have other opinions! Remember that this exam will be curved, I do not expect
+you to finish all the problems in 50 minutes.\\
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item Write down the prime factorization of $10!$.
+	
+	\item Find the least non-negative residue of $11^{67} \mod 13$. \\
+	Using Fermat's Little Theorem. Well $13\nmid 11$ so $11^{}$
+	
+	\item Find all incongruent solutions $\mod 40$, as least non-negative residues,
+	to the following lienar congruence: $$12x\equiv 28\mod 40$$
+
+	\item Use the Euclidean Algorithm to find $\gcd (390,72)$ and write this as a linear
+	combination of the two.
+
+	\item Use the Chinese Remainder Theorem to find the smallest positive solution to the
+	system:
+	\begin{align*}
+		x &\equiv 2\mod 5 \\
+		x &\equiv 1\mod 6 \\
+		x &\equiv 4\mod 7
+	\end{align*}
+
+	\item Use mathematical inductino to prove that: $$n!\geq n^3 \text{ for } n\geq 6$$
+	
+	\item One of the following two set is well-ordered and one is not. Decide which is which
+	and justify. You may assume only that $\integers^+$ is well-ordered.
+	\begin{align*}
+		S_1 &= [0,1]\cap \rationals \\
+		S_2 &= \{1-2^k \mid k\in\integers^+ \}
+	\end{align*}
+
+	\item Use the Fundamental Theorem of Arithmetic (uniqueness of prime factorization) to prove
+	that $\sqrt{2}$ is irrational. Hint: Use contradiction.
+
+	\item Suppose $a,b,c,d\in\integers$ with $a\mid c$, $b\mid c$, $d=\gcd(a,b)$, and $d^2\mid c$.
+	Prove that $ab\mid c$.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Exam 1 Summer 2016}
+\rule{\textwidth}{1pt}
+Note: I've ordered these by difficulty as I perceive it. Your opinion on difficulty might vary,
+but knowing how I ordered them might help you decide which to do first and which to do last!\\
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item 
+	\begin{enumerate}[(a)]
+		\item Find $\pi(18)$.
+		
+		\item Show that the set $\{\frac{a}{b} \mid a,b\in\integers^+, a>b\}$ is not well-ordered.
+		
+		\item Find how many primes there are, approximately, between one billion and two billion.
+	
+	\end{enumerate}
+
+	\item Find all integer solutions to $115x+25y=10$.
+	
+	\item Find the number of zeros at the end of $1000!$ with justification.
+	
+	\item The following are all false. Provide explicit numerical counterexamples.
+	\begin{enumerate}[(a)]
+		\item $a\mid bc$ implies $a\mid b$ or $a\mid c$.
+		
+		\item $a\mid b$ and $a\mid c$ implies $b\mid c$.
+		
+		\item $3\mid a$ and $3\mid b$ implies $\gcd(a,b)=3$.
+	
+	\end{enumerate}
+
+	\item Simplify $\inlineprod{j=1}{n} \left(1+\frac{2}{j}\right)$. Your result should not have a 
+	$\inlineprod{}{}$ in it, or any sort of long product.
+
+	\item Use Mathematical Induction to prove $2^1+2^2+\cdots+2^n=2^{n+1}-2$ for all integers $n\geq 1$.
+	
+	\item Find all $n\in\integers$ with $n^2-5n+6$ prime.
+	
+	\item Suppose $p$ is a prime and $a$ is a positive integers less than $p$. Find all possibilities for
+	$\gcd(a,7a+p)$.
+
+	\item Use the Fundamental Theorem of Arithmetic to prove that $\sqrt{6}$ is irrational.
+	
+	\item Prove that for $a,b\in\integers$ and $n\in\integers^+$ that if $a^n\mid b^n$ then $a\mid b$.
+	
+\end{enumerate}
+
+\end{document}

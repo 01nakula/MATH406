@@ -29,6 +29,98 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Problems}
+\subsection{Wilson's Theorem \& Fermat's Little Theorem}
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item \textbf{Wilson's Theorem:}
+	If $p$ is prime then $$(p-1)!\equiv -1\mod p$$
+	\begin{proof}
+		The case where $p=2$ is trivial to show, so let's look at primes $p\geq 3$.
+		Consider the set of numbers $\underbrace{\{1,2,3,4,5,\cdots,p-1\}}_{\text{even number of integers}}$.
+		Suppose $a$ is one of these, then $\exists b\in\integers$ such that $ab\equiv 1\mod p$ (a multiplicative inverse).
+		Because the equation $ax\equiv 1\mod p$ has one solution because $\gcd(a,p)=1\mid1$.
+		Note that $\gcd(a,p)=1$ because $a$ is one of $\{1,2,3,\cdots,p-1\}$.\\
+		Could we have, for some $a\in\{1,2,3,\cdots, p-1\}$ that $a^2\equiv 1\mod p$?\\
+		Suppose $a^2\equiv 1\mod p$, then $p\mid a^2-1$ so $p\mid (a+1)(a-1)$, either
+		$p\mid (a+1)$ or $p\mid (a-1)$.
+		If $p\mid (a+1)$ then $a\equiv -1\mod p$ or $a\equiv p-1\mod p$. If $p\mid(a-1)$
+		then $a\equiv 1\mod p$.\\\\
+		\textbf{Ex.} Suppose $p=11$, the set is $\{1,2,3,4,5,6,7,8,9,10\}$. Then the respective
+		pairs would be $2\cdot6$, $3\cdot4$, $5\cdot9$, and $7\cdot8$. Notice that $1$ and $10$
+		do not have a pair that results in congruence $\mod 11$.\\\\
+		In general in $\{1,2,3,\cdots,p-1\}$ the integers all pair up such that their products
+		are congruent $1\mod p$, except for $1$ and $p-1$. Thus,
+		$$(p-1)!=(1)(2)(3)\cdots(p-1)\equiv p-1\equiv -1\mod p$$
+	\end{proof}
+	\noindent\textbf{Ex.} Find the least non-negative residue of $20!\mod 23$.\\
+	Note: We see $20!$ and think $20!\equiv -1\mod 21$, but $21$ is not prime so there is
+	no guarantee and it does not apply anyways because we have $\mod 23$.\\
+	However, $22!\equiv -1\mod 23$
+	\begin{align*}
+		22! &\equiv -1\mod 23 \\
+		(22)(21)(20!) &\equiv -1\mod 23 \\
+		(-1)(-2)(20!) &\equiv -1\mod 23 \\
+		(2)(20!) &\equiv -1\mod 23 \\
+		(2)(20!) &\equiv 22\mod 23 \\
+		20! &\equiv 11\mod 23
+	\end{align*}
+	In this case, $11$ is the least non-negative residue.
+	\item \textbf{Fermat's Little Theorem:}
+	Suppose $p$ is prime and $a\in\integers$ with $p\nmid a$. Then,
+	$$a^{p-1} \equiv 1\mod p$$\\
+	\textbf{Ex.} $p=97$ and $a=10$, so $10^{96}\equiv 1\mod 97$.
+	\begin{proof}
+		Consider the set of integers $S=\{a,2a,3a,\cdots,(p-1)a\}$ (there are $p-1$ integers in this set).
+		\begin{itemize}
+		\item First observe that none are congruent $0\mod p$ because if $p\mid ka$ for some $1\leq k\leq (p-1)$.
+		Then $p\mid k$ or $p\mid a$ but $p\nmid a$ so $p\mid k$ but $1\leq k\leq p-1$.
+		
+		\item Second, no two are congruent one another $\mod p$ because if $k_1a\equiv k_2a\mod p$ for
+		some $1\leq k_1\leq p-1$ and $1\leq k_2\leq p-1$. Then 
+		$p\mid(k_1a - k_2a)=p\mid a(k_1-k_2)$, since $p\nmid a$ then $p\mid (k_1-k_2)$.
+		But this is impossible because $1-(p-1)\leq k_1-k_2\leq (p-1)-1$.
+		\end{itemize}
+		Thus the set $S$, is we take all $\mod p$, is equivalent to the set $T=\{1,2,3,\cdots,p-1\}$
+		in some order. Since, $\mod p$, all the numbers in $S$ is congruent to all the numbers in $T$,
+		we have
+		\begin{align*}
+			(a)(2a)(3a)\cdots((p-1)a) &\equiv (1)(2)(3)\cdots(p-1)\mod p \\
+			a^{p-1}(p-1)! &\equiv (p-1)!\mod p \\
+			a^{p-1}(-1) &\equiv (-1) \mod p \\
+			a^{p-1} &\equiv 1\mod p
+		\end{align*} 
+		Notice that we can canel all of the $1,2,3,\cdots,p-1$ without affecting the modulus
+		because they are coprime to $p$.
+	\end{proof}
+	\noindent\textbf{Ex.} Find the least non-negative residue of $5^{123}\mod 13$.\\
+	Well $13\nmid 5$ so $5^{12}\equiv 1\mod 13$. Then $123=12(10)+3$ so
+	\begin{align*}
+		5^{123}=5^{12(10)+3}= 5^{12^{10}}5^3 &\equiv (1)^{10}5^{3}\mod 13 \\
+		&\equiv 5^3 \mod 13 \\
+		&\equiv 5\cdot 25 \mod 13 \\
+		&\equiv 5(-1) \mod 13 \\
+		&\equiv -5 \mod 13 \\
+		&\equiv 8 \mod 13
+	\end{align*}
+	So $8$ is the least non-negative residue.\\\\
+	\textbf{Corollary:} From $a^{p-1}\equiv 1\mod p$ we get $a^{p}\equiv a\mod p$.
+	Note that $a^p \equiv a \mod p$ even when $p\mid a$ because if $p\mid a$ then 
+	$a\equiv 0\mod p$ and $a^p \equiv a\mod p$ is saying $0\equiv 0\mod p$.
+
+	\item \textbf{Closing Notes:}
+	This is relevant to cryptography for one of two reasons.
+	\begin{itemize} 
+	\item Encryption (which involved big exponents) is both practical and theoretically possible
+	based on Fermat's Little Theorem and Euler's Theorem.
+	\item Pseudoprime is a non-prime which "behaves like a prime". e.g. in FLiT
+	maybe $p$ is not prime but still when $p\nmid a$ we get $a^{p-1}\equiv 1\mod p$.
+	\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+%\subsection{Problems}
+%\rule{\textwidth}{1pt}
 
 \end{document}
