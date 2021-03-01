@@ -162,11 +162,11 @@
 	$a=0,1,2,3,4$ but which one? 
 	{\color{red} Warning:} Do not reduce exponent mod $5$! $2^{503}\equiv 2^x \mbox{ mod }5$.
 	\begin{enumerate}[(a)]
-		\item Look for patterns: $2^1 = 2\mbox{ mod }5$, $2^2\equiv 4\mbox{ mod }5$, $2^3\equiv 3\mbox{ mod }5$,
+		\item Look for patterns: $2^1 \equiv 2\mbox{ mod }5$, $2^2\equiv 4\mbox{ mod }5$, $2^3\equiv 3\mbox{ mod }5$,
 		$2^4\equiv 1\mbox{ mod }5$, $2^5\equiv 2\mbox{ mod }5$. This last one is a repeat, so it repeats
-		every 4. Note $503=4(125)+1$ so 
+		every 4. Note $503=4(125)+3$ so 
 		\begin{align*}
-			2^{503} &\equiv(2^4)^{503}2^3\\
+			2^{503} &\equiv2^{4(503)}2^3\\
 			&\equiv (1)^{125} 2^3\mbox{ mod }5\\
 			&\equiv (1) 8 \mbox{ mod }5\\
 			&\equiv 3\mbox{ mod }5
@@ -177,7 +177,7 @@
 		\begin{align*}
 			3^{81}&=3^{64}3^{16}3^1 \\
 			&\equiv 1\cdot 1\cdot 3 \\
-			&\equiv 4\mbox{ mod }5
+			&\equiv 3\mbox{ mod }5
 		\end{align*}
 	\end{enumerate}
 \end{enumerate}

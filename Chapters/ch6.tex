@@ -81,7 +81,7 @@
 		But this is impossible because $1-(p-1)\leq k_1-k_2\leq (p-1)-1$.
 		\end{itemize}
 		Thus the set $S$, is we take all $\mod p$, is equivalent to the set $T=\{1,2,3,\cdots,p-1\}$
-		in some order. Since, $\mod p$, all the numbers in $S$ is congruent to all the numbers in $T$,
+		in some order. Since, mod $p$, all the numbers in $S$ is congruent to all the numbers in $T$,
 		we have
 		\begin{align*}
 			(a)(2a)(3a)\cdots((p-1)a) &\equiv (1)(2)(3)\cdots(p-1)\mod p \\
@@ -115,6 +115,90 @@
 	\item Pseudoprime is a non-prime which "behaves like a prime". e.g. in FLiT
 	maybe $p$ is not prime but still when $p\nmid a$ we get $a^{p-1}\equiv 1\mod p$.
 	\end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Fermat Pseudoprimes \& Carmichael Numbers}
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item \textbf{Introduction:}
+	Primes are useful. Given $n\in\integers^+$ how can we check if $n$ is prime?
+	We could divide by everything (computationally intensive).
+	Or we could use some tests which give insight.
+	
+	\item \textbf{Femat Pseudoprimes:}
+		\begin{enumerate}[(a)]
+			\item \textbf{Reminder:}
+				FLiT: If $p$ is prime and $p\nmid a$ then $a^{p-1}\equiv 1\mod p$.
+				Suppose we have some $n\in\integers$ with $n\geq 2$. Suppose we find
+				some $a$ with $n\nmid a$ and $a^{n-1}\not\equiv 1\mod n$. We can
+				conclude that $n$ is not prime.\\
+				\textbf{Ex:}
+				Let $n=63$, observe that if $a=2$ then $n\nmid a$ clearly and
+				$2^{62}\equiv 4\not\equiv 1\mod 63$. Thus, $63$ is not prime.\\
+				\textbf{Definition:} $a=2$ is a \emph{Fermat Witness} to the fact that
+				$63$ is composite.\\\\
+				However, we might have some $n$ and $a$ with $n\nmid a$ and $a^{n-1}\equiv 1\mod n$
+				but still have $n$ composite.\\
+				\textbf{Ex.} Let $n=341$ and $a=2$, then $341\nmid 2$ and observe
+				$$2^{340} \equiv 1\mod 341$$
+				Even though $n=341=11\cdot 31$ is not prime it still "passes Fermat's
+				Little Theorem with $a=2$."\\
+				\textbf{Definition:} $a=2$ is a \emph{Fermat Liar} for $n=341$.
+
+			\item \textbf{Definition:} 
+				Suppose $n$ is composite and $b\in\integers$ satisfies
+				$\gcd(n,n)=1$ and $b^{n-1}\equiv 1\mod n$. 
+				Then we say $n$ is a \emph{Fermat Pseudoprime to the base $b$}.\\
+				\textbf{Ex:} So $341$ is a \emph{Fermat Pseudoprime with the base $b=2$}.\\
+				\textbf{Ex:} Likewise, $645$ is a \emph{Fermat Pseudoprime with the base $b=2$}.
+		\end{enumerate}
+	
+	\item \textbf{Carmichael Numbers:}
+		\begin{enumerate}[(a)]
+			\item \textbf{Introduction:}
+				Given some $n$ we wish to test if it is prime.
+				\begin{itemize}
+					\item Pick some $b$ with $\gcd(b,n)=1$.
+						Suppose we find $b^{n-1} \equiv 1\mod n$.
+						Either $n$ is prime or $b$ is a liar and $n$ is a Fermat
+						Pseudoprime with base $b$.
+					
+					\item Try another $b$ with $\gcd(b,n)=1\cdots$
+				\end{itemize}
+				So, is it possible that we could try all $b$ with $\gcd(b,n)=1$
+				and always get $b^{n-1}\equiv 1\mod n$ and still have a composite $n$?
+				The answer, yes!
+			
+			\item \textbf{Definition:}
+				A number $n$ is a \emph{Carmichael Number} if it is a Fermat Pseudoprime for
+				every base $b$ with $\gcd(b,n)=1$. These are sometimes called Absolute Pseudoprimes.\\
+				\textbf{Ex:} $n=561$ is a Carmichael Number. Note that $561=3\cdot 11\cdot 17$.
+				Suppose $b$ satisfies $\gcd(b,561)=1$. Then
+				\begin{itemize}
+					\item $\gcd(b,3)=1$ so by FLiT $b^2 \equiv 1\mod 3$. So $b^{560}=(b^2)^{280}\equiv 1\mod 3$
+						so $3\mid b^{560}-1$.
+					\item $\gcd(b,11)=1$ so by FLiT $b^{10}\equiv 1\mod 11$. So
+						$b^{560}=(b^{10})^{56}=(1)^{56}\equiv 1\mod 11$ so $11\mid b^{560}-1$.
+					\item $\gcd(b,17)=1$ so by FLiT $b^{16}\equiv 1\mod 17$. So
+						$b^{560}=(b^{16})^{35}\equiv(1)^{35}\equiv 1\mod 17$ so $17\mid b^{560}-1$.
+				\end{itemize}
+				So $3\cdot 11\cdot 17\mid b^{560}-1 \implies 561\mid b^{560}-1$. Therefore $b^{560}\equiv 1\mod 561$.
+
+			\item \textbf{Theorem:}
+				Suppose $n=p_1 p_2\cdots p_k$ such that $\forall i$ we have $p_i -1\mid n-1$.
+				Then $n$ is a Carmichael Number.
+				\begin{proof}
+					Suppose $\gcd(b,n)=1$. Claim that $b^{n-1}\equiv 1\mod n$ well, for each $i$ we have
+					$\gcd(b, p_i)=1$. By FLiT we have $b^{p_i -1} \equiv 1\mod p_i$ then
+					$b^{n-1}=b^{\alpha(p_i-1)}\equiv (1)^{\alpha}\equiv 1\mod p_i$. Thus,
+					$p_i\mid b^{n-1}-1$ for all $i$. Therefore, $n\mid b^{n-1}-1$ so 
+					$b^{n-1}\equiv 1\mod n$.
+				\end{proof}
+				\noindent
+		\end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%

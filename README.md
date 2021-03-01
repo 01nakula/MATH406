@@ -9,7 +9,7 @@ University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
 * Integers `complete`
 * Primes and Greatest Common Divisors `complete`
 * Congruences `in progress`
-* Special Congruences
+* Special Congruences `in progress`
 * Multiplicative Functions
 * Primitive Roots
 * Quadratic Residues
