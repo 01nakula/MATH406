@@ -128,7 +128,7 @@
 	We could divide by everything (computationally intensive).
 	Or we could use some tests which give insight.
 	
-	\item \textbf{Femat Pseudoprimes:}
+	\item \textbf{Fermat Pseudoprimes:}
 		\begin{enumerate}[(a)]
 			\item \textbf{Reminder:}
 				FLiT: If $p$ is prime and $p\nmid a$ then $a^{p-1}\equiv 1\mod p$.
@@ -204,7 +204,139 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-%\subsection{Problems}
-%\rule{\textwidth}{1pt}
+\subsection{Euler's Theorem}
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+	\item \textbf{Introduction:}
+	Fermat's Little Theorem tells us that is $p$ is a prime and if $p\nmid a$ then
+	$a^{p-1}\equiv 1\mod p$. This is relevant for both calculation and cryptography.
+	Since this is useful for reducing large powers of $a\mod p$
+	it might be helpful if we had a version for when the modulus is not prime.
+
+	\item \textbf{Preliminaries:}
+	\begin{enumerate}[(a)]
+		\item \textbf{Definition:} Define the \emph{Euler Phi-Function}
+		$\phi: \integers^+ \rightarrow \integers$. For $n\in\integers^+$ we define
+		$\phi(1)=1$ and $\phi(n)=$ the number of positive integers less than $n$ which are coprime
+		to $n$.\\
+		\textbf{Ex.} $\phi(10)=4$ because the set $\{1,3,7,9\}$ is all coprime to 10. \\
+		\textbf{Ex.} $\phi(97)=96$ because $\{1,2,\cdots,96\}$ are all coprime to 96. \\
+		\textbf{Definition:} If $n$ is prime then $\phi(n)=n-1$.
+
+		\item \textbf{Recall:} A complete residue system mod $n$ is a set of $n$ integers,
+		none of them congruent to each other mod $n$. CRS mod 8 is $\{0,1,2,\cdots,7\}$.
+		
+		
+		\item \textbf{Definition:} A \emph{reduced residue system} mod $n$ is a set of
+		$\phi(n)$ integers all of which are coprime to $n$ and no two of which are congruent to each
+		other mod $n$.\\
+		\textbf{Ex.} RRS mod 10 is $\{1,3,7,9\}$ or $\{11,-7,7,29\}$.
+		
+		\item \textbf{Theorem:} Suppose $\{r_1, r_2,\cdots r_{\phi(n)}\}$ is a RRS mod $n$.
+		Then suppose $a\in\integers$ with $\gcd(a,n)=1$. Then
+		$\{ar_1, ar_2, \cdots ar_{\phi(n)}\}$ is also a RRS mod $n$.
+		\begin{proof}
+			We see there are $\phi(n)$ of them. Claim that each is coprime to $n$.
+			\begin{itemize}
+			\item By means of contradiction, suppose we have some $ar_i$ not coprime to $n$, 
+			that is $\gcd(ar_i,n)\neq 1$. Then $\exists $ a prime $p$ with
+			$p\mid ar_i$ and $p\mid n$. Since $p\mid ar_i$ so $p\mid a$ or $p\mid r_i$.
+			If $p\mid a$ then, along with $p\mid n$, we have a contradiction because
+			$\gcd(a,n)=1$. If $p\mid r_i$ then, along with $p\mid n$, we have a contradiction
+			because $\gcd(r_i,n)=1$. So the $ar_i$ are coprime to $n$.
+
+			\item Suppose we have $ar_i\equiv ar_j\mbox{ mod }n$, since $\gcd(a,n)=1$ we can cancel.
+			So $r_i \equiv r_j \mbox{ mod }n$. So no two new elements are congruent mod $n$.
+			\end{itemize}
+		\end{proof}
+	\end{enumerate}
+
+	\item \textbf{Euler's Theorem:} Suppose $n$ is a modulus and $\gcd(a,n)=1$. Then
+	$a^{\phi(n)}\equiv 1\mbox{ mod }n$.\\
+	\textbf{Note.} If $n=p=$ prime we have $\phi(n)=n-1$ and we get Fermat's Little Theorem.
+	\begin{proof}
+		Given a modulus $n$, let $S = \{r_1, \cdots, r_{\phi(n)}\}$ be any RRS.
+		Then by the theorem above, $S'=\{ar_1, \cdots ar_{\phi(n)}\}$ is also a RRS.
+		It follows that $S$ and $S'$ consist of the same integers mod $n$. Thus,
+		\begin{align*}
+			(ar_1)(ar_2)\cdots (ar_{\phi(n)}) &\equiv r_1 r_2\cdots r_{\phi(n)} \mbox{ mod }n \\
+			a^{\phi(n)} &\equiv 1\mbox{ mod }n
+		\end{align*}
+	\end{proof}
+
+	\item \textbf{Use For Calculation:}
+	To reduce $9^{453} \mbox{ mod }16$, we note that $\gcd(9,16)=1$ so Euler's Theorem tells us that
+	$9^{\phi(16)}\equiv 1\mbox{ mod }16$. Since $\phi(16)=8$ we ahve $9^8 \equiv 1 \mbox{ mod }9$ and so:
+	$$9^{453} = 9^{8(56)+5} \equiv 9^5 \equiv 9(81)^2 \equiv 9\mbox{ mod }16$$
+
+	\item \textbf{Note:} If $\gcd(a,n)=1$ then $a^{\phi(n)-1}$ is a multiplicative inverse of $a\mbox{ mod }n$. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Problems}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+\item
+  Use Fermat's Little Theorem
+  to find the least nonnegative residue of
+  $2^{1000003}\mod 17$.
+
+\item
+  Use Fermat's Little Theorem to solve the following,
+  giving the result as the least nonnegative residue.
+  \begin{enumerate}
+  \item
+	$7x\equiv 12\mod 17$
+  \item
+	$10x\equiv 13\mod 19$
+\end{enumerate}
+
+\item
+  Use Fermat's Little Theorem
+  to show that
+  $30\big|(n^9-n)$
+  for all positive integers $n$.
+
+\item
+  The definition of $n$ being a Fermat pseudoprime to base $b$
+  does not actually require that $\gcd(b,n)=1$
+  because it's not possible to have $b^{n-1}\equiv 1\mod n$ with $\gcd(b,n)\neq 1$.
+  Prove this.
+
+\item
+  We didn't exclude even integers from the definition of a Fermat Pseudoprime.
+  Some books do.
+  Show that with our definition
+  $4$ is a Fermat Pseudoprime to a certain base.
+
+\item
+  Prove that if $n$ is an odd Fermat Pseudoprime to some base
+  then it must be so to an even number of bases.
+
+\item
+  Prove that 1105 is a Carmichael number.
+
+\item
+  Use Euler's Theorem to find the units digit of $7^{999999}$.
+
+\item
+  Solve each of the following using Euler's Theorem.
+  Solutions should be least nonnegative residues.
+\begin{enumerate}
+\item
+  $5x\equiv 3\mod 14$
+\item
+  $4x\equiv 7\mod 15$
+\item
+  $3x\equiv 5\mod 16$
+\end{enumerate}
+
+\item
+  Prove that if $\text{gcd}(a,30)=1$ then $60\mid a^4+59$.
+
+
+\end{enumerate}
 
 \end{document}
