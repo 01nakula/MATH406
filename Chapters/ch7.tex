@@ -24,11 +24,282 @@
 
 \begin{document}
     
-\section{Multiplicative Functions}
+\section{Various Multiplicative Functions}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Problems}
+\subsection{Multiplicative Functions and The Euler Phi Function}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+\item \textbf{Introduction:}
+In 4.3 (Chapter 6 of the text), we looked at $\phi$ in Euler's Theorem.
+If calculating $\phi$ is useful, we would like to do it easily. Perhaps
+find some properties. The goal in this section is to introduce related concepts.
+
+\item \textbf{Function Definitions:}
+\begin{enumerate}[(a)]
+	\item \textbf{Definition:}
+	A function is \emph{arithmetic} if it is defined on all positive integers.\\
+	\textbf{Ex.} $f(n) = n^2$\\
+	\textbf{Ex.} $f(n) = \sqrt{10-n^2}$ is not, because it fails for $n\geq 4$.
+
+	\item \textbf{Definition:}
+	An arithmetic function is \emph{multiplicative} if, whenever $\gcd(m,n)=1$,
+	we have $f(mn)= f(m)f(n)$.
+
+	\item \textbf{Definition:}
+	An arithmetic function is \emph{completely multiplicative} if
+	$f(mn) = f(m)f(n)$ always. \\
+	\textbf{Ex.} $f(n)=n$ because $f(mn) = mn = f(m)f(n)$. \\
+	\textbf{Ex.} $f(n)=n^3$ because $f(mn) = (mn)^3 = m^3 n^3 = f(m) f(n)$. \\
+	\textbf{Ex.} $f(n)=n+1$ because $f(3\cdot 3)=f(9)=10$ but $f(3)f(3)=4\cdot4=16$. \\
+	Clearly, all completely multiplicative functions are multiplicative. Are there any functions which are
+	multiplicative but not \emph{completely} multiplicative.\\\\
+	Note: $\phi$ is not completely multiplicative because 
+	$$\phi(10)\phi(10)=4\cdot 4= 16\neq 25=\phi(100) = \phi(10)\phi(10)$$
+	Is $\phi$, perhaps, multiplicative?
+	
+\end{enumerate}
+
+\item \textbf{Theorem} If $f$ is multiplicative and $n=p_1^{\alpha_1} p_2^{\alpha_2}\cdots p_n^{\alpha_n}$
+then 
+$$f(n) = f(p_1^{\alpha_1} p_2^{\alpha_2}\cdots p_n^{\alpha_n}) = f(p_1^{\alpha_1}) f(p_2^{\alpha_2})\cdots f(p_n^{\alpha_n})$$
+\begin{proof}
+	This follows from being multiplicative.
+\end{proof}
+
+\item \textbf{Back to $\phi$:}
+\begin{enumerate}[(a)]
+	\item \textbf{Theorem:} If $p$ is prime then $\phi(p)=p-1$
+	\begin{proof}
+		All of $1,2,3\cdots,p-1$ are coprime to $p$.
+	\end{proof}
+	
+	\item \textbf{Theorem:} If $p$ is prime then $\phi(p^k) = p^{k} - p^{k-1}$.
+	\begin{proof}
+		Of all the numbers $1,2,3\cdots, p-1$, the only ones which are not coprime to $p^k$
+		are the multiples of $p$ itself. Those are $p, 2p, 3p,\cdots,p^{k-1}p$ and so there are
+		$p^{k-1}$ of these. The remaining ones are coprime and there are $p^k - p^{k-1}$ of these. 
+	\end{proof}
+	\noindent\textbf{Ex.} $\phi(125)=\phi(5^3)= 5^3 - 5^2 = 100$. \\
+	\textbf{Ex.} $\phi(7^3) = 7^3 - 7^2 - 243 - 49 = 194$. \\\\
+	It is often good to note: $\phi(p^k)= p^{k-1} (p-1)$, $\phi(p^k) = p^{k} \left(1-\frac{1}{p}\right)$.
+
+	\item \textbf{Theorem:} The Euler Phi function is multiplicative. \\
+	\textbf{Ex.} To model the proof after $\phi(6\cdot 5)$, where $m=6$ and $n=5$. List $1,2,\cdots,30$.
+	\begin{center}
+		\begin{table}[!h]
+			\centering
+			\begin{tabular}{llllll}
+			\fbox{1} & \fbox{7} & \fbox{13} & \fbox{19} & 25 & \\
+			2 & 8 & 14 & 20 & 26 & -\emph{ignore}\\
+			3 & 9 & 15 & 21 & 27 & -\emph{ignore}\\
+			4 & 10 & 16 & 22 & 28 & -\emph{ignore}\\
+			5 & \fbox{11} & \fbox{17} & \fbox{23} & \fbox{29} & \\
+			6 & 12 & 18 & 24 & 30 & -\emph{ignore}
+			\end{tabular}
+			\end{table}
+	\end{center}
+	We see that there are two rows to consider and $\phi(6) = 2$ within each of those rows there are $4$
+	good values and $\phi(5)=4$. So we see that two rows with four values each $=2\cdot4$ values
+	which is $\phi(6)\phi(5)$. Thus $\phi(6\cdot 5)=\phi(6)\phi(5)=8$. \\
+	\begin{proof}
+		Look at $\phi(mn)$ with $\gcd(m,n)=1$. List them all,
+		\begin{center}
+			\begin{table}[!h]
+				\centering
+				\begin{tabular}{lllll}
+					1 & $m+1$ & $\cdots$ & $(n-1)m+1$ \\
+					2 & $m+2$ & $\cdots$ & $(n-1)m+2$ \\
+					$\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
+					$m$ & $m+m$ & $\cdots$ & $(n-1)m+m=mn$
+				\end{tabular}
+			\end{table}
+		\end{center}
+		Consider row $r$ with $1\leq r\leq m$. This row is $r, m+r, 2m+r, \cdots, (n-1)m+r$.
+		All have the form $km+r$ with $0\leq k\leq n-1$. Note that
+		$\gcd(km+r,m)=\gcd(r,m)$. So the entire of row $r$ is coprime to $m$ if and only if $r$ is
+		coprime to $m$. So throw out those entire rows which are not coprime to $m$ because the values
+		are not coprime to $m$, hence not coprime to $mn$.
+		Note that $\phi(m)$ rows remains, look at each row which remains.
+		Each is a row $r$ with $\gcd(r,m)=1$. Observe that $\{0,1,2,\cdots,n-1\}$ is a 
+		CSOR mod $n$ and since $\gcd(m,n)=1$, so is the set 
+		$\{0\cdot m+r, 1\cdot m+r, \cdots, m(n-1)+r\}$. Note this is one of our rows, row $r$.
+		Out of that CSOR, $\phi(n)$ will be coprime to $n$ those are also coprime to $m$ because
+		they are in a row which survived. Thus they are coprime to $mn$. \\\\
+		Finally: $\phi(m)$ rows survive, in each $\phi(n)$ entries. Thus $\phi(m)\phi(n)$ entires coprime to $mn$.
+		So $\phi(mn)= \phi(m)\phi(n)$ 
+	\end{proof}
+
+	\item \textbf{Corollary:} For $n=p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_k^{\alpha_k}$ we have:
+	\begin{align*}
+		\phi(n)&= \phi(p_1^{\alpha_1}\cdots p_k^{\alpha_k}) \\
+		&= \phi(p_1^{\alpha_1}) \cdots \phi(p_k^{\alpha_k}) \\
+		&= (p_1^{\alpha_1} - p_1^{\alpha_1 - 1}) \cdots (p_k^{\alpha_k} - p_k^{\alpha_k -1}) \\
+		&= p_1^{\alpha_1}\left(1-\frac{1}{p_1}\right) \cdots p_k^{\alpha_k}\left(1-\frac{1}{p_k}\right) \\
+		&= n \left(1-\frac{1}{p_1}\right)\cdots \left(1-\frac{1}{p_k}\right)
+	\end{align*}
+	\textbf{Ex.} $\phi(100) = 100 (1-\frac{1}{2})(1-\frac{1}{5})= 100(\frac{1}{2})(\frac{4}{5})= 40$. \\
+	\textbf{Ex.} To find $\phi(432)$ we find $432 = 2^4 \cdot 3^3$ and so:
+	$$\phi(432) = 432\left(1-\frac{1}{2}\right)\left(1-\frac{1}{3}\right) = 144$$
+	\textbf{Observation For Analysis:}
+	\begin{itemize}
+		\item If some prime $p\mid n$ then $p-1\mid \phi(n)$.
+		\item If some $p^{\alpha}\mid n$ then $p^{\alpha-1}\mid \phi(n)$. 
+	\end{itemize}
+	This can help us with a calculation like the following.\\\\
+	\textbf{Ex.} Find all $n$ with $\phi(n)=6$. \\
+	First note if $p\mid n$ then $p-1\mid \phi(n)=6$, thus we can only have 
+	$p-1=1,2,3,6 \implies p = 2,3,4,7 \implies p = 2,3,7$ ($4$ is not prime).
+	Thus the only primes are $p=2,3,7$. So we now know $n$ is of the form
+	$n=2^{\alpha} 3^{\beta} 7^{\gamma}$ with $\alpha,\beta,\gamma\geq 0$.
+	\begin{itemize}
+		\item If $\alpha\geq 1$ then $2^{\alpha}\mid n\implies 2^{\alpha-1}\mid\phi(n)=6$ and so $\alpha = 0,1,2$.
+		\item If $\beta\geq 1$ then $3^{\beta}\mid n\implies 3^{\beta -1}\mid\phi(n)=6$ and so $\beta = 0,1,2$.
+		\item If $\gamma\geq 1$ then $7^{\gamma}\mid n\implies 7^{\gamma -1}\mid\phi(n)=6$ and so $\gamma = 0,1$.
+	\end{itemize}
+	So then $\phi(n) = 6$ then $n=2^{\alpha} 3^{\beta} 7^{\gamma}$ with $\alpha=0,1,2$, $\beta=0,1,2$, and $\gamma=0,1$.
+	These are all neccessary but \emph{not} sufficient, we have to check each combination.
+	\begin{align*}
+		\phi(2^0 3^0 7^0) &= 1 \\
+		\phi(2^0 3^0 7^1) &= 6 \\
+		\vdots \\
+		\phi(2^0 3^2 7^0) &= 6 \\
+		\vdots \\
+		\phi(2^1 3^2 7^0) &= 6 \\
+		\vdots \\
+		\phi(2^1 3^0 7^1) &= 6 \\
+		\vdots
+	\end{align*}
+	Thus $n = 7,9,14,18$. \\\\
+
+	\textbf{Ex.} $\phi(n)=97$ if $p\mid n$ then $p-1\mid \phi(n)=97$, $p-1=1\implies p = 2$.
+	Then $n = 2^{\alpha}$ with $\alpha\geq 0$. If $\alpha \geq 1$, then $2^{\alpha}\mid n\implies 2^{\alpha -1}\mid 97$ so no
+	$\alpha \geq 1$ works, $n = 2^0$.
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{The Sum and Number of Divisors}
+\rule{\textwidth}{1pt}
+\begin{enumerate}[1.]
+\item \textbf{Introduction:} We can define two more related functions besides Euler's Phi function. \\
+\textbf{Definition:} $\tau (n)$ is the number of positive divisors of $n$. \\
+\textbf{Definition:} $\sigma (n)$ is the sum of all positive divisors of $n$. \\
+\textbf{Ex.} $\tau (6) = 4$ because $1,2,3,6\mid 6$. \\
+\textbf{Ex.} $\sigma (6) = 1+2+3+6 = 12$. \\\\
+It turns out that these are also multiplicative functions, this will allow nice formulas.
+
+\item \textbf{Formulas:}
+\begin{enumerate}[(a)]
+	\item First note that $\tau (p^{\alpha}) = \alpha + 1$ because the divisors are 
+	$1,p^1,\cdots, p^{\alpha}$. So now for $n = p^{\alpha_1}\cdots p^{\alpha_k}$ we have 
+	$$\tau (n) = (\alpha_1 + 1)(\alpha_2 + 1)\cdots (\alpha_k + 1)$$ 
+	because $\tau$ is multiplicative.
+
+	\item Then note that $\sigma(p^{\alpha}) = 1+p+p^2+\cdots +p^{\alpha} = \sum_{i=0}^{n} p^{i} = \frac{p^{\alpha+1}-1}{p-1}$.
+	So now for $n = p_1^{\alpha_1}\cdots p_k^{\alpha_k}$ we have
+	$$\sigma (n) = \left(\frac{p_1^{\alpha_1 + 1}-1}{p_1 -1}\right)\cdots \left(\frac{p_k^{\alpha_k +1}-1}{p_k-1}\right)$$
+	because $\sigma$ is multiplicative. \\\\
+	\textbf{Ex.} If $n = 3^2\cdot 5^5\cdot 11$ then $\tau(n) = (2+1)(5+1)(1+1) = 36$ and then
+	$\sigma(n) = \left(\frac{3^3 - 1}{3-1}\right)\left(\frac{5^6-1}{5-1}\right)\left(\frac{11^2-1}{11-1}\right)$
+\end{enumerate}
+
+\item \textbf{Proving $\tau$ and $\sigma$ are Multiplicative} \\
+\textbf{Theorem:} Suppose $f(n)$ is multiplicative. Define $F(n) =\inlinesum{d\mid n}{}f(d)$ (Summatory Function)
+i.e. $F(6) = f(1) + f(2) + f(3) + f(6)$. If the base function is multiplicative, then the summatory function is also
+multiplicative.
+\begin{proof}
+	Claim $F(mn) = F(m)F(n)$ with $\gcd(m,n)=1$. The proof then follows,
+	\begin{align*}
+		F(mn) &= \sum_{d\mid mn} f(d) \\
+		&= \sum_{d_1\mid m, d_2\mid n} f(d_1\cdot d_2) \\
+		&= \sum_{d_1\mid m, d_2\mid n} f(d_1) f(d_2) \\
+		&= \sum_{d_1\mid m} f(d_1) \sum_{d_2\mid n} f(d_2) \\
+		&= F(m) F(n)
+	\end{align*}
+\end{proof}
+\noindent\textbf{Corollary:} Let $f(n)=1$. This is clearly multiplicative (completely multiplicative),
+so $F(n) = \inlinesum{d\mid n}{}1$ is multiplicative. But $F(n) = \tau(n)$ so $\tau$ is multiplicative.\\
+\textbf{Corollary:} Let $f(n)=n$. This is also completely multiplicative, so $F(n) = \inlinesum{d\mid n}{}f(d)$
+is multiplicative. But $F(n) = \sigma(n)$ so $\sigma$ is multiplicative.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Perfect Numbers and Mersenne Primes}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+\item \textbf{Introduction:} The definition of the sum of the divisors of a positive integer
+leads to the concept of a perfect number which is intrinsically connected to a Mersenne prime.
+
+\item \textbf{Definition:} A positive integer is \emph{perfect} if the sum of the positive
+divisors equals twice the integer, that is, $\sigma(n) = 2n$.\\
+\textbf{Ex.} The integer $n=6$ is a perfect number since $\sigma(6) = 1+2+3+6=12=2(6)$.
+
+\item \textbf{Finding Perfect Numbers:} It is unknown whether there are infinitely many
+perfect numbers and it is unknown whether there are any odd perfect numbers - all perfect numbers
+which have been found have been even. Currently there are only 51 known perfect numbers,
+the largest of which has $49724095$ digits. 
+
+\item \textbf{Theorem:} If $n\in\integers^+$ is perfect and even if and only if
+$n=2^{m-1}(2^m - 1)$ for some $m\in\integers$ with $m\geq 2$ and $2^m-1$ being prime.
+To find perfection look at $2^m - 1$'s until we get primes!
+\begin{itemize}
+	\item $2^{2}-1=3$ prime! So $2^{2-1} (2^2 -1)=2(3)=6$ perfect!
+	\item $2^3 -1 =7$ prime! So $2^{3-1} (2^3 -1)=4(7)=28$ perfect!
+	\item $2^4 -1 =15$ nope!
+	\item $2^5 -1 =31$ prime! So $2^{5-1} (2^5 -1)=(16)(31)=496$ perfect!
+	\item $2^6-1 =63$ nope!
+	\item $2^7 -1=127$ prime! So $2^{7-1} (2^7 -1)=8128$ perfect!
+	\item $2^8 -1=255$ nope!
+	\item $2^9 -1=511=(7)(73)$ nope!
+	\item $2^{10}-1=1023=(3)(11)(31)$ nope!
+	\item $2^{11}-1=2047=(23)(89)$ nope!
+\end{itemize}
+Up until here it seemed that $2^p -1$ is prime but not so.
+
+\begin{proof}
+	$ $\\
+	$\Leftarrow$: Suppose $2^m -1$ is prime with $m\geq 2$. Define $n=2^{m-1}(2^m -1)$ and
+	claim that $n$ is perfect. Claim $\sigma(n) =2n$, look at $\sigma(n) = \sigma(2^{m-1} (2^m -1))$
+	well, $2^m -1\geq 3$ and is odd, $2^{m-1}$ is a power of 2, so $\gcd(2^{m-1}, 2^m-1)=1$. So,
+	$\sigma(2^{m-1} (2^m -1)) = \sigma(2^{m-1}) \sigma(2^m -1)$. Then observe from $5.2.2a$,
+	$$\sigma(2^{m-1}) = \frac{2^m -1}{2-1} = 2^m-1$$
+	and $$\sigma(2^m -1) = 1+(2^m -1)$$
+	because $2^m -1$ is prime.
+	So $\sigma(2^{m-1}) \sigma(2^m -1) = (2^m -1)(2^m) = 2\cdot 2^{m-1}(2^m -1)=2n$.
+	Thus, $\sigma(n) = 2n$. \\
+
+	$\Rightarrow$: This direction is fairly lengthy and will be omitted. It is
+	in the text if you're interested.
+\end{proof}
+
+\item \textbf{Theorem:} If $2^m -1$ is prime then $m$ is prime. I.e. if $m$ is composite 
+then $2^m - 1$ is composite.
+\begin{proof}
+	If $m$ is composite then $m=ab$ with $a,b>1$, then observe
+	$$2^m -1 = 2^{ab}-1 = (2^{a} -1)(2^{a(b-1)} + 2^{a(b-2)}+ \cdots + 2^{a(1)} + 1)$$
+	So $2^m$ is composite.
+\end{proof}
+
+\noindent All together we see,
+$$\left[m\mbox{ prime } \right] \Leftarrow \left[2^{m}-1 \mbox{ prime }\right] \iff \left[2^{m-1}(2^m -1) \mbox{ perfect }\right]$$
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+%\subsection{Problems}
+%\rule{\textwidth}{1pt}
 
 \end{document}
