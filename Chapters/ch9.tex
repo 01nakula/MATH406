@@ -24,11 +24,86 @@
 
 \begin{document}
     
-\section{Primitive Roots}
+\section{Indices, Index Arithmetic, Discrete Logarithms}
+How can we solve (or even know if solutions exist) something like $$3^x \equiv 5\mbox{ mod }22$$
+or -how many solutions there might be, or -if the solutions are mod 22 or something else.
+In pre-calculus with $3^x \equiv 5$ we can do $x=\log_3 5$, but we cannot do that here (yet).
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{The Order of an Integer \& Primitive Roots}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+\item \textbf{Introduction:} 
+The process of exponentiation and its inverse (logarithms) is as essential in modular arithmetic as it 
+is in regular math and forms the basis for various encryption techniques. We begin by taking a base $a$
+which is coprime to a modulus $m$ and looking at the powers of $a\mbox{ mod }m$.
+
+\item \textbf{Order:}
+Given a modulus $m$ and an integer $a$ with $\gcd(a,m)=1$ Euler's Theorem tells us that
+$a^{\phi(m)} \equiv 1\mbox{ mod }m$. It does not however tell us that $\phi(m)$ is the lowest
+power which yields 1. This leads to the following.
+\begin{enumerate}[(a)]
+	\item \textbf{Definition:} Suppose $\gcd(a,m)=1$ we define the \emph{order} of $a\mbox{ mod }m$
+	as the smallest power $x$ such that $a^x \equiv 1\mbox{ mod }m$. This is denoted $\mbox{ord}_m a$. \\
+	\textbf{Note:} $\mbox{ord}_m a \leq \phi(m)$ \\
+	\textbf{Note:} We can say "order of $a$" when $m$ is contextually obvious.\\
+	\textbf{Ex.} Let's find $\mbox{ord}_{11} 3$. Well,
+	\begin{align*}
+		3^1 &\equiv 3\mbox{ mod }11 \\
+		3^2 &\equiv 9\mbox{ mod }11 \\
+		3^3 &\equiv 5\mbox{ mod }11 \\
+		3^4 &\equiv 4\mbox{ mod }11 \\
+		3^5 &\equiv 1\mbox{ mod }11
+	\end{align*}
+	Thus, $\mbox{ord}_{11} 3 = 5$. \\
+	\textbf{Note:} We can now start to see that the order gives us a pattern under which
+	$3^x$ will repat!
+	
+	\item \textbf{Theorem:} For $x\in\integers^+$ we have $a^x \equiv 1\mbox{ mod }m$ if and only if
+	$x\equiv 0\mbox{ mod } \mbox{ord}_m a$ if and only if $\mbox{ord}_m a \mid x$. \\
+	\textbf{Ex.} We saw $\mbox{ord}_{11} 3=5$ so $3^x \equiv 1\mbox{ mod }11$ if and only if $x\equiv 0\mbox{ mod }5$
+	if and only if $5\mid x$.
+	\begin{proof}
+		$ $\\
+		$\rightarrow$ Assume $a^x\equiv 1 \mbox{ mod }m$, use the Divison Algorithm to write
+		$x = q(\mbox{ord}_m a)+r$. Observe,
+		$$1\equiv a^x\equiv \left(a^{\mbox{ord}_m a}\right)^q a^r \equiv a^r\mbox{ mod }m$$
+		Since $\mbox{ord}_m a$ is the smallest positve power, we must have $r=0$.
+		Thus, $x=q\mbox{ord}_m a$ so $\mbox{ord}_m a\mid x$. \\\\
+		$\leftarrow$ Assume $\mbox{ord}_m a\mid x$. Then, 
+		$$a^x \equiv a^{k\mbox{ord}_m a} \equiv \left(a^{\mbox{ord}_m a}\right)^k \equiv 1^k \equiv 1\mbox{ mod }m$$
+	\end{proof}
+
+	\item \textbf{Corollary:} We have $\mbox{ord}_m a \mid \phi(m)$.
+	\begin{proof}
+		The proof here is obvious because $a^{\phi(m)} \equiv 1\mbox{ mod }m$. Apply the theorem.
+	\end{proof}
+	\noindent So to find $\mbox{ord}_m a$ try divisors of $\phi(m)$ only. \\
+	\textbf{Ex.} To find $\mbox{ord}_{11} 2$ we note that $\phi(11)=10$.
+	So we need to check $1,2,5$ because if it fails for those, $\mbox{ord}_{11} 2 =10$.
+	\begin{align*}
+		2^1 &\equiv 2\not\equiv 1\mbox{ mod }11 \\
+		2^2 &\equiv 4\not\equiv 1\mbox{ mod }11 \\
+		2^5 &\equiv 10\not\equiv 1\mbox{ mod }11
+	\end{align*}
+	Aha, from this we can see that $2^{10} \equiv 1\mbox{ mod } 11$ by Euler's Theorem. So $\mbox{ord}_{11} 2 = 10$.
+
+	\item \textbf{Theorem:} We have $a^x \equiv a^y \mbox{ mod }m$ if and only if 
+	$\mbox{ord}_m a \mid (x-y)$ if and only if $x\equiv y\mbox{ mod }\mbox{ord}_m a$. 
+	i.e. Exponents work mod $\mbox{ord}_m a$. \\
+	\textbf{Ex.} $\mbox{ord}_{11} 3 = 5$ so $3^x \equiv 3^y \mbox{ mod } 11$ if and only if
+	$x\equiv y\mbox{ mod }\mbox{ord}_{11} 3$ ($x\equiv y\mbox{ mod }5$).
+	
+\end{enumerate}
+
+\item \textbf{Primitive Roots}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
 \subsection{Problems}
+\rule{\textwidth}{1pt}
 
 \end{document}

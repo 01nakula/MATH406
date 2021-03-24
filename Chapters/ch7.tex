@@ -294,12 +294,86 @@ then $2^m - 1$ is composite.
 \noindent All together we see,
 $$\left[m\mbox{ prime } \right] \Leftarrow \left[2^{m}-1 \mbox{ prime }\right] \iff \left[2^{m-1}(2^m -1) \mbox{ perfect }\right]$$
 
+\textbf{Definition:} The $m^{\text{th}}$ Mersenne number is $M_m = 2^m - 1$. \\\\
+\textbf{Definition:} If $p$ is prime and if $2^p -1$ is also prime then $M_p = 2^p -1$ is a 
+Mersenne prime. \\\\
+\textbf{Ex.} $2^5 -1 =31$ is a Mersenne prime. \\\\
+\textbf{Ex.} $29$ is a prime but not a Mersenne prime because it is not of the form $2^p -1$. \\\\
+Suppose $p$ is prime. We know $2^p -1$ might be prime.
+Is there a way of checking besides trying all divisors? 
+
+\item \textbf{Theorem:} If $p$ is prime, then all factors of $2^p -1$ must have the form
+$2pk +1$ for $k\in\integers^+$. \\\\
+\textbf{Theorem:} We only need to check factors of this form.
+\begin{proof}
+	Omitted, the proof is not long but depends on an obscure lemma related to the Eulcidean Algorithm.
+\end{proof}
+\textbf{Ex.} Consider $p=11$ is prime. Look at $2^{11} -1=2047$,
+by the theorem check $2(11)k+1=22k+1$ for $k=1,2,3,\cdots$.
+Also only check up to $\sqrt{2047}\approx 45.24$, so only check
+$23$ and $45$. We find $2047=(23)(89)$. Not Prime! \\\\
+\textbf{Ex.} Consider $p=13$ is prime. Look at $2^{13} -1=8191$,
+by the theorem check $2(13)k=26k+1$ for $k=1,2,3,\cdots$.
+Also only check up to $\sqrt{8191} \approx 90.5$, so only check
+$27$, $53$, $79$. None of the factors check so $8191$ is prime.
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-%\subsection{Problems}
-%\rule{\textwidth}{1pt}
+\subsection{Problems}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+\item
+  Find all $n$ satisfying $\phi(n)=18$.
+
+\item
+  Show there are no $n$ with $\phi(n)=14$.
+
+\item
+  For what values of $n$ is $\phi(n)$ odd?
+  Justify.
+
+\item
+  Prove that $f(n)=\gcd(n,3)$ is multiplicative.
+  (This is actually true if 3 is replaced by any positive integer.)
+
+\item
+  Find $\tau(2\cdot 3^2\cdot 5^3\cdot 11^5\cdot 13^4\cdot 17^5\cdot 19^5)$
+\item
+  Find $\sigma(2\cdot 3^2\cdot 5^3\cdot 11^5\cdot 13^4\cdot 17^5\cdot 19^5)$
+
+\item
+  Find $\tau(20!)$.
+
+\item
+  Classify all $n$ with $\tau(n)=30$. Explain!
+
+\item
+  Prove that $\sigma(n)=k$
+  has at most a finite number of solutions when $k$ is a positive integer.
+
+\item
+  Show that if $a$ and $b$ are positive integers
+  and $p$ and $q$ are distinct odd primes
+  then $n=p^aq^b$ is deficient.
+
+\item
+  Prove that a perfect square cannot be a perfect number.
+
+\item
+  Use Theorem 7.12 to determine whether each of the following Mersenne numbers
+  is a Mersenne prime:
+  \begin{enumerate}
+  \item
+	$M_{11}$
+  \item
+	$M_{21}$
+  \item
+	$M_{31}$
+  \end{enumerate}
+
+\end{enumerate}
 
 \end{document}
