@@ -13,6 +13,12 @@
 *.sta
 *.synctex.gz
 *.toc
+*.idv
+*.lg
+*.4ct
+*.4tc
+*.tmp
+*.xref
 
 ## exclude hw answers:
 answers.pdf
