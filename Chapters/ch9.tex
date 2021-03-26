@@ -94,10 +94,100 @@ power which yields 1. This leads to the following.
 	i.e. Exponents work mod $\mbox{ord}_m a$. \\
 	\textbf{Ex.} $\mbox{ord}_{11} 3 = 5$ so $3^x \equiv 3^y \mbox{ mod } 11$ if and only if
 	$x\equiv y\mbox{ mod }\mbox{ord}_{11} 3$ ($x\equiv y\mbox{ mod }5$).
-	
+	\begin{proof}
+		$ $\\
+		$\rightarrow$ Suppose $a^x \equiv a^y \mbox{ mod }m$ without loss of generality, assume
+		$x>y$. Since $\gcd(a,m)=1$ we can cancel $a^y$ from each side to get $a^{x-y} \equiv 1\mbox{ mod } m$.
+		By (b) above then $x-y\equiv 0\mbox{ mod } \mbox{ord}_m a$. \\\\
+		$\leftarrow$ Suppose $x\equiv y\mbox{ mod }\mbox{ord}_m a$, then
+		$x=y+k\mbox{ord}_m a$ for some $k$. Then
+		$a^x\equiv a^y a^{k\mbox{ord}_m a} \equiv a^y \left(a^{\mbox{ord}_m a}\right)^k \equiv a^y \cdot 1 \equiv a^y\mbox{ mod } m$.
+	\end{proof}
+	\noindent\textbf{Summary Ex.}
+	We saw $\mbox{ord}_{11} 3 = 5$. So $3^x$ repeats every $5^{\text{th}}$ power mod 11
+	and $3^5 \equiv 1\mbox{ mod }11$.
+
 \end{enumerate}
 
 \item \textbf{Primitive Roots}
+\begin{enumerate}
+	\item \textbf{Introduction:} If $\gcd(a,m)=1$ we know that $a^{\phi(m)}\equiv 1\mbox{ mod }m$ by
+	Euler's Theorem, but this may not be the smallest power. \\
+	\textbf{Ex.} $\gcd(3,11)=1$ and so $3^{\phi(11)}\equiv 1\mbox{ mod }11$ so $3^{10}\equiv 1\mbox{ mod }11$,
+	but in fact $3^{5}\equiv 1\mbox{ mod }11$ and $\mbox{ord}_{11} 3 = 5$ (smallet than 10). \\
+	\textbf{Ex.} $\gcd(6,11)=1$ and so $6^{\phi(11)}\equiv 1\mbox{ mod }11$ so $6^{10} \equiv 1\mbox{ mod }11$
+	and in fact this is the smallest. $\mbox{ord}_{11} 6=10=\phi(11)$.
+
+	\item \textbf{Definition:} Suppose $\gcd(a,m) =1$, we say $a$ is a
+	\textit{primitive root} modulus $m$ if $\mbox{ord}_m a = \phi(m)$. $a=3$ is not a primitive root mod 11,
+	but $r=6$ is a primitive root mod 11. \\
+	\textbf{Intuition:} Having a primitive root as a base results in more results when we raise it to powers.
+
+	\item \textbf{Theorem:} Suppose $r$ is a primitive root mod $m$. Then $\left\{r, r^2, \cdots, r^{\phi(m)} \right\}$
+	is a reduced residue set mod $m$, meaning there are $\phi(m)$ distinct items and all are coprime to $m$.
+	\begin{proof}
+		All are distinct because powers all distinct mod $\phi(m)=\mbox{ord}_m a$.
+		All are coprime to $m$ because all are powers of $r$ and $r$ is coprime to $m$.
+	\end{proof}
+	\noindent\textbf{Intuition:} Given an $m$, finding a primitive root $r$ is nice because there
+	will be $\phi(m)$ distinct powers of $r$ and that is the most we could have. \\
+	Given an $m$, can we always find a primitive root?
+	No. $m=8$ has no primitive roots, but if $m$ is prime then we can.
+	If $m$ has a primitive root, might it have several? It might ...
+
+	\item \textbf{Theorem:} Given a modulus $m$ and an integer $a$ with $\gcd(a,m)=1$ we have:
+	$$\mbox{ord}_m \left(a^k\right) = \frac{\mbox{ord}_m a}{\gcd(\mbox{ord}_m a, k)}$$
+	\textbf{Note:} In MATH403 this is the same result as the result from cyclic groups
+	which states that if $|g|=n$ then $\left| g^k\right| = \frac{n}{\gcd(n,k)}$. \\
+	\textbf{Ex.} $\mbox{ord}_{11} 6 = 10$. Look at $\mbox{ord}_{11} (6^2)$, intuitively it should be 5.
+	$$\mbox{ord}_{11} (6^2) = \frac{\mbox{ord}_{11} 6}{\gcd(\mbox{ord}_{11} 6, 2)} = \frac{10}{\gcd(10, 2)} = \frac{10}{2} = 5$$
+	\begin{proof}
+		We'll first proof it is $\leq$ and $\geq$, thereby proving it is equal.
+		\begin{itemize}
+			\item First observe:
+			\begin{align*}
+				\left(a^k\right)^{\mbox{ord}_m a / \gcd(\mbox{ord}_m a, k)} &= \left(a^{\mbox{ord}_m a}\right)^{k / \gcd(\mbox{ord}_m a, k)} \\
+				&\equiv 1 ^{k / \gcd(\mbox{ord}_m a, k)} \\
+				&\equiv 1\mbox{ mod }m
+			\end{align*}
+			So, $$\mbox{ord}_m (a^k) \leq \frac{\mbox{ord}_m a}{\gcd(\mbox{ord}_m a, k)}$$
+
+			\item Second observe:
+			\begin{align*}
+				a^{k \mbox{ord}_m \left(a^k\right)} &= \left(a^k\right)^{\mbox{ord}_m \left(a^k\right)} \\
+				&\equiv 1\mbox{ mod }m
+			\end{align*}
+			So then, 
+			$\mbox{ord}_m a \Big| k\mbox{ord}_m \left(a^k\right)\implies
+			\frac{\mbox{ord}_m a}{\gcd(\mbox{ord}_m a, k)} \Big|
+			\frac{k\cdot \mbox{ord}_m \left(a^k \right) }{\gcd(\mbox{ord}_m a, k)}$.
+			Then, because $\gcd$ of two fractions is $1$ we get,
+			$\frac{\mbox{ord}_m a}{\gcd(\mbox{ord}_m a, k)} \Big| \mbox{ord}_m \left(a^k\right)$,
+			and so $\frac{\mbox{ord}_m a}{\gcd(\mbox{ord}_m a, k)} \leq \mbox{ord}_m \left(a^k\right)$
+ 		\end{itemize}
+		Thus, the two results together give us that 
+		$$\mbox{ord}_m \left(a^k\right) = \frac{\mbox{ord}_m a}{\gcd(\mbox{ord}_m a, k)}$$
+	\end{proof}
+
+	\item \textbf{Theorem:} Suppose $r$ is a primitive root of $m$. Then $r^k$ is a primitive root of $m$
+	if and only if $\gcd(k,\phi(m))=1$.
+	\begin{proof}
+		Well, $r^k$ is a primitive root mod $m$ if and only if $\mbox{ord}_m \left(r^k\right) = \phi(m)=\mbox{ord}_m a$,
+		by the theorem this is true if and only if and only if
+		$\gcd(\mbox{ord}_m r, k)=1$ if and only if $\gcd(\phi(m), k)=1$.
+	\end{proof}
+
+	\item \textbf{Corollary:} If there is a primitive root mod $m$ then there are $\phi(\phi(m))$ of them.
+	\begin{proof}
+		Let $r$ be a primitive root. Since powers of $r$ form a reduced residue set mod $m$ we know that all
+		other integers coprime to $m$ may be written as $r^k$ for some $k$, then by the previous theorem
+		we know that $r^k$ is also a primitive root if and only if $\gcd(k,\phi(m))=1$ and there are 
+		$\phi(\phi(m))$ such $k$.
+	\end{proof}
+	\noindent\textbf{Ex.} $r=6$ is a primitive root mod 11. Then is has $\phi(\phi(11))=\phi(10)=4$
+	primitive roots. What are they? Take $k$ with $\gcd(k, \phi(11))=1$ i.e. $k$ with $\gcd(k,10)=1$.
+	So $k=1,3,7,9$, therefore $6^1, 6^3, 6^7, 6^9 \implies 6,7,8,2$ are the primitive roots.
+\end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%
