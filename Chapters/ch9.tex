@@ -20,14 +20,13 @@
 \def\irrationals{{\mathbb I}}
 \def\inlinesum#1#2{\overset{#2}{\underset{#1}{\sum}}}
 \def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
+\def\ord{{\text{ord}}}
+\def\ind{{\text{ind}}}
 
 
 \begin{document}
     
 \section{Indices, Index Arithmetic, Discrete Logarithms}
-How can we solve (or even know if solutions exist) something like $$3^x \equiv 5\mbox{ mod }22$$
-or -how many solutions there might be, or -if the solutions are mod 22 or something else.
-In pre-calculus with $3^x \equiv 5$ we can do $x=\log_3 5$, but we cannot do that here (yet).
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
@@ -193,7 +192,185 @@ power which yields 1. This leads to the following.
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-%\subsection{Problems}
-%\rule{\textwidth}{1pt}\\
+\subsection{Discrete Logarithms}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}[1.]
+\item \textbf{Introduction:} Just for reference, sections 9.2 and 9.3 concern themselves with the
+existence of primitive roots. They are quite technical so we will omit them and go on to section 9.4
+which addresses what we can do with them. How can we solve (or even know if solutions exist) something like 
+$3^x \equiv 5\mbox{ mod }22$
+or -how many solutions there might be, or -if the solutions are mod 22 or something else.
+In pre-calculus with $3^x \equiv 5$ we can do $x=\log_3 5$, but we cannot do that here (yet).
+
+
+\item \textbf{Back to Primitive Roots:} Recall that if $\gcd(r,m)=1$ and $r$ is a 
+primitive root mod $m$ then the set $\{r^1, r^2, \cdots, r^{\phi(m)}\}$ gets us all integers coprime to $m$.\\
+\textbf{Ex.} $r=3$ is a primitive root of $m=14$, because 
+$3^1\equiv1, 3^2\equiv 9, 3^3\equiv 13, 3^4\equiv 11, 3^5\equiv 5, 3^6\equiv 1\mbox{ mod }14$.
+Note: $\mbox{ord}_{14} 3=6=\phi(14)$ so it is a primitive root. Note: we obtain
+$3,9,13,1,5,1$ are all coprime to 14. Thus, we see that we can solve $3^x \equiv a\mbox{ mod }14$ if and only if
+$\gcd(a,14)=1$. \\\\
+In general, when $r$ is a primitive root mod $m$ then $$r^x \equiv a\mbox{ mod }m \iff \gcd(a,m)=1$$ has solutions.
+
+\item \textbf{Indices:}
+\begin{enumerate}[(a)]
+	\item \textbf{Definition:} Suppose $r$ is a primitive root mod $m$ and $\gcd(a,m)=1$.
+	The exponent $x$ with $1\leq x\leq \phi(m)$ satisfying
+	$r^x\equiv a\mbox{ mod }m$ is the \textit{index} of $a$ mod $m$ with primitive root $r$.
+	This is denoted $\mbox{ind}_r a$. Note: $m$ is missing from the notation but it matters,
+	generally it is known in the problem. We could also write $\log_r a$ too but be careful to
+	not think it be a 'normal' log. \\
+	\textbf{Ex.} $r=3$ is a primitive root mod 14 and:
+	\begin{align*}
+		3^1 \equiv 3\mbox{ mod }14 &\leftrightarrow \mbox{ind}_{3} 3 = 1 \\ 
+		3^2 \equiv 9\mbox{ mod }14 &\leftrightarrow \mbox{ind}_{3} 9 = 2 \\
+		3^3 \equiv 13\mbox{ mod }14 &\leftrightarrow \mbox{ind}_{3} 13 = 3 \\
+		3^4 \equiv 11\mbox{ mod }14 &\leftrightarrow \mbox{ind}_{3} 11 = 4 \\
+		3^5 \equiv 5\mbox{ mod }14 &\leftrightarrow \mbox{ind}_{3} 5 = 5 \\
+		3^6 \equiv 1\mbox{ mod }14 &\leftrightarrow \mbox{ind}_{3} 1 = 6
+	\end{align*}
+	\textbf{Two Immediate Notes:} If $a,b$ coprime to $m$ and $r$ is a primitive root then:
+	\begin{enumerate}
+		\item $r^{\mbox{ind}_r a}=a$
+		\item $a\equiv b\mbox{ mod }m \iff \mbox{ind}_r a = \mbox{ind}_r b$.
+		Side note, since indices are always between $1$ and $\phi(m)$ we can actually write
+		$a\equiv b\mbox{ mod }m \iff \mbox{ind}_r a \equiv \mbox{ind}_r b\mbox{ mod }\phi(m)$
+	\end{enumerate}
+	Idea - in pre-calculus we do things like:
+	\begin{align*}
+		3^x &= 4^{x-1} \\
+		\ln 3^x &= \ln 4^{x-1} \\
+		x\ln 3 &= (x-1)\ln 4
+	\end{align*}
+	So now we can do things like:
+	\begin{align*}
+		11^x &\equiv 5^{x-1} \mbox{ mod }14 \\
+		\mbox{ind}_{3} 11^x &\equiv \mbox{ind}_3 5^{x-1} \mbox{ mod }\phi(14)
+	\end{align*}
+	Can we know do "log-like" rules?
+
+	\item \textbf{Index Rules:} Indices behave like logarithms (think logarithm laws)
+	but there is a quirk that arises from the order of $r$, that being $\phi(m)$. To
+	see why this is, consider the logarithm rule $\log(ab) = \log a + \log b$.
+	It would be tempting to write: $\mbox{ind}_r (ab) = \mbox{ind}_r a + \mbox{ind}_r b$.
+	However, this is not quite right. Consider that with $m=14$ and $r=3$ if we have
+	$a=13$ and $b=5$ then $ab \equiv 9\mbox{ mod }14$, the tempting statement would say:
+	\begin{align*}
+		\mbox{ind}_3 9 &= \mbox{ind}_3 13 + \mbox{ind}_3 5 \\
+		2 &= 3+5 \\
+		2 &= 8
+	\end{align*}
+	Which is clearly false. However, we see that $2\equiv 8\mbox{ mod }\phi(14)$. \\
+	\textbf{Theorem:} Let $m$ be a modulus, $r$ be a primitive root, and $a,b$ coprime to $m$.
+	Then we have:
+	\begin{enumerate}
+		\item $\mbox{ind}_r 1 \equiv 0\mbox{ mod }\phi(m)$
+		\begin{proof}
+			By Euler's Theorem we know that $r^{\phi(m)}\equiv 1\mbox{ mod }m$. So,
+			$$\mbox{ind}_r 1 = \phi(m) \equiv 0\mbox{ mod }\phi(m)$$
+		\end{proof}
+		\item $\mbox{ind}_r (ab) \equiv \mbox{ind}_r a + \mbox{ind}_r b \mbox{ mod }\phi(m)$
+		\begin{proof}
+			Observe that from the definition of index:
+			\begin{align*}
+				r^{\mbox{ind}_r (ab)} &\equiv ab\mbox{ mod }m \\
+				r^{\mbox{ind}_r a + \mbox{ind}_r b} = r^{\mbox{ind}_r a} r^{\mbox{ind}_r b} &\equiv ab\mbox{ mod }m
+			\end{align*}
+			Then by a theorem from section 9.1 (which states that 
+			$a^x \equiv a^y \mbox{ mod }m$ if and only if $x\equiv y\mbox{ mod }\mbox{ord}_m a$)
+			we get:
+			$$\mbox{ind}_r (ab) \equiv \mbox{ind}_r a + \mbox{ind}_r b \mbox{ mod }\phi(m)$$
+		\end{proof}
+		\item $\mbox{ind}_r a^k \equiv k\mbox{ind}_r a \mbox{ mod }\phi(m)$
+	\end{enumerate}
+\end{enumerate}
+
+\end{enumerate}
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Problems}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+\item
+  Determine the following orders and justify each.
+  \begin{enumerate}
+  \item
+	$\ord_{21}8$
+
+  \item
+	$\ord_{25}8$
+
+  \end{enumerate}
+
+\item
+  Find all primitive roots (reduced mod $50$) for $n=50$ as follows:
+  First find (with justification) the smallest primitive root.
+  Then use the Theorem from class which yields all the remaining ones.
+
+\item
+  Prove that if $p$ is an odd prime and $a$ has $\ord_pa=2k$ then
+  $a^k\equiv -1\mod p$
+
+\item
+  Show that if $a$ is relatively prime to $m$ and $\ord_ma=m-1$
+  then $m$ is prime.
+
+\item
+  Suppose $r$ is a primitive root of an odd prime $p$.
+  Prove that:
+  $$\ind_r(p-a)\equiv \ind_ra+\left(\frac{p-1}{2}\right)\mod p-1$$
+
+\item
+  Show that if $n$ is an integer and $a$ and $b$ are integers which
+  are relatively prime to $n$ with $\gcd(\ord_n a,\ord_n b)=1$
+  then $\ord_n(ab)=(\ord_n a)(\ord_n b)$.
+
+\item
+  Let $r$ be a primitive root of the prime $p$ with $p\equiv 1\mod 4$.
+  Prove that $-r$ is also a primitive root.
+
+\item
+  It's a fact that $r=7$ is a primitive root mod $13$.
+  \begin{enumerate}
+  \item
+	Use this to construct a table of indices
+	for this primitive root.
+
+  \item
+	Use the table of indices to solve the equation:
+	$x^{2}\equiv 12\mod 13$.
+	Your answer(s) should be mod $13$.
+
+  \item
+	Use the table of indices to solve the equation:
+	$4^x\equiv 12 \mod 13$.
+	Your answer(s) should be mod $12$.
+
+  \end{enumerate}
+
+\item
+  With logarithms we have
+  $\log_r a-\log_r b=\log_r\left(\frac ab\right)$
+  \begin{enumerate}
+  \item
+	Why is it not reasonable to write
+	$\equiv \ind_r a-\ind_r b\mod \phi(n) \equiv \ind_r\left(\frac ab\right)$
+	when $a,b$ are coprime to $n$ and $r$ is a primitive root?
+
+  \item
+	What would be a reasonable index substitute for this logarithm rule?
+
+  \item
+	Prove this substitute.
+
+  \end{enumerate}
+
+\item
+  Suppose $p$ is an odd prime and both $r_1$ and $r_2$
+  are primitive roots for $p$.
+  Prove that $r_1r_2$ is not a primitive root for $p$.
+
+\end{enumerate}
 
 \end{document}
