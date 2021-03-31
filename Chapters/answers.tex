@@ -10,6 +10,27 @@
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
 \usepackage{epsfig,amssymb,amsmath,multicol,tikz,pgfplots,amsthm,enumerate}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{codegray},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
 
 \def\naturals{{\mathbb N}}
 \def\reals{{\mathbb R}}
@@ -737,9 +758,362 @@
 \subsection{Special Congruences}
 \hfill \fbox{98/100}
 \rule{\textwidth}{1pt}\\
+\begin{enumerate}
+\item
+  Use Fermat's Little Theorem
+  to find the least nonnegative residue of
+  $2^{1000003}\mod 17$. \\\\
+  Well $17\nmid 2$ so $2^{16} \equiv 1\mbox{ mod }17$. Then $1000003 = 16(62500) + 3$ so
+  \begin{align*}
+	2^{1000003}= 2^{16^{62500}} 2^3 &\equiv (1)^{62500} 2^{3} \mbox{ mod }17 \\
+	&\equiv 2^3\mbox{ mod }17 \\
+	&\equiv 8\mbox{ mod }17
+  \end{align*}
+  So $8$ is the least non-negative residue.
+
+\item
+  Use Fermat's Little Theorem to solve the following,
+  giving the result as the least nonnegative residue.
+  \begin{enumerate}
+  \item
+	$7x\equiv 12\mod 17$ \\\\
+	By FLiT we know $7^{17-1} \equiv 1\mbox{ mod }17$, it follows that
+	$7^{16}\cdot 12 \equiv 1\mbox{ mod }17$ therefore $7x = 7^{16}\cdot 12 = 7^{15}\cdot 12$.
+	Then reduce $7^{15}\cdot 12\mbox{ mod }17$. So $9$ is the least non-negative residue.
+
+  \item
+	$10x\equiv 13\mod 19$ \\\\
+	By FLiT we know $10^{19-1} \equiv 1\mbox{ mod }19$, it follows that
+	$10^{18}\cdot 13 \equiv 1\mbox{ mod }19$ therefore $10x = 10^{18}\cdot 13 = 10^{17}\cdot 13$.
+	Then reduce $10^{17}\cdot 13\mbox{ mod }19$. So $7$ is the least non-negative residue.
+
+\end{enumerate}
+
+\item
+  Use Fermat's Little Theorem
+  to show that
+  $30\big|(n^9-n)$
+  for all positive integers $n$.
+  \begin{proof}
+	Note that $30 = 2\cdot 3\cdot 5$, from Fermat's Little Theorem we know that
+	$a^p \equiv a\mbox{ mod }p$ when $p$ is prime.
+	Let,
+	\begin{align*}
+	  x &= (n^5 -n)(n^4 +1) \\
+	  y &= (n^3 -n)(n^2 +1)(n^4 +1) \\
+	  z &= (n^2 -n)(n^3 +n^2 +n +1) (n^4 +1)
+	\end{align*}
+	Note that $x = y = z = n^9 -n$. Then observe the following,
+	\begin{itemize}
+	  \item By FLiT $5\mid n^5 - n \implies 5\mid x \implies 5\mid n^9 - n$.
+	  \item By FLiT $3\mid n^3 - n \implies 3\mid y \implies 3\mid n^9 - n$.
+	  \item By FLiT $2\mid n^2 - n \implies 2\mid z \implies 2\mid n^9 - n$.
+	\end{itemize}
+	It follows that $2\cdot 3\cdot 5 \mid n^9 -n \implies 30\mid n^9 -n$.
+  \end{proof}
+
+\item
+  The definition of $n$ being a Fermat pseudoprime to base $b$
+  does not actually require that $\gcd(b,n)=1$
+  because it's not possible to have $b^{n-1}\equiv 1\mod n$ with $\gcd(b,n)\neq 1$.
+  Prove this.
+  \begin{proof}
+	Let $\gcd(b,n)=a$ where $a\neq 1$, this implies there exists a prime $p$ such that
+	$p\mid b$ and $p\mid n$. It follows that there exists a linear combination of $b$ and $n$
+	such that $xb + yn = 1$ for $x,y\in\integers$. But if $p\mid b$ and $p\mid n$ then 
+	$p\mid xb+yn = 1 \implies p\mid 1$ but this is a contradiction to the fact that $p$ is prime.
+  \end{proof}
+
+\item
+  We didn't exclude even integers from the definition of a Fermat Pseudoprime.
+  Some books do.
+  Show that with our definition
+  $4$ is a Fermat Pseudoprime to a certain base. \\\\
+  From $5^{4-1}= 5^3 \equiv 1\mbox{ mod }4$, we see that $4$ is a Fermat Pseudoprime to the base $5$.
+
+\item
+  Prove that if $n$ is an odd Fermat Pseudoprime to some base
+  then it must be so to an even number of bases.
+  \begin{proof}
+	Let $n$ be an odd Fermat Pseudoprime, then let $b$ be a base of $n$ where $b^{n-1}\equiv 1\mbox{ mod }n$.
+	Because $n$ is odd $n-1$ is even, this means that $b^{n-1} = (-b)^{n-1}$, it follows that any base $b$
+	has a pair $-b$ that is also a base as long as $-b\not\equiv b\mbox{ mod }n$.\\\\
+	If $-b\equiv b\mbox{ mod }n$ then $n$ would divide $2b$ but since $n$ is odd this implies $n\mid b$.
+	Then, $b^{n-1} \equiv 0\mbox{ mod }n$ which contradicts $b^{n-1}\equiv 1\mbox{ mod }n$.\\\\
+	So it is not possible for $-b\equiv b\mbox{ mod }n$, therefore any base $b$ of $n$ has a respective pair
+	$-b$ such that $n$ has an even number of bases.
+  \end{proof}
+
+\item
+  Prove that 1105 is a Carmichael number.
+  \begin{proof}
+	  Note that $1105=5\cdot 13\cdot 17$. Suppose $b$ satisfies $\gcd(b,1105)=1$. Then,
+	\begin{itemize}
+	  \item $\gcd(b,5)=1$ so by FLiT $b^4 \equiv 1\mbox{ mod }5$. So
+	  $b^{1104}=(b^4)^{276}\equiv 1 \mbox{ mod }5$ so $5\mid b^{1104}-1$.
+
+	  \item $\gcd(b,13)=1$ so by FLiT $b^{12}\equiv 1\mbox{ mod }13$. So
+	  $b^{1104}=(b^{12})^{92}\equiv 1\mbox{ mod }13$ so $13\mid b^{1104}-1$.
+
+	  \item $\gcd(b,17)=1$ so by FLiT $b^{16}\equiv 1\mbox{ mod }17$. So
+	  $b^{1104}=(b^{16})^{69}\equiv 1 \mbox{ mod }17$ so $17\mid b^{1104}-1$. 
+	\end{itemize}
+	So $5\cdot 13\cdot 17 \mid b^{1104}-1 \implies 1105\mid b^{1104}-1$.
+	Therefore $b^{1104} \equiv 1\mbox{ mod }1105$.
+  \end{proof}
+
+\item
+  Use Euler's Theorem to find the units digit of $7^{999999}$.\\\\
+  The units digit is the least non-negative residue mod 10.
+  Since $\phi(10)=4$ we have $7^{4} \equiv 1 \mbox{ mod }10$ and so:
+  $$7^{999999}=(7^4)^{249999} 7^3\equiv 7^3 \equiv 3\mbox{ mod }10$$
+  The units digit of $7{999999}$ is $3$.
+
+\item
+  Solve each of the following using Euler's Theorem.
+  Solutions should be least nonnegative residues.
+\begin{enumerate}
+\item
+  $5x\equiv 3\mod 14$\\\\
+  Since $\gcd(5,14)=1$ then $5^{\phi(14)}\equiv 1\mbox{ mod }14$.
+  Then $5^6 = 5^5 \cdot 5\equiv 1\mbox{ mod }14$ where $5^5\equiv 3$ is the inverse.
+  Then $5x\equiv 3\mbox{ mod }14$ can be reduced to $x\equiv 3\cdot 3\mbox{ mod }14$.
+  So $9$ is the least non-negative residue.
+\item
+  $4x\equiv 7\mod 15$\\\\
+  Since $\gcd(4,15)=1$ then $4^{\phi(15)}\equiv 1\mbox{ mod }15$.
+  Then $4^{8} = 4^7\cdot 4 \equiv 1\mbox{ mod }15$ where $4^7\equiv 4$ is the inverse.
+  Then $4x\equiv 7\mbox{ mod }15$ can be reduced to $x\equiv 7\cdot 4\mbox{ mod }15$.
+  So $13$ is the least non-negative residue.
+\item
+  $3x\equiv 5\mod 16$\\\\
+  Since $\gcd(3,16)=1$ then $3^{\phi(16)}\equiv 1 \mbox{ mod }16$.
+  Then $3^{8} = 3^7 \cdot 3 \equiv 1\mbox{ mod }16$ where $3^7 \equiv 11$ is the inverse.
+  Then $3x\equiv 5\mbox{ mod }16$ can be reduced to $x\equiv 5\cdot 11\mbox{ mod }16$.
+  So $7$ is the least non-negative residue.
+\end{enumerate}
+
+\item
+  Prove that if $\text{gcd}(a,30)=1$ then $60\mid a^4+59$.
+  \begin{proof}
+	Note that $60 = 5\cdot 12$, because $\gcd(a,30)=1$ we know $\gcd(a,5)=1$ and $\gcd(a,12)=1$.
+	\begin{itemize}
+	  \item $a^{\phi(5)} = a^4 \equiv 1\mbox{ mod }5$, so $5\mid a^4-1$.
+
+	  \item $a^{\phi(12)} = a^4 \equiv 1\mbox{ mod }12$, so $12\mid a^4-1$.
+	\end{itemize}
+	Since $\gcd(5,12)=1$ it follows that $60\mid a^4 -1 \implies 60\mid (a^4 -1)+60 \implies 60\mid a^4 +59$.
+  \end{proof}
+
+\end{enumerate}
 
 \subsection{Various Multiplicative Functions}
-\hfill \fbox{98/100}
+\hfill \fbox{/100}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+\item
+  Find all $n$ satisfying $\phi(n)=18$. \\\\
+  Suppose $p\mid n$, then $p-1\mid \phi(n)$ so $p-1 = 1,2,3,6,9,18 \implies p = 2,3,4,7,10, 19$.
+  But $4$ and $10$ are not prime so $p = 2,3,7,19$. Therefore $n = 2^{\alpha} 3^{\beta} 7^{\gamma} 19^{\delta}$
+  for some $\alpha$, $\beta$, $\gamma$, and $\delta$. Then, 
+  \begin{itemize}
+	\item If $2^{\alpha}\mid n$ with $\alpha >0$ then $2^{\alpha -1}\mid\phi(n)$ so $\alpha = 0, 1, 2$.
+	\item If $3^{\beta}\mid n$ with $\beta >0$ then $3^{\beta -1}\mid\phi(n)$ so $\beta = 0, 1, 2, 3$.
+	\item If $7^{\gamma}\mid n$ with $\gamma >0$ then $7^{\gamma -1}\mid\phi(n)$ so $\gamma = 0, 1$.
+	\item If $19^{\delta}\mid n$ with $\delta >0$ then $19^{\delta -1}\mid\phi(n)$ so $\delta = 0, 1$.
+  \end{itemize}
+  Then these are the cases,
+  \begin{center}
+	\begin{tabular}{ l l l }
+	  $\bullet$ $n=2^0 3^0 7^0 19^0 = 1$ &    $\bullet$ $n=2^1 3^0 7^0 19^0 = 2$ & $\bullet$ $n=2^2 3^0 7^0 19^1 = 4$\\
+	  $\bullet$\fbox{$n=2^0 3^0 7^0 19^1 = 19$} &   $\bullet$\fbox{$n=2^1 3^0 7^0 19^1 = 38$} & $\bullet$ $n=2^2 3^0 7^0 19^1 = 76$\\
+	  $\bullet$ $n=2^0 3^0 7^1 19^0 = 7$ &    $\bullet$ $n=2^1 3^0 7^1 19^0 = 14$ & $\bullet$ $n=2^2 3^0 7^1 19^1 = 28$\\
+	  $\bullet$ $n=2^0 3^0 7^1 19^1 = 133$ &   $\bullet$ $n=2^1 3^0 7^1 19^1 = 266$ & $\bullet$ $n=2^2 3^0 7^1 19^1 = 532$\\
+	  $\bullet$ $n=2^0 3^1 7^0 19^0 = 3$ &    $\bullet$ $n=2^1 3^1 7^0 19^0 = 6$ & $\bullet$ $n=2^2 3^1 7^0 19^1 = 12$\\
+	  $\bullet$ $n=2^0 3^1 7^0 19^1 = 57$ &   $\bullet$ $n=2^1 3^1 7^0 19^1 = 114$ & $\bullet$ $n=2^2 3^1 7^0 19^1 = 228$\\
+	  $\bullet$ $n=2^0 3^1 7^1 19^0 = 21$ &    $\bullet$ $n=2^1 3^1 7^1 19^0 = 42$ & $\bullet$ $n=2^2 3^1 7^1 19^1 = 84$\\
+	  $\bullet$ $n=2^0 3^1 7^1 19^1 = 399$ &   $\bullet$ $n=2^1 3^1 7^1 19^1 = 798$ & $\bullet$ $n=2^2 3^1 7^1 19^1 = 1596$\\
+	  $\bullet$ $n=2^0 3^2 7^0 19^0 = 9$ &    $\bullet$ $n=2^1 3^2 7^0 19^0 = 18$ & $\bullet$ $n=2^2 3^2 7^0 19^1 = 36$\\
+	  $\bullet$ $n=2^0 3^2 7^0 19^1 = 171$ &   $\bullet$ $n=2^1 3^2 7^0 19^1 = 342$ & $\bullet$ $n=2^2 3^2 7^0 19^1 = 684$\\
+	  $\bullet$ $n=2^0 3^2 7^1 19^0 = 63$ &    $\bullet$ $n=2^1 3^2 7^1 19^0 = 126$ & $\bullet$ $n=2^2 3^2 7^1 19^1 = 252$\\
+	  $\bullet$ $n=2^0 3^2 7^1 19^1 = 1197$ &   $\bullet$ $n=2^1 3^2 7^1 19^1 = 2394$ & $\bullet$ $n=2^2 3^2 7^1 19^1 = 4788$\\
+	  $\bullet$\fbox{$n=2^0 3^3 7^0 19^0 = 27$} &    $\bullet$\fbox{$n=2^1 3^3 7^0 19^0 = 54$} & $\bullet$ $n=2^2 3^3 7^0 19^1 = 108$\\
+	  $\bullet$ $n=2^0 3^3 7^0 19^1 = 513$ &   $\bullet$ $n=2^1 3^3 7^0 19^1 = 1026$ & $\bullet$ $n=2^2 3^3 7^0 19^1 = 2052$\\
+	  $\bullet$ $n=2^0 3^3 7^1 19^0 = 189$ &    $\bullet$ $n=2^1 3^3 7^1 19^0 = 378$ & $\bullet$ $n=2^2 3^3 7^1 19^1 = 756$\\
+	  $\bullet$ $n=2^0 3^3 7^1 19^1 = 3591$ &   $\bullet$ $n=2^1 3^3 7^1 19^1 = 7182$ & $\bullet$ $n=2^2 3^3 7^1 19^1 = 14364$
+	\end{tabular}
+  \end{center}
+  Then evaluating all $n$ as $\phi(n)$ we get that for $n=19,27,38,54$, $\phi(n)=18$.
+
+\item
+  Show there are no $n$ with $\phi(n)=14$. \\\\
+  Suppose $\phi(n)=14$ for some $n$, then $7\mid p^{\alpha} - p^{\alpha -1}$
+  for some odd prime $p$. Since the factors of $14$ are $2$ and $7$ we have two cases.
+  If $p=7$ and $\alpha >1$ which implies $6\mid 14$ which is not true.
+  Or if $7\mid p-1$ but $p-1$ is even, so $p=15$ which is not prime. Therefore
+  there are no $n$ with $\phi(n)=14$.
+
+\item
+  For what values of $n$ is $\phi(n)$ odd?
+  Justify. \\\\
+  Since $\phi(p^{\alpha})=p^{\alpha - 1} (p-1)$ we know that it will be even for all $p>2$,
+  therefore $n$ cannot have any prime factors greater than 2. It follows that for $n=1,2$
+  $\phi(n)$ is odd.
+
+\item
+  Prove that $f(n)=\gcd(n,3)$ is multiplicative.
+  (This is actually true if 3 is replaced by any positive integer.)
+  \begin{proof}
+	We wish to show $f(mn)=f(m)\cdot f(n)$ when $\gcd(m,n)=1$.
+	Suppose that $\gcd(m,n)=1$, then
+	$\gcd(\gcd(m,3), \gcd(n,3)) = p$ for $p\in\integers^+$.
+	This implies that $p\mid \gcd(m,3)$ and $p\mid\gcd(n,3)$ which implies
+	$p\mid m$ and $p\mid n$, but since $\gcd(m,n)=1$ we have $p=1$. \\
+	Let $\gcd(m,3)=x$, this implies $x\mid 3$ and $x\mid m$. Then,
+	$$x\mid m \implies x\mid mn \implies x\mid \gcd(mn, 3)$$
+	Likewise, let $\gcd(n,3)=y$, this implies $y\mid 3$ and $y\mid n$. Then,
+	$$y\mid n \implies y\mid mn \implies y\mid \gcd(mn, 3)$$
+	Then because $x\mid \gcd(mn,3)$ and $y\mid\gcd(mn,3)$ and $\gcd(x,y)=1$
+	we have, $xy\mid \gcd(mn, 3)$.
+	Thus, $\gcd(mn,3) = \gcd(m,3)\cdot \gcd(n,3)$ and $f(n)$ is multiplicative.
+  \end{proof}
+
+\item
+  Find $\tau(2\cdot 3^2\cdot 5^3\cdot 11^5\cdot 13^4\cdot 17^5\cdot 19^5)$
+  $$=(1+1)(2+1)(3+1)(5+1)(4+1)(5+1)(5+1) = 2\cdot 3\cdot 4\cdot 6\cdot 5\cdot 6\cdot 6 = 25920$$
+
+\item
+  Find $\sigma(2\cdot 3^2\cdot 5^3\cdot 11^5\cdot 13^4\cdot 17^5\cdot 19^5)$
+  $$=\left(\frac{2^2 - 1}{2-1}\right)\left(\frac{3^3-1}{3-1}\right)\left(\frac{5^4-1}{5-1}\right)
+  \left(\frac{11^6-1}{11-1}\right)\left(\frac{13^5-1}{15-1}\right)\left(\frac{17^6-1}{17-1}\right)
+  \left(\frac{19^6-1}{19-1}\right)$$
+
+\item
+  Find $\tau(20!)$. \\\\
+  First we need the prime factorization of $20!$,
+  \begin{align*}
+	20! &= \left(2\right) \left(3\right) \left(2^2\right) \left(5\right) \left(2\cdot 3\right)
+	\left(7\right) \left(2^3\right) \left(3^2\right) \left(2\cdot 5\right) \left(11\right)
+	\left(2^2\cdot 3\right)\\
+	& \left(13\right) \left(2\cdot7\right) \left(3\cdot 5\right)
+	\left(2^4\right) \left(17\right) \left(2\cdot 3^2\right) \left(19\right) \left(2^2 \cdot 5\right)
+  \end{align*}
+  Thus, $20! = 2^{18} \cdot 3^8 \cdot 5^4 \cdot 7^2 \cdot 11 \cdot 13 \cdot 17 \cdot 19$.
+  Therefore, $\tau(20!)=(18+1)(8+1)(4+1)(2+1)(1+1)(1+1)(1+1)(1+1) = 41040$.
+
+\item
+  Classify all $n$ with $\tau(n)=30$. Explain! \\\\
+  Suppose $n = p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ with $a_i > 0$, it follows that
+  $\tau(n) = (1+\alpha_1) \cdots (1+\alpha_k)=30$. Since $(1+\alpha_i) \geq 2$ we get
+  the following cases:
+  \begin{itemize}
+	\item $k=15$ and $a_1 = \cdots = a_{15} = 1$.
+	\item $k=10$ and $a_1 = \cdots = a_{10} = 2$.
+	\item $k=6$ and $a_1 = \cdots = a_{6} = 4$.
+	\item $k=5$ and $a_1 = \cdots = a_{5} = 5$.
+	\item $k=3$ and $a_1 = \cdots = a_{3} = 9$.
+	\item $k=1$ and $a_1 = 29$.
+  \end{itemize}
+  Then we have,
+  \begin{itemize}
+	\item $n=p_1\cdots p_{15}$
+	\item $n=p_1^2\cdots p_{10}^2$
+	\item $n=p_1^4\cdots p_{6}^4$
+	\item $n=p_1^5\cdots p_{5}^5$
+	\item $n=p_1^9 p_2^9 p_3^9$
+	\item $n=p_1^{29}$
+  \end{itemize}
+
+\item
+  Prove that $\sigma(n)=k$
+  has at most a finite number of solutions when $k$ is a positive integer.
+  \begin{proof}
+	Since $\sigma(n)$ is multiplicative we know that $1\mid n$ and $n\mid n$ implies that
+	$\sigma(n) \geq 1+n$. It follows then that $\sigma(n)=k \implies 1+n\leq k \implies n\leq k-1$.
+	Thus, $\sigma(n)=k$ has a finite number of solutions.
+  \end{proof}
+
+\item
+  Show that if $a$ and $b$ are positive integers
+  and $p$ and $q$ are distinct odd primes
+  then $n=p^aq^b$ is deficient. \\\\
+  We wish to show $\sigma(n) < 2n$,
+  $$\sigma(p^a q^b) = \left(\frac{p^{a+1}-1}{p-1}\right) \left(\frac{q^{b+1}-1}{q-1}\right)
+  < \left(\frac{p^{a+1}}{p-1}\right) \left(\frac{q^{b+1}}{q-1}\right)
+  = \left(\frac{p}{p-1}\right)\left(\frac{q}{q-1}\right) p^a q^b$$
+  Since we wish to show $\sigma(n) < 2n$ we then need 
+  $\left(\frac{p}{p-1}\right)\left(\frac{q}{q-1}\right) < 2$.
+  \begin{align*}
+	\left(\frac{p}{p-1}\right)\left(\frac{q}{q-1}\right) &< 2 \\
+	pq &< 2(p-1)(q-1) \\
+	pq &< 2\left(pq -p -q + 1\right) \\
+	pq &< 2pq -2p -2q +2 \\
+	0 &< pq -2p -2q +2 \\
+	0 &< (p-2)(q-2) -2 \\
+	-2 &< (p-2)(q-1)
+  \end{align*}
+  Recall that $p$ and $q$ are \textit{distinct} odd primes, so let's assume that
+  $p>q>2$. Since let $p=5$ and $q=3$, we then see $2 < (5-2)(3-2)$, thus the
+  inequality holds. Therefore $p^a q^b$ is deficient.
+
+\item
+  Prove that a perfect square cannot be a perfect number.
+  \begin{proof}
+	Let $n$ be a perfect square, first observe that when $n$ is even by Euler's Theorem 
+	$n= 2^{p-1} \left(2^p -1\right) \implies \sqrt{n} = \sqrt{2^{p-1} \left(2^p -1\right)}$
+	but then this implies that $\sqrt{n} \not\in \integers$ which contradicts $n$ being a
+	perfect square. Therefore $n$ must be odd. So 
+	$n= 2^{k} \left(p_1^{\alpha_1}\cdots p_i^{\alpha_i}\right)$, note that for 
+	$p_1^{\alpha_1}\cdots p_i^{\alpha_i}$ each $p$ and $\alpha$ is even.
+	Then it follows that $n$ has an odd number of odd divisors. Thus $\sigma(n)$ is an odd number,
+	but a perfect number is when $\sigma(n)=2n$ which implies $\sigma(n)$ must be an even number.
+	Therefore a perfect square cannot be a perfect number.
+  \end{proof}
+
+\item
+  Use Theorem 7.12 to determine whether each of the following Mersenne numbers
+  is a Mersenne prime:
+  \begin{enumerate}
+  \item[] Personally, I found it easiest to create a simple python script to test 
+  for primality of Mersenne numbers.
+\begin{center}
+\begin{lstlisting}[language=Python]
+import math
+
+def Mersenne_Prime (n):
+  M = 2**n -1
+
+  for k in range (1, int(math.sqrt(M))):
+	factor = (2*n)*k +1
+	if M % factor == 0:
+	  print(M/factor)
+	  return false
+  
+  return True
+\end{lstlisting}
+\end{center}
+
+
+  \item
+	$M_{11}$ \\\\
+	First we see $M_{11} = 2^{11} - 1= 2047$, then the factors of 2047 are of the form
+	$2(11)k+1 = 22k + 1$. Look at $k$ up to $\sqrt{2047}\approx 45.24$. We find that
+	$2047 = 23\cdot 89$, therefore $M_{11}$ is not prime.
+  \item
+	$M_{21}$ \\\\
+	First we observe that $21=3\cdot 7$, then by the definition of a Mersenne prime, since $21$ is
+	not prime then $M_{21}$ is not prime.
+  \item
+	$M_{31}$ \\\\
+	First we see $M_{31} = 2^{31} -1=2147483647$, then the factors of 2147483647 are of the form
+	$2(31)k+1 = 62k+1$. Look at $k$ up to $\sqrt{2147483647} \approx 46340.95$. We find that
+	there is no factor of $2147483647$ of the form $62k+1$ for $k\leq 46341$, therefore $M_{31}$ is prime.
+  \end{enumerate}
+
+\end{enumerate}
+
+\subsection{Primitive Roots}
+\hfill \fbox{/100}
 \rule{\textwidth}{1pt}\\
 
 \end{document}

@@ -26,7 +26,7 @@
 
 \begin{document}
     
-\section{Indices, Index Arithmetic, Discrete Logarithms}
+\section{Primitive Roots}
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
@@ -285,6 +285,77 @@ In general, when $r$ is a primitive root mod $m$ then $$r^x \equiv a\mbox{ mod }
 	\end{enumerate}
 \end{enumerate}
 
+\item \textbf{The Discrete Logarithm Problem:} Given a modulus $m$ and a primitive root $r$ we know
+	how to calculate $r^x \mbox{ mod }m$ (given $x$) to reduce it. How hard is it to solve
+	$r^x \equiv y\mbox{ mod }m$ if $y$ is given and we need $x$ i.e. solving $\ind_r y$. The answer,
+	it is extremely hard. There is no meaningfully better way than trying all
+	$1\leq x\leq \phi(m)$.
+	In simple cases we can try them all.
+
+\item \textbf{Index Arithmetic:} We can use indices to solve modular problems
+	involving exponets. Suppose we work frequently with the modulus $m=17$. 
+	We first find a primitive root mod $17$. \\\\
+	Note: Assuming you know one exists
+	\begin{itemize}
+		\item Find one by finding $r$ with $\ord_{17} r = \phi(17) = 16$.
+		\item There will be $\phi(\phi(17)) = \phi(16) = 8$ of them.
+	\end{itemize}
+	Turns out $r=3$ is a primitive root. So let's solve some problems. \\\\
+	First, to find necessary discrete logs (aka indices) we will build a table:
+	\begin{center}
+		\scalebox{.8}{
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			$a\mbox{ mod }17$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+			\hline
+			$\ind_3 a$ & 16 & 14 & 1 & 12 & 5 & 15 & 11 & 10 & 2 & 3 & 7 & 13 & 4 & 9 & 6 & 8 \\\hline
+		\end{tabular}
+		}
+	\end{center}
+	\begin{enumerate}[(a)]
+	\item \textbf{Ex.} Solve $3x^{10} \equiv 12 \mbox{ mod }17$. Take the $\ind_3$ of both sides.
+	\begin{align*}
+		\ind_3 (3x^{10}) &\equiv \ind_3 (12) \mbox{ mod } 16 \\
+		\ind_3 3 + \ind_3 x^10 &\equiv \ind_3 12 \mbox{ mod } 16 \\
+		\ind_3 3 + 10(\ind_3 x) &\equiv \ind_3 12 \mbox{ mod } 16 \\
+		1 + 10(\ind_3 x) &\equiv 13 \mbox{ mod } 16 \\
+		10(\fbox{$\ind_3 x$}) &\equiv 12 \mbox{ mod } 16{\color{red}\text{*}}\hspace{6mm}\text{treat this as \textit{one} variable}
+	\end{align*}
+	Recall: $ax\equiv b\mbox{ mod }m$ has solutions if and only if $\gcd(a,m)\mid b$ and
+	if so, $\exists \gcd(a,m)$ incongruent solutions mod $m$. Obtain $x_0$ via guessing or the Euclidean Algorithm,
+	then all solutions have the form $x = x_0 + k \frac{m}{\gcd(a,m)}$. \\
+	Since $\gcd(10,16) = 2\mid 12$, $\exists 2$ solutions mod 16. The solutions we get are:
+	$$\ind_3 x \equiv 6, 14 \mbox{ mod } 16$$
+	Use the table to "un-index":
+	$$x \equiv 15, 2 \mbox{ mod } 17$$
+	%On line three we reference the table we formed above.
+	%$$x\equiv y\mbox{ mod } m \iff \ind_r x \equiv \ind_r y \mbox{ mod }\phi(m)$$
+	{\color{red}\text{*}}\textbf{Note:} We could, at this point, do
+	\begin{align*}
+		5\ind_3 x &\equiv 6\mbox{ mod }\frac{16}{\gcd(16, 2)} \\
+		5\ind_3 x &\equiv 6\mbox{ mod } 8 \\
+		\ind_3 x &\equiv 6\mbox{ mod } 8
+	\end{align*}
+	This is unique mod 8 because $\gcd(5,8)=1$. To "un-index" we need mod 16.
+	$$\ind_3 x \equiv 6\mbox{ mod } 8 \implies \ind_3 x \equiv 6, 14\mbox{ mod } 16$$
+	Now we can "un-index"
+
+	\item \textbf{Ex.} Solve $4^x \equiv 16\mbox{ mod } 17$. We will take the $\ind_3$ of both sides.
+	\begin{align*}
+		\ind_3 (4^x) &\equiv \ind_3 (16) \mbox{ mod } 16 \\
+		x\ind_3 4 &\equiv \ind_3 (16) \mbox{ mod } 16 \\
+		x(12) &\equiv 8 \mbox{ mod } 16 \\
+		12x &\equiv 8 \mbox{ mod } 16 \\
+		3x &\equiv 2\mbox{ mod } \frac{16}{\gcd(4, 16)} \\
+		3x &\equiv 2\mbox{ mod } 4
+	\end{align*}
+	Since $\gcd(3,4)=1\mid 2$, $\exists$ a solution mod 4.
+	$$x \equiv 2\mbox{ mod } 4$$
+	\textbf{Note:} Any of $x= \cdots, -6, -2, 2, 6, \cdots$ works. \\
+	\textbf{Note:} Could also give as $x \equiv 2, 6, 10, 14 \mbox{ mod } 16$ ("un-index" back to original mod)
+\end{enumerate}
+\textbf{Note:} We can do either of these problems again with a completely different primitive root mod 17.
+As an exercise in understanding, we could do the two examples above with a different primitive root.
 \end{enumerate}
 %%%%%%%%%%%%%%%
 %%% Section %%%
