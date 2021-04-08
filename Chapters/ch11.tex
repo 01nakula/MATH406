@@ -25,7 +25,7 @@
 
 
 \begin{document}
-    
+\setcounter{section}{10}
 \section{Quadratic Residues}
 \textbf{Introduction:} The concept of Quadratic Residues is a fundamental tool
 which has ramifications in lots of other number theory places: Cryptography, Factoring,
@@ -105,10 +105,101 @@ Then the perfect squares are $0,1,2,4$ and $3,5,6$ are not.
 		}
 	\end{center}
 	So what this theorem tells us is that $a=1,2,4,8,9,13,15,16$ are the quadratic residues
-
 \end{enumerate}
 
+\item \textbf{The Legendre Symbol and Properties}
+\begin{enumerate}[(a)]
+	\item \textbf{Definition:} Given an odd prime $p$ and $a\in\integers$ with $\gcd(a,p)=1$,
+	define the Legendre Symbol:
+	$$\left(\frac{a}{p}\right) = \begin{cases}1 &\text{if $a$ is a quadratice residue mod $p$}\\
+	-1 &\text{if $a$ is a quadratic nonresidue mod $p$} \end{cases}$$
+	\textbf{Ex.} If $p=7$ we have:
+	$$\left(\frac{1}{7}\right) = \left(\frac{2}{7}\right) = \left(\frac{4}{7}\right) = 1$$
+	$$\left(\frac{3}{7}\right) = \left(\frac{5}{7}\right) = \left(\frac{6}{7}\right) = -1$$
+	Since $1,2,4$ are QR mod 7 and $3,5,6$ are QNR mod 7.
 
+	\item \textbf{Euler's Criterion:} If $p$ is an odd prime and $a\in\integers$ with $\gcd(a,p)=1$
+	then: $$\left(\frac{a}{p}\right) \equiv a^{(p-1)/2} \mbox{ mod } p$$
+	\begin{proof}
+		Suppose $\left(\frac{a}{p}\right)=1$ then $\exists x$ such that $x^2 \equiv a \mbox{ mod } p$. Then observe,
+		$a^{(p-1)/2} \equiv (x^2)^{(p-1)/2} = x^{p-1} \equiv 1 \mbox{ mod }p$
+		by Euler's Theorem/Fermat's Little Theorem they are equal. \\\\
+		Suppose $\left(\frac{a}{p}\right)=-1$. Consider the list $\{1,2,\cdots, p-1\}$, each is coprime to $p$
+		and there are an even number of them because $p$ is odd. Suppose $b\in\{1,2,\cdots, p-1\}$, then
+		consider the equation $bx \equiv a\mbox{ mod } p$. Since $\gcd(b,p)=1\mid a$, $\exists !$ solution.
+		Could $x\equiv b\mbox{ mod }p$? No because if $b\cdot b \equiv a \mbox{ mod }p \implies b^2 \equiv a\mbox{ mod }p$
+		but then $a$ would be a QR mod $p$. Since the solution is not $b$ it is another element in the set
+		$\{1,2,\cdots, p-1\}$. Thus all of $\{1,2,\cdots, p-1\}$ pair up to give pairs whose products are $a$.
+		Thus, $$\underbrace{(1)(2)\cdots(p-1)}_{\text{Wilson's Theorem}} \equiv a^{(p-1)/2} \mbox{ mod }p$$
+		$$a^{(p-1)/2}\equiv -1\mbox{ mod }p$$
+	\end{proof}
+	\noindent\textbf{Ex.} $\left(\frac{6}{11}\right) = 6^{(11-1)/2} = 6^5 \equiv 10 \equiv -1 \mbox{ mod }11$.
+	So 6 is a QNR mod 11. i.e. $x^2\equiv 6\mbox{ mod }11$ has no solution.
+
+	\item \textbf{Theorem:} If $p$ is an odd prime and $a\in\integers$ with $\gcd(a,p)=\gcd(b,p)=1$ then:
+	\begin{enumerate}
+		\item If $a\equiv b\mbox{ mod }p$ then $\left(\frac{a}{p}\right) = \left(\frac{b}{p}\right)$. This statements
+		that we can reduce the numerator mod the denominator.
+		\begin{proof}
+			Clear because $x^2\equiv a\mbox{ mod }p$ if and only if $x^2\equiv b\mbox{ mod } p$ because $a\equiv b\mbox{ mod }p$.
+		\end{proof}
+
+		\item $\left(\frac{ab}{p}\right) = \left(\frac{a}{p}\right) \left(\frac{b}{p}\right)$
+		\begin{proof}
+			Well, $$\left(\frac{ab}{p}\right) \equiv (ab)^{(p-1)/2} \equiv a^{(p-1)/2} b^{(p-1)/2} \equiv \left(\frac{a}{p}\right)
+			\left(\frac{b}{p}\right) \mbox{ mod }p$$
+			So $\left(\frac{ab}{p}\right)\equiv \left(\frac{a}{p}\right) \left(\frac{b}{p}\right) \mbox{ mod }p$ so 
+			$p\mid \left[\left(\frac{ab}{p}\right)- \left(\frac{a}{p}\right) \left(\frac{b}{p}\right)\right]$ but $p\geq 3$
+			Since $\left(\frac{ab}{p}\right)- \left(\frac{a}{p}\right) \left(\frac{b}{p}\right)$ is between $-2$ and $2$
+			and $p$ divides it, we know that it must be 0. Therefore, 
+			$\left(\frac{ab}{p}\right)= \left(\frac{a}{p}\right) \left(\frac{b}{p}\right)$.
+		\end{proof}
+		
+		\item $\left(\frac{a^2}{p}\right) = 1$
+		\begin{proof}
+			Obvious.
+		\end{proof}
+	\end{enumerate}
+
+	\item \textbf{Gauss' Lemma:} Suppose $p$ is an odd prime and $a\in\integers$ with $\gcd(a,p)=1$.
+	Let $s$ be the number of least nonnegative residues in the set
+	$\left\{a,2a,\cdots, \left((p-1)/2\right)a\right\}$ which are $> p/2$.
+	Then $\left(\frac{a}{p}\right) = (-1)^s$. \\\\
+	\textbf{Ex.} Consider $\left(\frac{8}{13}\right)$. Note that $\left(\frac{p-1}{2}\right) = \frac{12}{2} = 6$
+	so look at 
+	$$\{8, 2\cdot8, 3\cdot8, \cdots, 6\cdot8\} \equiv \{8,3,11,6,1,9\} \mbox{ mod } 13$$
+	Since only three of these are greater than $p/2 = 6.5$ we have $\left(\frac{8}{13}\right) = (-1)^3 = -1$. Thus,
+	8 is a quadratic nonresidue mod 13.
+\end{enumerate}
+
+	\item \textbf{Two Special Cases}\\
+	These will turn out to be really useful after 11.2 and 11.3 .
+	\begin{enumerate}[(a)]
+		\item \textbf{Theorem:} Suppose $p$ is an odd prime, then
+		$$\left(\frac{-1}{p}\right) = \begin{cases}
+			1 &\text{if $p\equiv 1\mbox{ mod } 4$} \\
+			-1 &\text{if $p\equiv 3\mbox{ mod } 4$}
+		\end{cases}$$
+		\begin{proof}
+			By Euler's Criterion we have,
+			$$\left(\frac{-1}{p}\right) \equiv (-1)^{(p-1)/2} \mbox{ mod }p$$
+			If $p\equiv 1\mbox{ mod }4$ then $p=4k+1$ for some $k\in\integers$ so:
+			$$(-1)^{(p-1)/2} = (-1)^{(4k+1-1)/2} = (-1)^{2k} = 1$$
+			If $p\equiv 3\mbox{ mod }4$ then $p=4k+3$ for some $k\in\integers$ so:
+			$$(-1)^{(p-1)/2} = (-1)^{(4k+3-1)/2} = (-1)^{2k+1} = -1$$
+		\end{proof}
+
+		\item \textbf{Theorem:} Suppose $p$ is an odd prime, then
+		$$\left(\frac{2}{p}\right) = \begin{cases}
+			1 &\text{if $p\equiv 1,7\mbox{ mod } 8$} \\
+			-1 &\text{if $p\equiv 3,5\mbox{ mod } 8$}
+		\end{cases}$$
+		\begin{proof}
+			Not obvious as it uses Gauss' Lemma and is lengthy.
+		\end{proof}
+		\noindent\textbf{Note:} This is equivalent to
+		$$\left(\frac{2}{p}\right) = (-1)^{(p^2 - 1)/8}$$
+	\end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%

@@ -31,7 +31,6 @@
 
 \lstset{style=mystyle}
 
-
 \def\naturals{{\mathbb N}}
 \def\reals{{\mathbb R}}
 \def\complex{{\mathbb C}}
@@ -41,64 +40,39 @@
 \def\irrationals{{\mathbb I}}
 \def\inlinesum#1#2{\overset{#2}{\underset{#1}{\sum}}}
 \def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
-
+\def\ord{{\text{ord}}}
+\def\ind{{\text{ind}}}
 
 \begin{document}
-	
-\section{Answers to Problems}
+\setcounter{section}{0}
+\section{Solutions}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{The Integers}
-\hfill \fbox{91/100}
+\setcounter{subsection}{0}
+\subsection{Chapter 1}
 \rule{\textwidth}{1pt}\\
-\begin{enumerate}
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 1 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Determine whether each of the following sets is well-ordered.  If
-  so, give a proof which relies on the fact that $\integers^+$ is well-ordered.
-  If not, give an example of a subset with no least element.\hfill\fbox{10/10}
-  \begin{enumerate}
+\subsubsection{}
+\begin{enumerate}[(a)]
   \item
-	$\left\{a\,\big|\, a\in\integers,a>3\right\}$
-
 	Is a subset of $\integers^+$ and therefore is well-ordered.
-  \item
-	$\left\{a\,\big|\, a\in\rationals,a>3\right\}$
-
+  
+	\item
 	There is no least element so the set is not well-ordered.
-  \item
-	$\left\{\frac a2\,\big|\, a\in\integers,a\geq 10\right\}$
-
+  
+	\item
 	Consider the set $\left\{a\,\big|\, a\in\integers,a\geq 10\right\}$, it is apparent that this is a subset of $\integers^+$ and therefore is well-ordered.
 	So the set $\left\{\frac a2\,\big|\, a\in\integers,a\geq 10\right\}$ is also well-ordered because it holds a least element ($\frac{10}{5}$).
-  \item
-	$\left\{\frac 2a\,\big|\, a\in\integers,a>10\right\}$
-
+  
+	\item
 	There is no least element so the set is not well-ordered.
   \end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 2 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Suppose $a,b\in\integers^+$ are unknown.  Let
-  $S=\left\{a-bk\,\big|\, k\in\integers,a-bk>0\right\}$.
-  Explain why $S$ has a smallest element but no largest element.\hfill\fbox{3/10}
-
-  Since $S$ is a subset of $\integers^+$ by well-ordering we know that $S$ has a least element, and because $k\in\integers$,
-  $k$ can be $0$ and therefore there is no most element.
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 3 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Use the well-ordering property to show that
-  $\sqrt 5$ is irrational.\hfill\fbox{10/10}
-  \begin{proof}
+\subsubsection{}
+Since $S$ is a subset of $\integers^+$ by well-ordering we know that $S$ has a least element, and because $k\in\integers$,
+$k$ can be $0$ and therefore there is no most element.
+\subsubsection{}
+\begin{proof}
 	Suppose $\sqrt{5}$ is rational and is of the form $\frac{a}{b}$ where $a,b\in\mathbb{Z}^+$ and $b\neq 0$.
 	Consider the set $S$,
 	$$S = \left\{ k \mid k, k\sqrt{5}\in\mathbb{Z}^+ \right\}$$
@@ -112,19 +86,9 @@
 	\end{itemize}
 	It follows that $l'\in S$ but $l' < l$ which contradicts $l$ being the least element in $S$.
   \end{proof}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 4 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Use the identity
-  $$\frac1{k^2-1}=\frac12\left(\frac1{k-1}-\frac1{k+1}\right)$$
-  to evaluate the following:\hfill\fbox{10/10}
-  \begin{enumerate}
-
+\subsubsection{}
+\begin{enumerate}[(a)]
   \item
-	$\inlinesum{k=2}{10}\frac1{k^2-1}$
-
 	\begin{align*}
 	  \inlinesum{k=2}{10}\frac{1}{k^2-1} &=\inlinesum{k=2}{10}\frac{1}{2}\left(\frac{1}{k-1}-\frac{1}{k+1}\right)= \frac{1}{2}\inlinesum{k=2}{10}\left(\frac{1}{k-1}-\frac{1}{k+1}\right) \\
 	  &= \frac{1}{2}\left[\left(\frac{1}{1}-\frac{1}{3}\right) + \cdots + \left(\frac{1}{8}-\frac{1}{10}\right) + \left(\frac{1}{9}-\frac{1}{11}\right)\right] \\
@@ -133,57 +97,30 @@
 	\end{align*}
 
   \item
-	$\inlinesum{k=2}{n}\frac1{k^2-1}$
-
 	$$\inlinesum{k=2}{n}\frac1{k^2-1}= \frac{1}{2}\left[\frac{1}{1}+\frac{1}{2} - \frac{1}{n} - \frac{1}{n+1}\right]$$
 
   \item
-	$\inlinesum{k=1}{n}\frac1{k^2+2k}$
-	\hspace{10pt}Hint: $k^2+2k=(???)^2-1$
-
 	$$\inlinesum{k=1}{n} \frac{1}{k^2+2k} = \inlinesum{k=1}{n}\frac{1}{(k+1)^2 - 1} = \inlinesum{k=2}{n+1}\frac{1}{k^2 - 1}$$
 	$$\inlinesum{k=2}{n+1}\frac{1}{k^2 - 1} = \frac{1}{2} \left[\frac{1}{1} + \frac{1}{2} - \frac{1}{n+1} - \frac{1}{n+2}\right]$$
 
   \end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 5 %%%%%
-%%%%%%%%%%%%%%%%%%%%%  
-\item
-  Find the value of each of the following:\hfill\fbox{10/10}
-
-  \begin{enumerate}
+\subsubsection{}
+\begin{enumerate}[(a)]
 
   \item
-	$\inlineprod{j=2}{7}\left(1-\frac1j\right)$
-
-	\begin{align*}
-	  \inlineprod{j=2}{7}\left(1-\frac1j\right)
-	&= \left[\frac{1}{2}\cdot\frac{2}{3}\cdot\frac{3}{4}\cdot\frac{4}{5}\cdot\frac{5}{6}\cdot\frac{6}{7}\right] \\
-	&= \frac{1}{7}
-	\end{align*}
+	$\inlineprod{j=2}{7}\left(1-\frac1j\right)
+	= \left[\frac{1}{2}\cdot\frac{2}{3}\cdot\frac{3}{4}\cdot\frac{4}{5}\cdot\frac{5}{6}\cdot\frac{6}{7}\right]
+	= \frac{1}{7}$
 	
   \item
-	$\inlineprod{j=2}{n}\left(1-\frac1j\right)$
-
-	$$\inlineprod{j=2}{n}\left(1-\frac1j\right) = \frac{1}{n}$$
+	$\inlineprod{j=2}{n}\left(1-\frac1j\right) = \frac{1}{n}$
 
   \item
-	$\inlineprod{j=2}{n}\left(1-\frac1{j^2}\right)$
-	\hspace{10pt}Hint: Be sneaky!
-
-	$$\inlineprod{j=2}{n}\left(1-\frac1{j^2}\right) = \frac{n+1}{2n}$$
+	$\inlineprod{j=2}{n}\left(1-\frac1{j^2}\right) = \frac{n+1}{2n}$
 
   \end{enumerate}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 6 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Use weak mathematical induction to prove that
-  $$\inlinesum{j=1}{n}j(j+1)=\frac{n(n+1)(n+2)}3$$
-  for every positive integer $n$.\hfill\fbox{9/10}
-  \begin{proof}
+\subsubsection{}
+\begin{proof}
 	$ $
 	\begin{enumerate}
 	  \item[] \textbf{Base Case:}
@@ -211,14 +148,8 @@
 	  \item[] Thus for all $n\geq 1$, $$\sum_{j=1}^{n} j(j+1) = \frac{n(n+1)(n+2)}{3}$$     
 	\end{enumerate}
   \end{proof}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 7 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Use Weak Mathematical Induction
-  to show that $f_nf_{n+2}=f_{n+1}^2+(-1)^{n+1}$ for all $n\geq 1$.\hfill\fbox{9/10}
-  \begin{proof}
+\subsubsection{}
+\begin{proof}
 	$ $
 	\begin{enumerate}
 	  \item[] \textbf{Base Case:}
@@ -248,25 +179,8 @@
 	  \item[] Thus for all $n\geq 1$, $$f_nf_{n+2}-f_{n+1}^2 =(-1)^{n+1}$$
 	\end{enumerate}
   \end{proof}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 8 %%%%%
-%%%%%%%%%%%%%%%%%%%%%  
-\item
-  Use weak mathematical induction to show that
-  a $2^n\times2^n$ chessboard with a corner missing can be tiled
-  with pieces shaped like
-  \begin{picture}(20,20)
-	\put(0,-5){\line(0,1){20}}
-	\put(10,-5){\line(0,1){20}}
-	\put(20,-5){\line(0,1){10}}
-	\put(0,-5){\line(1,0){20}}
-	\put(0,5){\line(1,0){20}}
-	\put(0,15){\line(1,0){10}}
-  \end{picture}
-  \,
-  for every integer $n\geq 0$.\hfill\fbox{10/10}
-  \begin{proof}
+\subsubsection{}
+\begin{proof}
 	$ $
 	\begin{enumerate}
 	  \item[] \textbf{Base Case:}
@@ -295,16 +209,8 @@
 	  \item[] Thus, every $2^n \times 2^n$ chessboard with a corner missing can be tiled with trominoes.
 	\end{enumerate}    
   \end{proof}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 9 %%%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Define:
-  $$H_{2^n}=\inlinesum{j=1}{2^n}\frac1j$$
-  Use weak mathematical induction to prove that
-  for all $n\geq 1$ we have $H_{2^n}\leq 1+n$.\hfill\fbox{10/10}
-  \begin{proof}
+\subsubsection{}
+\begin{proof}
 	$ $
 	\begin{enumerate}
 	  \item[] \textbf{Base Case:}
@@ -331,14 +237,8 @@
 	  \item[] Thus for all $n\geq 1$, $$H_{2^n}\leq 1+n$$
 	\end{enumerate}
   \end{proof}
-
-%%%%%%%%%%%%%%%%%%%%%
-%%%%% Problem 10 %%%%
-%%%%%%%%%%%%%%%%%%%%%
-\item
-  Use strong mathematical induction to prove that every amount of
-  postage over $53$ cents can be formed using $7$-cent and $10$-cent stamps.\hfill\fbox{10/10}
-  \begin{proof}
+\subsubsection{}
+\begin{proof}
 	$ $
 	\begin{enumerate}
 	  \item[] \textbf{Inductive Step:}
@@ -364,13 +264,11 @@
 	\end{enumerate}
   \end{proof}
 
-\end{enumerate}
-
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Primes and GCDs}
-\hfill \fbox{69/80}
+\setcounter{subsection}{2}
+\subsection{Chapter 3}
 \rule{\textwidth}{1pt}\\
 \begin{enumerate}
 \item
@@ -516,8 +414,8 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Congruences}
-\hfill \fbox{91/100}
+\setcounter{subsection}{3}
+\subsection{Chapter 4}
 \rule{\textwidth}{1pt}\\
 \begin{enumerate}
 \item
@@ -755,8 +653,8 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Special Congruences}
-\hfill \fbox{98/100}
+\setcounter{subsection}{5}
+\subsection{Chapter 6}
 \rule{\textwidth}{1pt}\\
 \begin{enumerate}
 \item
@@ -907,8 +805,11 @@
 
 \end{enumerate}
 
-\subsection{Various Multiplicative Functions}
-\hfill \fbox{/100}
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{6}
+\subsection{Chapter 7}
 \rule{\textwidth}{1pt}\\
 \begin{enumerate}
 \item
@@ -1112,8 +1013,350 @@ def Mersenne_Prime (n):
 
 \end{enumerate}
 
-\subsection{Primitive Roots}
-\hfill \fbox{/100}
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{8}
+\subsection{Chapter 9}
 \rule{\textwidth}{1pt}\\
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{10}
+\subsection{Chapter 11}
+\rule{\textwidth}{1pt}\\
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{7}
+\subsection{Chapter 8}
+\rule{\textwidth}{1pt}\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ███████╗██╗░░██╗░█████╗░███╗░░░███╗░██████╗ %
+% ██╔════╝╚██╗██╔╝██╔══██╗████╗░████║██╔════╝ %
+% █████╗░░░╚███╔╝░███████║██╔████╔██║╚█████╗░ %
+% ██╔══╝░░░██╔██╗░██╔══██║██║╚██╔╝██║░╚═══██╗ %
+% ███████╗██╔╝╚██╗██║░░██║██║░╚═╝░██║██████╔╝ %
+% ╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═════╝░ %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{section}{5}
+\setcounter{subsection}{0}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Sample A}
+\rule{\textwidth}{1pt}\\
+\subsubsection{}
+Let $10!$ be written as,
+	\begin{align*}
+		10! &= 1\cdot 2\cdot 3\cdot 4\cdot 5\cdot 6\cdot 7\cdot 8\cdot 9\cdot 10 \\
+		&= 1\cdot 2\cdot 3\cdot 2^2\cdot 5\cdot (2\times 3)\cdot 7\cdot 2^3\cdot 3^2\cdot (2\times 5) \\
+		&= 1\cdot 2^8\cdot 3^4\cdot 5^2\cdot 7
+	\end{align*}
+	Therefore, the prime factorization of $10!$ is $2^8 3^4 5^2 7$.
+
+\subsubsection{}
+Using Fermat's Little Theorem. 
+	Well $13\nmid 11$ so $11^{12} \equiv 1\mod 13$. Then $67= 12(5) + 7$ so,
+	\begin{align*}
+		11^{67} = 11^{12(5)+7} = 11^{12^5}11^7 &\equiv (1)^{10} 11^{7} \mod 13 \\
+		&\equiv 11^7 \mod 13 \\
+		&\equiv 11 \cdot 1771561 \mod 13 \\
+		&\equiv 11 (-1) \mod 13 \\
+		&\equiv -11 \mod 13 \\
+		&\equiv 2 \mod 13
+	\end{align*}
+	So $2$ is the least non-negative residue.
+
+\subsubsection{}
+Since $\gcd(12,40)=4\mid 28$ there exists a solution. We use the Euclidean Algorithm to solve
+	$12x' + 40y' = 4$. This gives us $12(-3)+40(1)=4$, we want a 28 on the right hand side so 
+	multiple by $7$. We then get $12(-21)+40(7)=28$, so $12(-21)\equiv 28\mod 40$. Therefore,
+	$x_0 \equiv 19\mod 40$, so all solutions are then
+	$$x\equiv 19 + 10k\mod 40k, k=0,1,2,3$$
+	That is $x\equiv 19, 29, 39, 9\mod 40$
+
+\subsubsection{}
+Using the Euclidean Algorithm we do the following:
+	\begin{align*}
+		390 &= 5(72) + 30 \\
+		72 &= 2(30) + 12 \\
+		30 &= 2(12) + 6 \\
+		12 &= 2(6) + 0
+	\end{align*}
+	So the gcd is $6$. Now the find the linear combination.
+	\begin{align*}
+		6 &= 1(30) - 2(12) \\
+		&= 1(30) - 2(72 - 2(30)) \\
+		&= 5(30) - 2(72) \\
+		&= 5(390 - 5(72)) - 2(72) \\
+		&= 5(390) - 27(72)
+	\end{align*}
+	Where $\alpha = 5$ and $\beta = -27$.
+
+\subsubsection{}
+Test to see if all $m_i$ are pairwise coprime, $\gcd(5,6)=\gcd(5,7)=\gcd(6,7)$. This means that
+	$M=210$, $M_1=42$, $M_2=35$, and $M_3=30$.
+	\begin{itemize}
+		\item[] Solve for $y_1$:
+			\begin{align*}
+				42y_1 &\equiv 1\mod 5 \\
+				2y_1 &\equiv 1\mod 5 \\
+				y_1 &= 3
+			\end{align*}
+		
+		\item[] Solve for $y_2$:
+			\begin{align*}
+				35y_2 &\equiv 1\mod 6 \\
+				5y_2 &\equiv 1\mod 6 \\
+				y_2 &= 5
+			\end{align*}
+		
+		\item[] Solve for $y_3$:
+			\begin{align*}
+				30y_3 &\equiv 1\mod 7 \\
+				2y_3 &\equiv 1\mod 7 \\
+				y_3 &= 4
+			\end{align*}
+	\end{itemize}
+	So we then get
+	$$x = (2)(42)(3) + (1)(35)(5) + (4)(30)(4) \equiv 907\mod 210$$
+	$$x\equiv 67\mod 210$$
+	So the least non-negative residue is $67$.
+
+\subsubsection{}
+\begin{proof}
+	$ $\\
+	\begin{itemize}
+		\item[] \textbf{Base Case:}
+		\begin{itemize}
+			\item[] Let $n=6$, $n! = 720$ and $6^3=216$, $720\geq 216$ so the base case is valid.
+		\end{itemize}
+		\item[] \textbf{Inductive Hypothesis:}
+		\begin{itemize}
+			\item[] Assume from the inductive hypothesis that the conclusion is true for some $n\geq 6$.
+			This implies that $n!\geq n^3$.
+		\end{itemize}
+		\item[] \textbf{Inductive Step:}
+		\begin{itemize}
+			\item[] Then consider the equation to $n+1$:
+			\begin{align*}
+				(n+1)! &\geq (n+1)^3 \\
+				(n+1)(n!) &\geq (n+1)^3 \\
+				(n+1)n^3 &> (n+1)^3 \hspace{5mm}\text{by IH} \\
+				n^3 &> (n+1)^2 \\
+				n^3 &> n^2 + 2n + 1
+			\end{align*}
+			Which is true for any $n\geq 3$.
+		\end{itemize}
+		\item[] Thus for all $n\geq 6$,
+		$$n!\geq n^3$$
+	\end{itemize}
+\end{proof}
+
+\subsubsection{}
+The set $S_1$ is not well-ordered because the subset $(0,0)\cap \reals$ has no least element.
+Likewise, the set $S_2$ is also not well-ordered because the set itself has no least element.
+
+\subsubsection{}
+\begin{proof}
+	Suppose that $\sqrt{2}$ is rational, this means that $\sqrt{2}$ is of the form $\frac{a}{b}$, $a,b\in\integers^+$.
+	Then $2=\frac{a^2}{b^2}$ so $a^2=2b^2$. Because $a^2$ and $b^2$ are both squared the prime factorizations
+	of both are even, but $a^2=2b^2$ implies there is an odd number of prime factorizations for $2$. This contradicts
+	uniqueness of prime factors.
+\end{proof}
+
+\subsubsection{}
+\begin{proof}
+	Given that $a\mid c$, $b\mid c$, and $d^2\mid c$ given that $d=\gcd(a,b)$ we can \emph{not} conclude
+	that $ab\mid c$. We will show this with a simple contradiction, let $a=2$, $b=4$, $c=4$.
+	We know that $2\mid 4$ and $4\mid 4$, it follows that $\gcd(2,4)=2^2\mid 4$ but 
+	$ab\nmid c$ because $2\cdot 4\nmid 4$ because $8>4$. So the statement is false.
+\end{proof}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{0}
+\subsection{Sample B}
+\rule{\textwidth}{1pt}\\
+\subsubsection{}
+\begin{enumerate}[(a)]
+	\item
+	We first list the primes up to $18$, $\{2,3,5,7,11,13,17\}$. We see that there are $7$ primes,
+	therefore $\pi(18)=7$.
+	
+	\item
+	Since $a>b$ we know a subset 
+	$\{\frac{2}{1}, \frac{3}{2}, \frac{4}{3},\cdots\}$ exists, and it does not have a least element.
+	Since the subset does not have a least element, the set is not well-ordered.
+	
+	\item
+	From section 2.2 we know that for very large $x$, $\pi(x)=\frac{x}{\ln x}$.
+	So there are, approximately, 
+	$$\frac{2000000000}{\ln(2000000000)} - \frac{1000000000}{\ln(1000000000)}$$
+	primes between one and two billion.
+
+\end{enumerate}
+
+\subsubsection{}
+Zeros at the end of numbers are from multiples of 10 which are pairs of 2 and 5, so
+we find the number of pairs of 2's and 5's to find the number of zeros. Let $d_n(x)$
+represent the sum of the numbers divisible by all powers of $n$ less than $x$. 
+$$d_2(1000!) = 500 + 250 + 125 + 62 + 31 + 15 + 7 + 3 + 1 = 994$$
+$$d_5(1000!) = 200 + 40 + 8 + 1 = 249$$
+Thus, there can only be 249 pairs of 2's and 5's, so there are only 249 
+10's, so there are 249 zeros at the end of $(1000!)$.
+
+\subsubsection{}
+\begin{enumerate}[(a)]
+	\item
+	$6\mid 3\cdot4$ but $6\nmid 3$ and $6\nmid 4$.
+	
+	\item
+	$2\mid 4$ and $2\mid 6$ but $4\nmid 6$.
+	
+	\item
+	$3\mid 6$ and $3\mid 12$ but $\gcd(6,12)=6\neq 3$.
+
+\end{enumerate}
+
+\subsubsection{}
+$$\prod_{j=1}^{n}\left(1+\frac{2}{j}\right)= \prod_{j=1}^{n}\left(\frac{j+2}{j}\right) = \frac{3}{1}\times\frac{4}{2}\times\cdots\times\frac{n+2}{n} = \frac{(n+2)(n+1)}{2}$$
+
+\subsubsection{}
+\begin{proof}
+	$ $
+	\begin{itemize}
+		\item[] \textbf{Base Case:}
+		\begin{itemize}
+			\item[] Let $n=1$, $2^1=2^{1+1}-2$ is true, so the base case is valid.
+		\end{itemize}
+		\item[] \textbf{Inductive Hypothesis:}
+		\begin{itemize}
+			\item[] Assume from the inductive hypothesis that the conclusion is true for some $n\geq 1$.
+			This implies that $2^1+2^2+\cdots+2^n=2^{n+1}-2$.
+		\end{itemize}
+		\item[] \textbf{Inductive Step:}
+		\begin{itemize}
+			\item[] Then consider the equation to $n+1$:
+			\begin{align*}
+				2^1+2^2+\cdots+2^{n+1} &= 2^1+2^2+\cdots2^n+2^{n+1} \\
+				&= 2^{n+1}-2 + 2^{n+1} \hspace{5mm}\text{ by IH} \\
+				&= 2^{(n+1)+1}-2
+			\end{align*}
+		\end{itemize}
+		\item[] Thus for all $n\geq 1$, $$2^1+2^2+\cdots+2^n=2^{n+1}-2$$    
+	\end{itemize}
+\end{proof}
+
+\subsubsection{}
+Factor $n^2-5n+6$ out to be of the form $(n-2)(n-3)$. For this polynomial to be prime
+	we need one factor to be $\pm1$ and the other to be a prime. We have four cases:
+	\begin{itemize}
+		\item If $n-2=1\implies n=3$ then $n^2-5n+6=0$ which is not prime.
+		\item If $n-2=-1\implies n=1$ then $n^2-5n+6=2$ which is prime.
+		\item If $n-3=1\implies n=4$ then $n^2-5n+6=2$ which is prime.
+		\item If $n-3=-1\implies n=2$ then $n^2-5n+6=0$ which is not prime.
+	\end{itemize}
+	So the only values of $n$ such that $n^2-5n+6$ is prime is $n=1,4$.
+
+\subsubsection{}
+We know that $\gcd(a,7a+p)=\gcd(a,p)$, but since $a<p$ and the only divisors of $p$ are $1$ and
+$p$ we know that $a\nmid p$, therefore $\gcd(a,p)=1$.
+
+\subsubsection{}
+\begin{proof}
+	Suppose that $\sqrt{6}$ is rational, this means that $\sqrt{6}$ is of the form $\frac{a}{b}$, $a,b\in\integers^+$.
+	Then $6=\frac{a^2}{b^2}$ so $a^2=6b^2$. Because $a^2$ and $b^2$ are both squared the prime factorizations
+	of both are even, but $a^2=6b^2$ implies there is an odd number of prime factorizations for $2$ and $3$. This contradicts
+	uniqueness of prime factors.
+\end{proof}
+
+\subsubsection{}
+\begin{proof}
+	Suppose that $a^n\mid b^n$, this implies that $b^n = ka^n$ for some $k\in\integers$.
+	We know that any prime in the prime factorization of $k$ must be to the power of $\alpha n$.
+	This implies that $k=p_1^{\alpha_1 n} p_2^{\alpha_2 n} \cdots p_i^{\alpha_i n}$ which in turn
+	implies that $k=(p_1^{\alpha_1} p_2^{\alpha_2}\cdots p_i^{\alpha_i})^n$. From this we know that 
+	$k$ is a perfect square, meaning that $\sqrt{k}\in\integers^+$, thus $a\sqrt{k}=b$ and
+	$a\mid b$.
+\end{proof}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{1}
+\subsection{Sample A}
+\rule{\textwidth}{1pt}\\
+\subsubsection{}
+\subsubsection{}
+\begin{proof}
+	Since $\gcd(6,n)=1$ we know that $\gcd(2,n)=\gcd(3,n)=1$.
+	Then observe:
+	$\phi(3n) = \phi(3)\phi(n) = 2 \phi(n)$, and
+	$2\phi(2n) = 2\phi(2)\phi(n) = 2\phi(n)$.
+	So we see that $\phi(3n) = 2\phi(2n)$.
+\end{proof}
+\subsubsection{}
+If $n=p_1^{\alpha_1}\cdots p_k^{\alpha_k}$ then $\tau(n) = (\alpha_1 +1) \cdots (\alpha_k +1)=12$.
+We see that we can have at most three distinct primes ($12 = 2\cdot 6 = 3\cdot 4 = 2\cdot 2 \cdot 3$).
+It then follows that $n=p^{11}$, $n=p_1 p_2^{5}$, $n=p_1^{2} p_2^{3}$, or $n=p_1 p_2 p_3^{2}$.
+\subsubsection{}
+\begin{proof}
+	Suppose that $\gcd(p,n)=1$, then by the definition of a perfect number
+	we have $2pn = \sigma(pn)= \sigma(p)\sigma(n) = \sigma(p) (2n)$.
+	Then $\sigma(p) = p$, but this contradicts the fact that $\sigma(p)=p+1$.
+\end{proof}
+\subsubsection{}
+\begin{proof}
+	Suppose $\gcd(a,b) = 1$ we then get:
+	\begin{itemize}
+		\item $a^{\phi(b)} \equiv 1 \mbox{ mod } b \implies a^{\phi(b)} + b^{\phi(a)} \equiv 1\mbox{ mod } b$
+		\item $b^{\phi(a)} \equiv 1 \mbox{ mod } a \implies a^{\phi(b)} + b^{\phi(a)} \equiv 1\mbox{ mod } a$
+	\end{itemize}
+	Then it follows that $a^{\phi(b)} + b^{\phi(a)} \equiv 1\mbox{ mod }ab$.
+\end{proof}
+\subsubsection{}
+\begin{proof}
+	$ $\\
+	$\rightarrow$ Suppose $p\nmid n$, this implies that $\gcd(p, n) =1$. Then, 
+	$$\phi(pn) = \phi(p)\phi(n) = (p-1)\phi(n)$$
+	$\leftarrow$ Suppose $p\mid n$, then $n = p^{\alpha} \cdot k$ for some $\alpha, k\in\integers$ and
+	$\gcd(p, k) =1$. Then,
+	$$\phi(pn) = \phi(p \cdot p^{\alpha}k) = \phi(p^{\alpha +1} k) = \phi(p^{\alpha +1}) \phi(k) = (p^{\alpha + 1} - p^{\alpha}) \phi(k)$$
+	$$ = p\phi(p^{\alpha})\phi(k) = p\phi(n) \neq (p-1)\phi(n)$$
+	Therefore $p\nmid n \iff \phi(pn) = (p-1)\phi(n)$.
+\end{proof}
+\subsubsection{}
+\begin{enumerate}[(a)]
+	\item $\ord_{17}3= 16$ and $\phi(17)=17-1=16$ therefore $3$ is a primitive root mod 17.
+	\item 
+\end{enumerate}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{1}
+\subsection{Sample B}
+\rule{\textwidth}{1pt}\\
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
 
 \end{document}
