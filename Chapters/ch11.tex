@@ -22,6 +22,7 @@
 \def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
 \def\ord{{\text{ord}}}
 \def\ind{{\text{ind}}}
+\def\leg#1#2{\left(\frac{#1}{#2}\right)}
 
 
 \begin{document}
@@ -163,7 +164,7 @@ Then the perfect squares are $0,1,2,4$ and $3,5,6$ are not.
 
 	\item \textbf{Gauss' Lemma:} Suppose $p$ is an odd prime and $a\in\integers$ with $\gcd(a,p)=1$.
 	Let $s$ be the number of least nonnegative residues in the set
-	$\left\{a,2a,\cdots, \left((p-1)/2\right)a\right\}$ which are $> p/2$.
+	$$\left\{a,2a,\cdots, \left((p-1)/2\right)a\right\}$$ which are $> p/2$.
 	Then $\left(\frac{a}{p}\right) = (-1)^s$. \\\\
 	\textbf{Ex.} Consider $\left(\frac{8}{13}\right)$. Note that $\left(\frac{p-1}{2}\right) = \frac{12}{2} = 6$
 	so look at 
@@ -205,7 +206,204 @@ Then the perfect squares are $0,1,2,4$ and $3,5,6$ are not.
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-%\subsection{Problems}
-%\rule{\textwidth}{1pt}
+\subsection{Quadratic Reciprocity and Calculation Examples}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+	\item \textbf{Introduction:}
+	The Law of Quadratic reciprocity establishes that for odd primes $p$ and $q$
+	there is a connection between when $p$ is a quadratic residue mod $q$ when
+	$q$ is a quadratic residue mod $p$.
+	
+	\item \textbf{Theorem:}
+	If $p,q$ are odd primes then
+	$$\left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)}$$
+	\begin{proof}
+		Omitted due to length.
+	\end{proof}
+
+	\noindent\textbf{Use for Calculation:} Under what circumstances will $\left(\frac{p}{q}\right)$ and
+	$\left(\frac{q}{p}\right)$ be identical? We would need $\left(\frac{p-1}{2}\right)\left(\frac{q-1}{2}\right)$
+	to be even. This happens if and only if one of the two is even, say $\frac{p-1}{2}$ is even.
+	That is, $\frac{p-1}{2} = 2k$ for some $k\in\integers$, so $p-1=4k$ so $p\equiv 1\mbox{ mod }4$.
+	Thus, for calculation, we get:
+	$$\left(\frac{p}{q}\right) = \begin{cases}
+		\left(\frac{p}{q}\right) &\text{if either $p\equiv1$ mod 4 or $q\equiv 1\mbox{ mod } 4$ (or both).} \\
+		-\left(\frac{q}{p}\right) &\text{if both $p\equiv 3\mbox{ mod }4$ and $q\equiv 3\mbox{ mod } 4$.}
+	\end{cases}$$
+
+	\item \textbf{Theorem:}
+	\begin{enumerate}[(a)]
+		\item If $a\equiv b\mbox{ mod }p$ then $\left(\frac{a}{p}\right)=\left(\frac{b}{p}\right)$. Call this "reducing".
+		\item $\left(\frac{ab}{p}\right) = \left(\frac{a}{p}\right) \left(\frac{b}{p}\right)$ . Call this "splitting".
+		\item $\left(\frac{a^2}{p}\right) = 1$. Call this the "square rule".
+		\item $\left(\frac{-1}{p}\right) = \begin{cases}
+			1 &\text{if $n\equiv 1\mbox{ mod } 4$}\\
+			-1 &\text{if $n\equiv 3\mbox{ mod } 4$}
+		\end{cases}$. Call this the "-1 rule".
+		\item $\left(\frac{2}{p}\right) = \begin{cases}
+			1 &\text{if $n\equiv 1,7\mbox{ mod } 8$}\\
+			-1 &\text{if $n\equiv 3,5\mbox{ mod } 8$}\end{cases}$. Call this the "2 rule".
+	\end{enumerate}
+
+	\item \textbf{Examples:}\\
+	\textbf{Ex.} Calculate $\left(\frac{48}{29}\right)$:
+	\begin{align*}
+		\left(\frac{48}{29}\right) &= \left(\frac{19}{29}\right) \hfill\text{by reducing} \\
+		\left(\frac{19}{29}\right) &= \left(\frac{29}{19}\right) \hfill\text{by LoQR since $19\equiv 1\mbox{ mod } 4$.} \\
+		\left(\frac{29}{19}\right) &= \left(\frac{10}{19}\right) \hfill\text{by reducing.} \\
+		\left(\frac{10}{19}\right) &= \left(\frac{2}{19}\right) \left(\frac{5}{19}\right) \hfill\text{by splitting.}
+	\end{align*}
+	Then, we calculate these separately. First $\left(\frac{2}{19}\right) = -1$ by the
+	"2 rule" because $19\equiv 2\mbox{ mod } 8$. Then second, 
+	\begin{align*}
+		\left(\frac{5}{19}\right) &= \left(\frac{19}{5}\right) \hfill\text{by LoQR since $5\equiv 1\mbox{ mod } 4$.} \\
+		\left(\frac{19}{5}\right) &= \left(\frac{4}{5}\right) \hfill\text{by reducing.} \\
+		\left(\frac{4}{5}\right) &= 1 \hfill\text{by square rule.}
+	\end{align*}
+	Thus $\left(\frac{48}{29}\right) = (-1)(1)=-1$.
+
+	\textbf{Ex.} Calculate $\left(\frac{105}{1009}\right)$. Note that 105 is not prime so we
+	cannot use the LoQR immediately.
+		$$\left(\frac{105}{1009}\right) = \left(\frac{3}{1009}\right) \left(\frac{5}{1009}\right) 
+		\left(\frac{7}{1009}\right) \hfill\text{by splitting.}$$
+	Then we calculate these separately. 
+	First,
+	\begin{align*}
+		\left(\frac{3}{1009}\right) &= \left(\frac{1009}{3}\right) \hfill\text{by LoQR since $1009\equiv 1\mbox{ mod } 4$.} \\
+		\left(\frac{1009}{3}\right) &= \left(\frac{1}{3}\right) \hfill\text{by reducing} \\
+		\left(\frac{1}{3}\right) &= 1
+	\end{align*}
+	Second,
+	\begin{align*}
+		\left(\frac{5}{1009}\right) &= \left(\frac{1009}{5}\right) \hfill\text{by LoQR since $1009\equiv 1\mbox{ mod } 4$.} \\
+		\left(\frac{1009}{5}\right) &= \left(\frac{4}{5}\right) \hfill\text{by reducing} \\
+		\left(\frac{4}{5}\right) &= 1 \hfill\text{ by the square rule}
+ 	\end{align*}
+	Third,
+	\begin{align*}
+		\left(\frac{7}{1009}\right) &= \left(\frac{1009}{7}\right) \hfill\text{by LoQR since $1009 \equiv 1\mbox{ mod } 4$.} \\
+		\left(\frac{1009}{7}\right) &= \left(\frac{1}{7}\right) \hfill\text{by reducing} \\
+		\left(\frac{1}{7}\right) &= 1
+	\end{align*}
+	Thus, $\left(\frac{105}{1009}\right) = (1)(1)(1) = 1$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{The Jacobi Symbol}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+	\item \textbf{Introduction:} The Jacobi symbol is a generalization of the Legendre symbol
+	for when the denominator is odd but not necessarily prime. It preserves many of the same
+	useful properties and almost the same meaning.
+
+	\item \textbf{Definition:} Let $n$ be an odd positive integer with prime factorization
+	$n=p_1^{\alpha_1} \cdots p_k^{\alpha_k}$ and let $\alpha\in\integers$ be coprime to $n$. Define:
+	$$\left(\frac{a}{n}\right) = \left(\frac{a}{p_1}\right)^{\alpha_1} \cdots \left(\frac{a}{p_k}\right)^{\alpha_k}$$
+	Thus the Jacobi symbol is defined in terms of the Legendre symbol.
+
+	\item \textbf{Theorem:} Assume $\gcd(a,n)=\gcd(b,n)=1$.
+	\begin{enumerate}[(a)]
+		\item If $a\equiv b\mbox{ mod }n$ then $\left(\frac{a}{n}\right) = \left(\frac{b}{n}\right)$.
+		\item $\left(\frac{a^2}{n}\right) = 1$
+		\item $\left(\frac{ab}{n}\right) = \left(\frac{a}{n}\right) \left(\frac{b}{n}\right)$
+		\item $\left(\frac{-1}{n}\right) = \begin{cases}
+			1 &\text{if $n\equiv 1\mbox{ mod } 4$}\\
+			-1 &\text{if $n\equiv 3\mbox{ mod } 4$}
+		\end{cases}$
+		\item $\left(\frac{2}{n}\right) = \begin{cases}
+			1 &\text{if $n\equiv 1,7\mbox{ mod } 8$}\\
+			-1 &\text{if $n\equiv 3,5\mbox{ mod } 8$}\end{cases}$
+		\item $\left(\frac{m}{n}\right) = \begin{cases}
+			\left(\frac{m}{n}\right) &\text{if either $m\equiv 1\mbox{ mod }4$, $n\equiv 1\mbox{ mod } 4$} \\
+			-\left(\frac{n}{m}\right) &\text{if both $m\equiv 3\mbox{ mod }4$ and $n\equiv 3\mbox{ mod } 4$}
+		\end{cases}$
+ 	\end{enumerate}
+	\begin{proof}
+		Lots of calculation.
+	\end{proof}
+
+	\item \textbf{Question:} We know $\left(\frac{a}{p}\right)$ tells us if $a$ is a QR or QNR mod $p$.
+	Does $\left(\frac{a}{n}\right)$ tell us if $a$ is a QR or QNR mod $n$?
+	Well, half-yes.\\\\
+	\textbf{Theorem:} Suppose $\gcd(a,n)=1$ and $n$ is an odd prime.
+	\begin{enumerate}[(a)]
+		\item If $a$ is a QR mod $n$ then $\left(\frac{a}{n}\right)=1$.
+		\item If $\left(\frac{a}{n}\right)=1$ then we cannot conclude $a$ is a QR mod $n$.
+	\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Problems}
+\rule{\textwidth}{1pt}
+\begin{enumerate}
+\item
+	Determine, by squaring,
+	which of $1,...,16$ are quadratic residues of $p=17$.
+
+\item Calculate $\leg 3{17}$ by
+\begin{enumerate}
+\item
+	Euler's Criterion
+\item
+	Gauss's Lemma
+\end{enumerate}
+
+\item
+	Prove that if $p$ and $q=2p+1$ are both odd primes
+	then $-4$ is a primitive root of $q$.
+
+\item
+	Prove that if $p\equiv 1\mod 4$ is a prime
+	then $-4$ and $(p-1)/4$ are both quadratic residues of $p$.
+
+\item
+	Calculate each of the following:
+	\begin{enumerate}
+	\item
+		$\leg{21}{59}$
+	\item
+		$\leg{1463}{89}$
+	\item
+		$\leg{1547}{1913}$
+	\end{enumerate}
+
+\item
+	Using the Law of Quadratic Reciprocity, show that if $p$ is an odd prime that
+
+	$$\leg3p=
+	\begin{cases}
+		1  & \text{if $p\equiv\pm1\mod 12$} \\
+		-1 & \text{if $p\equiv\pm5\mod 12$}
+	\end{cases}
+	$$
+
+\item
+	Classify all primes $p$ with $\leg5p=1$
+
+\item
+	Calculate each of the following using properties of
+	the Jacobi Symbol, not by raw calculation.
+	\begin{enumerate}
+	\item
+		$\leg{5}{21}$
+	\item
+		$\leg{1009}{2307}$
+	\item
+		$\leg{27}{101}$
+	\end{enumerate}
+
+\item
+	Categorize all positive integers $n$
+	which are relatively prime to $15$ and for which $\leg{15}{n}=1$.
+
+\item
+	Show that if $a>0$ is not a perfect square then there exists
+	a positive integer $n$ such that $\leg a n = -1$.
+
+\end{enumerate}
 
 \end{document}
