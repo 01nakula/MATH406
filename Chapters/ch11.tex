@@ -332,6 +332,51 @@ Then the perfect squares are $0,1,2,4$ and $3,5,6$ are not.
 		\item If $a$ is a QR mod $n$ then $\left(\frac{a}{n}\right)=1$.
 		\item If $\left(\frac{a}{n}\right)=1$ then we cannot conclude $a$ is a QR mod $n$.
 	\end{enumerate}
+	\begin{proof}
+		Suppose $a$ is a QR mod $n$, then $\exists x$ such that
+		$x^2\equiv a\mbox{ mod }n$ has solutions then $n\mid (x^2-a)$ and so for every $p$
+		in the prime factorization of $n$ we have $p\mid(x^2-a)$ and so $x^2\equiv a\mbox{ mod }p$
+		which then tells us that $\leg{a}{p}=1$. It follows that $\leg{a}{n}=1$ because
+		$\leg{a}{n}$ is simply a product of 1s. The reverse cannot be guaranteed,
+		for example $x^2 \equiv 2\mbox{ mod } 15$ has no solution (can be verified by trial and
+		error). However $\leg{2}{3}=-1$ and $\leg{2}{5}=-1$ and so $\leg{2}{15}=(-1)(-1)=1$.
+	\end{proof}
+
+	\item \textbf{Calculations:}
+	We can then calculate Jacobi symbols essentially as we did with Legendre symbols.
+	The biggest thing to watch out for is making sure that we obey the rules at each
+	step of the calculation.\\\\
+	\textbf{Ex.} Let's calculate $\leg{1009}{2307}$. We have:
+	\begin{align*}
+		\leg{1009}{2307} &= \leg{2307}{1009} \hspace{5mm}\text{by LoQR since }1009\equiv 1\mbox{ mod } 4.\\
+		&= \leg{289}{1009} \hspace{5mm}\text{by reducing.}\\
+		&= \leg{1009}{289} \hspace{5mm}\text{by LoQR since }1009\equiv 1\mbox{ mod }4.\\
+		&= \leg{142}{289} \hspace{5mm}\text{by reducing.}\\
+		&=\leg{2}{289}\leg{71}{289} \hspace{5mm}\text{by splitting.}
+	\end{align*}
+	Then we calculate the first, $\leg{2}{289}=1$ by the 2 rule, since 289 $\equiv$ 1 mod 8.
+	For the second part,
+	\begin{align*}
+		\leg{71}{289} &= \leg{289}{71} \hspace{5mm}\text{by LoQR since }289 \equiv 1\mbox{ mod }4.\\
+		&= \leg{5}{71} \hspace{5mm}\text{by reducing.}\\
+		&=\leg{71}{5} \hspace{5mm}\text{by LoQR since }5\equiv 1\mbox{ mod }4.\\
+		&= \leg{1}{5}\hspace{5mm} \text{by reducing.}
+	\end{align*}
+	Thus, $\leg{1009}{2307}=1$. We cannot conclude if 1009 is a QR or a QNR mod 2307.\\\\
+	\textbf{Ex.} Let's calculate $\leg{1999}{2315}$. We have:
+	\begin{align*}
+		\leg{1999}{2315} &= -\leg{2315}{1999} \text{by LoQR since }1999\equiv 3\mbox{ mod }4 \text{ and } 2315\equiv 1\mbox{ mod }4.\\
+		&= -\leg{316}{1999} \text{by reducing.}\\
+		&= -\leg{2^2}{1999} \leg{79}{1999} \text{by splitting.} \\
+		&= -(1)\leg{79}{1999} \text{} \\
+		&= -\left(-\leg{1999}{79}\right) \text{by LoQR since } 1999,79 \equiv 3\mbox{ mod }4.\\
+		&= \leg{24}{79} \text{by reducing.} \\
+		&= \leg{2}{79}^3 \leg{3}{79}
+	\end{align*}
+	Then, $\leg{2}{79}=1$ since $79=7\mbox{ mod }8$. Then, $\leg{3}{79} = -\leg{79}{3}$ since $79,3\equiv 3\mbox{ mod }4$.
+	Which then becomes $-\leg{1}{3}=-1$ from reducing. Therefore, $\leg{1999}{2315}=-1$ and 
+	1999 is a QNR mod 2315.
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%

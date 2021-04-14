@@ -29,6 +29,84 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-\subsection{Problems}
+\subsection{Character Ciphers}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+	\item \textbf{Introduction:} The goal of this entire chapter (and the rest of the course) is
+	to talk about encryption and cryptography.
+
+	\item \textbf{Terminology:} We have the following:
+	\begin{enumerate}[(a)]
+		\item \textit{Cryptology}: The study of encryption/decryption.
+		\item \textit{Cryptography}: The study of methods of encryption/decryption.
+		\item \textit{Cipher}: A particular method of encryption.
+		\item \textit{Cryptanalysis}: Breaking of systems of encryption.
+		\item \textit{Plaintext}: The human-readable text we wish to encryp.
+		\item \textit{Encryption}: The process of applying a cipher to plaintext.
+		\item \textit{Ciphertext}: The human-non-readable result.
+		\item \textit{Decryption}: The process of getting the plaintext back.
+		\item \textit{Some Names}:
+		\begin{enumerate}
+			\item Alice: encrypts and sends
+			\item Bob: receives and decrypts
+			\item Eve: eavesdropper
+		\end{enumerate}
+	\end{enumerate}
+
+	\item \textbf{Basic Methods:}
+	\begin{enumerate}[(a)]
+		\item \textbf{Character Assignment:} To begin, we will assign a number to each letter of
+		the alphabet:
+		\begin{table}[h!]
+			\centering
+			\resizebox{10cm}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+				\hline
+				A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z\\
+				\hline
+				0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25\\
+				\hline
+			\end{tabular}
+			}
+		\end{table}
+
+		\textbf{Note:} For now we will exclude lower-case, punctuation and spaces, but we could include those
+		and use a different modulus.\\
+		\textbf{Note:} This can be confusing since \verb|A| is the first leter of the alphabet and so we would
+		naturally want to assign it to 1. We use this for purposes of making our modular arithmetic easier.
+
+		\item \textbf{Shift Cipher:} For each plaintext letter $P$ we assign ciphertext
+		$$C \equiv P+ b \mbox{ mod } 26$$
+
+		\textbf{Ex.} Encrypt \verb|LEIBNIZ| with $b=3$.
+		\begin{align*}
+			&L: &P=11, 11+3\equiv14=C: &O \\
+			&E: &P=4, 4+3\equiv7=C: &H \\
+			&I: &P=8, 8+3\equiv11=C: &L \\
+			&B: &P=1, 1+3\equiv4=C: &E \\
+			&N: &P=13, 13+3\equiv16=C: &Q \\
+			&I: &P=8, 8+3\equiv11=C: &L \\
+			&Z: &P=25, 25+3\equiv2=C: &C
+		\end{align*}
+		Which then results in \verb|OHLEQLC|.
+		To decrypt we simply reverse: $C\equiv P+b\mbox{ mod }26$, $P\equiv C-b\mbox{ mod }26$.
+
+		\item \textbf{Affine Cipher:} Choose $a$ and $b$ and encrypt via $C=aP + b \mbox{ mod }26$.
+		How will decryption work? $C\equiv aP + b \mbox{ mod }26$, $aP\equiv C-b\mbox{ mod }26$
+		there needs to be a unique $P$.
+		To have this we need $\gcd(a, 26)=1$ so that $a$ has a multiplicative inverse.
+		Then $P\equiv a^{-1} (C-b)\mbox{ mod }26$.
+		How many choices? $\phi(26)=12$ for $a$ and $26$ choices for $b$.\\\\
+		\textbf{Ex.} If we choose $a=5$ and $b=7$ then encryption is $C\equiv 5P + 7 \mbox{ mod }26$
+		and decryption is $5P \equiv C-7\mbox{ mod }26 \implies P\equiv 21(C-7)\mbox{ mod }26$
+		(calculated from 21 being the multiplicative inverse of 5).
+	\end{enumerate}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+% \subsection{Problems}
+% \rule{\textwidth}{1pt}\\
 
 \end{document}
