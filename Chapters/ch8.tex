@@ -59,7 +59,7 @@
 		the alphabet:
 		\begin{table}[h!]
 			\centering
-			\resizebox{10cm}{!}{
+			\resizebox{\textwidth}{!}{
 			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 				\hline
 				A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z\\
@@ -100,6 +100,93 @@
 		\textbf{Ex.} If we choose $a=5$ and $b=7$ then encryption is $C\equiv 5P + 7 \mbox{ mod }26$
 		and decryption is $5P \equiv C-7\mbox{ mod }26 \implies P\equiv 21(C-7)\mbox{ mod }26$
 		(calculated from 21 being the multiplicative inverse of 5).
+	\end{enumerate}
+
+	\item \textbf{Breaking Shift Ciphers:} To break a shift cipher, we only need $b$.
+	For example, if we manage to find a specific $C_0$ for a specifice $P_0$,
+	then we know that $C_0 \equiv P_0 + b\mbox{ mod }26$ so $b\equiv C_0-P_0 \mbox{ mod }26$.
+	How might we do this? With frequency analysis.\\\\
+	\textbf{Frequency Analysis:} In english, the most frequent letter is \verb|E|, note this is
+	$P_0=4$. Find the most frequent ciphertext letter. If that is $C_0$ we guess at that.
+
+	\item \textbf{Breaking Aphine Ciphers:} One $C_0$ and $P_0$ pair is not sufficient!
+	Since knowing $C_0\equiv aP_0 + b\mbox{ mod }26$ is not enough to find $a$ and $b$.
+	However, having another pair is good enough because:
+	\begin{align*}
+		&C_0 \equiv aP_0 + b \mbox{ mod } 26 \\
+		&C_1 \equiv aP_1 + b \mbox{ mod } 26 \\
+		&\rule{4.5cm}{.5pt} \\
+		&C_0 - C_1 \equiv a(P_0 - P_1) \mbox{ mod }26
+	\end{align*}
+	This will have solutions if and only if $\gcd(P_0 - P_1, 26) \mid C_0 - C_1$, and if so
+	there will be $\gcd(P_0-P_1, 26)$ solutions. \\\\
+	\textbf{Note:} Keep in mind this is valid cipher text.
+	There is an a (which Alice chose).
+	So there will be solutions. There may be more than 1. If multiple possible $a$,
+	for each, find $b$, simply try all of those $a,b$ combinations until we get proper plaintext.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Exponentiation Ciphers}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+	\item \textbf{Introduction:} Can we find a process which is harder to invert? \\
+	First we will modify the table of letters slightly:
+	\begin{table}[h!]
+		\centering
+		\resizebox{\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & Q & R & S & T & U & V & W & X & Y & Z\\
+			\hline
+			00 & 01 & 02 & 03 & 04 & 05 & 06 & 07 & 08 & 09 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25\\
+			\hline
+		\end{tabular}
+		}
+	\end{table}
+	Now, we can put letters together unambigiously. For example \verb|JU| can be assigned to
+	0920 or just 920. Without the leading 0 it is unclear what something like $111$ means. 
+	It could be $111\implies 0111$ or $111\implies 1101$. \\\\
+	\textbf{Fermat's Little Theorem:} Recall, if $p$ is prime and $a\in\integers$ with $p\nmid a$
+	then $a^{p-1}\equiv 1\mbox{ mod }p$.
+
+	\item \textbf{Exponentiation Cipher}
+	\begin{enumerate}
+		\item \textbf{Encryption:} Let $p$ be an odd prime (typically very large) and let $e$ be a
+		positive integer with $\gcd(e,p-1)=1$ (use Euclidean Algorithm for this).
+		We then take the plaintext and group the letters into blocks so no block is
+		larger than $p$. \\
+		For example, 
+		\begin{itemize}
+			\item If $p=29$ then blocksize is 1 since $\verb|z|\leftrightarrow 25<p$.
+			\item If $p=3001$ then blocksize is 2 since $\verb|zz|\leftrightarrow 2525<p$.
+			\item If $p=377173$ then blocksize is 3 since $\verb|zzz|\leftrightarrow 252525<p$.
+		\end{itemize}
+		We then pad the plaintext with junk letters at the end if needed so that the
+		plaintext length is a multiple of the blocksize. Traditionally \verb|X| is used but any letter can
+		be used. To encrypt, Alice needs to divide full plaintext into blocks. For each block $P$ we do
+		$$C \equiv P^e \mbox{ mod } p$$
+		\textbf{Ex.} Alice wants to encryp \verb|LOVENOTE| with $(e,p)=(479,3001)$ and $\gcd(479, 3000)=1$.
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{c l l l l}
+				$ $& \verb|LO|& \verb|VE|& \verb|NO|& \verb|TE| \\
+				$ $& 1114& 2104& 1314& 1904 \\
+				$ $& $1114^{479}$& $2104^{479}$ &$1314^{479}$ &$1904^{479}$ \\
+				\hline
+				$\equiv$ &0169 &0317 &0017 &1697
+			\end{tabular}
+		\end{table}
+		So we get \verb|0169 0317 0017 1697| as the ciphertext that Alice would send to Bob.
+
+		\item \textbf{Decryption:} This process is invertible since the fact that $\gcd(e, p-1)$
+		guarantees that there exists some $d$ with $de \equiv 1 \mbox{ mod } p$.
+		Then for a ciphertext block raised to $d$:
+		$$C^d \equiv (P^e)^d \equiv P^{ed} \equiv P^{1+k(p-1)} \equiv P(P^{p-1})^k \equiv P(1)^k \equiv P\mbox{ mod }p$$
+		Here the fact that $P^{p-1}\equiv 1\mbox{ mod } p$ is guaranteed by FLiT. Note that $p\nmid P$ since $P<p$. \\\\
+		Thus, to decrypt ciphertext, Bob simply takes $C$ and raises it to $d$, $C^d\mbox{ mod }p$.
 	\end{enumerate}
 \end{enumerate}
 
