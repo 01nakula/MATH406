@@ -168,7 +168,7 @@
 		plaintext length is a multiple of the blocksize. Traditionally \verb|X| is used but any letter can
 		be used. To encrypt, Alice needs to divide full plaintext into blocks. For each block $P$ we do
 		$$C \equiv P^e \mbox{ mod } p$$
-		\textbf{Ex.} Alice wants to encryp \verb|LOVENOTE| with $(e,p)=(479,3001)$ and $\gcd(479, 3000)=1$.
+		\textbf{Ex.} Alice wants to encrypt \verb|LOVENOTE| with $(e,p)=(479,3001)$ and $\gcd(479, 3000)=1$.
 		\begin{table}[h!]
 			\centering
 			\begin{tabular}{c l l l l}
@@ -186,14 +186,361 @@
 		Then for a ciphertext block raised to $d$:
 		$$C^d \equiv (P^e)^d \equiv P^{ed} \equiv P^{1+k(p-1)} \equiv P(P^{p-1})^k \equiv P(1)^k \equiv P\mbox{ mod }p$$
 		Here the fact that $P^{p-1}\equiv 1\mbox{ mod } p$ is guaranteed by FLiT. Note that $p\nmid P$ since $P<p$. \\\\
-		Thus, to decrypt ciphertext, Bob simply takes $C$ and raises it to $d$, $C^d\mbox{ mod }p$.
+		Thus, to decrypt ciphertext, Bob simply takes $C$ and raises it to $d$, $C^d\mbox{ mod }p$. \\\\
+		\textbf{Ex.} Alice sends cipher text to \verb|2672 0317 1665 2110 0246 1749 0017 2112| Bob. She encrypted
+		using Bob's choice of $(e,p)=(479, 3001)$. To decrypt Bob would have to use
+		$e^{-1}=d=119$.
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{c l l l l l l l l l}
+				$ $& 2672& 0317& 1665& 2110& 0246& 1749& 0017& 2112 \\
+				$ $& $2672^{119}$& $0317^{119}$& $1665^{119}$& $2110^{119}$& $0246^{119}$& $1749^{119}$& $0017^{119}$& $2112^{119}$ \\
+				\hline
+				$\equiv$& 1800& 2104& 2414& 2017& 1804& 1105& 1314& 2223 \\
+				$ $& \verb|SA|& \verb|VE|& \verb|YO|& \verb|UR|& \verb|SE|& \verb|LF|& \verb|NO|& \verb|WX|
+			\end{tabular}
+		\end{table}
+		Then, Bob can obviously see the message \verb|SAVE YOURSELF NOW| which is padded with an \verb|X| to make
+		the length a multiple of two characters. \\\\
+		\textbf{Note:} Bob chose $p=3001$ and $e=479$ and provided them to Alice so
+		she can send him messages. Two things
+		\begin{itemize}
+			\item If the two of them keep the $p$ and $e$ secret this is fairly secure.
+			\item Since Alice knows $e$, she can calculate $d$.
+			So Alice can decrypt anything else sent to Bob if that specific $p$ and $e$ are used.
+			So Bob would have to use a different $p,e$ with each person.
+		\end{itemize}
+		This is symmetric: knowing $p,e \equiv$ knowing $p,d$.
+		Is there a way to provide an encryption method so that 
+		even if you know how to encrypt you cannot figure out how to decrypt?
+	\end{enumerate}
+\end{enumerate}
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\setcounter{subsection}{3}
+\subsection{Public Key Encryption and RSA}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}[1.]
+	\item \textbf{Introduction:} The primary problem with a 
+	technique like an exponentiation cipher is that given $(p,e)$ it is
+	easy to find $(p,d)$.
+
+	\item \textbf{RSA:}
+	\begin{enumerate}[(a)]
+		\item \textbf{Encryption:}
+		Bob picks two distinct large primes $p$ and $q$ and calculated $n=pq$. This will
+		be his modulus. He then chooses $e$ with $\gcd(\phi(n),e)=1$. Note that $\phi(n)=\phi(pq)=(p-1)(q-1)$
+		so he can choose an $e$ pretty easily via the Euclidean Algorithm. Bob makes the pair
+		$(n,e)$ publicly avaliable.\\\\
+		Alice takes her message and breaks it up just like the exponentiation cipher,
+		breaking it into blocks with numerical value not possible more than $n$. For each plaintext block
+		$P$, she calculates the ciphertext block as the least nonnegative residue:
+		$$C = P^e\mbox{ mod } n$$
+		She then sends all the ciphertext blocks to Bob.\\\\
+		\textbf{Ex.} Suppose Bob chooses $p=59$ and $q=73$. Then $n=(59)(73)=4307$ and
+		$\phi(n)=(58)(72)=4176$. He then chooses $e=7$ with $\gcd(e,\phi(n))=1$.
+		Alice wishes to encrypt and send \verb|WORD|. She divides it into blocks of length 2 and does:
+		\begin{table}[h!]
+			\centering
+			\begin{tabular}{c l l c}
+				$ $& \verb|WO|& \verb|RD|& $ $\\
+				$ $& 2214& 1703& $ $\\
+				$ $& $2214^{7}$& $1703^7$& $ $\\
+				\hline
+				$\equiv$ &$3918$& $1655$& $\mbox{mod }4307$
+			\end{tabular}
+		\end{table}
+
+		\item \textbf{Decryption:}
+		Since Bob knows $\phi(n)=(p-1)(q-1)$ he can easily find $d$ with $ed\equiv 1\mbox{ mod }\phi(n)$.
+		Then for each ciphertext block$C$ he can decrypt by calculating the least nonnegative residue $C^d\mbox{ mod } n$.
+		\begin{proof}
+			Claim that $C^d \equiv P\mbox{ mod }n$ because $p,q$ are coprime it suffices to show that
+			$C^d\equiv P \mbox{ mod }p$ and $C^d\equiv P\mbox{ mod }q$. Let's show $C^d \equiv P\mbox{ mod }p$.
+			$C^d \equiv (P^e)^d \equiv P^{ed}$ and $ed=1+k\phi(n)$, then 
+			$$P^{ed}\equiv P^{1}P^{k\phi(n)}= P(P^{\phi(n)})^k \equiv P(P^{(p-1)(q-1)})^k \equiv P(P^{(p-1)})^{(q-1)k}$$
+			$$\equiv P(1)^{(q-1)k} \mbox{ mod }p$$
+			But we can't guarantee $\gcd(P,p)=1$ then certainly we get $C^d\equiv P\mbox{ mod }p$.
+			However, if $\gcd(P,p)\neq 1$ then $p\mid P$ and then, $C^d\equiv (P^e)^d\equiv 0\equiv P\mbox{ mod }p$.
+			Together, we see that $C^d\equiv P\mbox{ mod }p$ always and a similar argument for $q$ gives us $C^d\equiv P\mbox{ mod }q$ always.
+			Thus, $$C^d\equiv P\mbox{ mod }n$$
+		\end{proof}
+		\noindent\textbf{Ex.} If Bob receives \verb|1611| from Alice, he has computed $d=2983$ so $ed=1\mbox{ mod }\phi(n)$.
+		He then does $1611^{2983}\equiv 0704\mbox{ mod }4307$ to receieve \verb|HE| from Alice.
+
+		\item \textbf{Security:} If Alice (or Eve) knows $(n,e)$ only, how hard is it to find $d$? The short answer,
+		no, it's extremely hard. Eve wants $d$ with $ed\equiv 1\mbox{ mod }\phi(n)$, to do this she needs to know
+		$\phi(n)$, which means she has to factor $n$ to get $n=pq$ to get $\phi(n) = (p-1)(q-1)$.
+		The issue with this is that factoring seems to be hard. 
+		Is it possible that Eve can find $\phi(n)$ without factoring $n$? Well,
+		if she can factor, then she knows $\phi(n)$. Suppose she knows $\phi(n)$.
+		She also knows $n$. Observe:
+		$$p+q=pq-(p-1)(q-1)+1=n-\phi(n)+1$$
+		$$p-q=\sqrt{(p-q)^2}=\sqrt{(p+q)^2-4pq}=\sqrt{(n-\phi(n)+1)^2-4n}$$
+		Then notice,
+		$$p=\frac{1}{2}((p+q)+(p-q)) \text{ and }q=\frac{1}{2}((p+q)-(p-q))$$
+		What all this shows is if we have $n,\phi(n)$ we can get $p,q$. So, factoring $n$
+		is equivalently difficult to finding $\phi(n)$.
+
+		\item \textbf{Digital Signatures:} Suppose Alice has public key $(n_A, e_A)$ and
+		private key $(n_A, d_A)$ while Bob has public key $(n_B, e_B)$ and private key $(n_B, d_B)$.
+		If Alice wants to send a message to Bob, is there a way to "sign" her message such that
+		Bob knows that she sent it and no one else could have. \\\\
+		Alice takes the plaintext block $P$ and she signs it by doing $S\equiv P^{d_A}\mbox{ mod }n_A$
+		(only Alice can do this!). So $S$ is the signed plaintext. Note: Since $(n_A, e_A)$ is public,
+		anyone can do $S^{e_A}$ and get $(P^{d_A})^{e_A}\equiv P\mbox{ mod }n_A$ so anyone/everyone
+		can verify that it is "signed" by Alice and only Alice. Then she does
+		$S^{e_B}$ to get $C\equiv S^{e_B}\mbox{ mod }n_{B}$ this is the encrypted signed plaintext.
+		So in summary, $$C= \left(P^{d_A} \mbox{ mod }n_A\right)^{e_B} \mbox{ mod }n_B$$
+		To decrypt and unsign it, Bob does
+		$$P = \left(C^{d_B}\mbox{ mod }n_B\right)^{e_A} \mbox{ mod }n_A$$
+		\textbf{Note:} Alice may need to re-block the text here. This is beause the result of
+		signing a block might result in a signed block with a numerical value larger than Bob's
+		encryption modulus.
 	\end{enumerate}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-% \subsection{Problems}
-% \rule{\textwidth}{1pt}\\
+\subsection{RSA Attacks}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+	\item \textbf{Introduction:} RSA is (currently) incredibly hard to break.
+	Most methods for breaking the encrpytion are well beyond the scope of this course (technical and physical attacks alike).
+	So for this section the "attacks" we cover are less attacks and more so warnings for users of
+	RSA encryptions to be wary of.
+
+	\item \textbf{Common Modulus Attack:}
+	Suppose Bob1 and Bob2 use the same $n$. Suppose for security they use
+	coprime $e$. Bob1 has ($n,e_1$) and Bob2 has ($n,e_2$). Suppose then
+	that Alice wants to send $P$ to both of them (scandalous).
+	Then suppose that Eve intercepts both ciphertexts $C_1$ and $C_2$.
+	Remeber that $(n,e)$ are public.
+	Eve knows $C_1$ and $C_2$ as well as $C_1=P^{e_1} \mbox{ mod }n$ and $C_2=P^{e_2}\mbox{ mod }n$.
+	However, she does not know $P$. Since she can discover that $\gcd(e_1, e_2)=1$
+	so $\exists\alpha,\beta$ such that $\alpha e_1 + \beta e_2=1$.
+	Then she does:
+	$$C_1^{\alpha}C_2^{\beta} = (P^{e_1})^{\alpha} (P^{e_2})^{\beta} = P^{\alpha e_1 + \beta e_2} = P^1
+	\equiv P\mbox{ mod }n$$
+
+	\item \textbf{Hastad Broadcast Attack:}
+	This generalizes but the simple version is with three Bobs.
+	Suppose we have Bob1, Bob2, and Bob3 each use $e=3$ for their encryption
+	exponent, but they all choose pairwise coprime moduli $n_1, n_2,$ and $n_3$.
+	Suppose then that Alice sends $P$ to all of them;
+	\begin{align*}
+		C_1 &\equiv P^3\mbox{ mod }n_1 \\
+		C_2 &\equiv P^3\mbox{ mod }n_2 \\
+		C_3 &\equiv P^3\mbox{ mod }n_3
+	\end{align*}
+	Suppose then that Eve intercepts all of them, and then creates the following system of
+	linear congruences.
+	\begin{align*}
+		x\equiv C_1 &\equiv P^3\mbox{ mod }n_1 \\
+		x\equiv C_2 &\equiv P^3\mbox{ mod }n_2 \\
+		x\equiv C_3 &\equiv P^3\mbox{ mod }n_3
+	\end{align*}
+	Then by the Chinese Remainder Theorem she can find a unique solution
+	mod $n_1 n_2 n_3$. So she has $x\equiv P^3\mbox{ mod }n_1n_2n_3$.
+	However, $P<n_1$, $P<n_2$, and $P<n_3$ so in fact $P^3<n_1n_2n_3$ so we then have
+	$P^3=x\implies P=\sqrt[3]{x}$.
+	(We know that $P^3=x$ since $x$ is congruent to $P^3$ and they have the same bounds
+	of $0\leq x <n_1n_2n_3$.)
+
+	\item \textbf{Interception/Resend Attack:}
+	(Burn Your Trash!)
+	Suppose Bob uses public key ($n,e$) and private key $(n,d)$.
+	Alice wants to send $P$ to Bob so of course she does $C\equiv P^e\mbox{ mod }n$.
+	Suppose then that Eve intercepts this $C$, she will then choose $r$ such that
+	$\gcd(r,n)=1$ and then sends Bob $\bar{C}\equiv Cr^e \mbox{ mod }n$.
+	Bob then (not knowing that his message has been tampered with) 
+	receieves $\bar{C}$ and attempts to decrypt it, finding:
+	$$(\bar{C})^d\equiv (Cr^e)^d\equiv (P^er^e)^d\equiv P^{ed}r^{ed} \equiv Pr\mbox{ mod }n$$
+	Which is incomprehensible to him so he bins the message,
+	at which point Eve retrieves it and multiplies by $r^{-1}$ to get $P$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Problems}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+
+	\item
+		Given the plaintext \texttt{LISTENTOITTWICE}.
+		Encrypt using an affine cipher with $a=11$ and $b=8$.
+	
+	\item
+		Suppose Eve intercepts the message
+		\texttt{USWNRSCHISPWRCVSHGKCNSBINMRCNPSDN}
+		sent from Alice to Bob using an affine cipher.
+		\begin{enumerate}
+		\item
+			Use frequency analysis to find the values of $a$ and $b$.
+			Make your steps clear with explanations.
+	
+		\item
+			Decrypt the message.
+	
+		\end{enumerate}
+	
+	\item
+		Use the exponentiation cipher with $p=3637$ and $e=71$ to encrypt
+		the message:
+		\begin{center}
+			\texttt{NEEDBACKUPNOWX}
+		\end{center}
+	
+	\item
+		Suppose Bob receives the following ciphertext:
+		\begin{center}
+			\texttt{1333 0513 0452 0767 2130 1395 1097 3597}
+		\end{center}
+		which he knows Alice encrypted using an exponentiation cipher
+		with $p=3637$ and $e=71$.
+	
+		\begin{enumerate}
+	
+		\item
+			Find the least nonnegative residue of the decryption exponent $d$
+			and make sure it's clear what the modulus is.
+	
+		\item
+			Decode the message.
+	
+		\end{enumerate}
+	
+	\item
+		Eve intercepts the following ciphertext from Alice to Bob
+		\begin{center}
+			\texttt{11,17,00,12,10,24,14,00,13,10,11}
+		\end{center}
+		which she knows Alice encrypted using an exponentiation cipher with $p=29$
+		and (obviously) using single-character chunks.
+		Eve does not know $e$ or $d$ but she discovered that the first character of the
+		plaintext is \texttt{S}.
+		\begin{enumerate}
+		\item Write down the discrete logarithm problem that corresponds to the encrypti
+			on of the first character.
+	
+		\item
+			It is a fact that the integer $r=2$ is a primitive root modulo $p=29$.
+			Use this fact along with index arithmetic to solve for $e$.
+			\\Note: You don't need to write down
+			the entire table of indices for $r=2$ since you only need two specific values.
+			You can find these by trial-and-error on Wolfram Alpha if you like.
+	
+		\item
+			Use $e$ to solve for $d$.
+	
+		\item
+			Use $d$ to decrypt the message.
+	
+		\end{enumerate}
+	
+	\item
+		Given:
+		\begin{itemize}
+		\item
+			Alice: Public key $(e_a,n_a)=(103,3551)$ and private key $d_a=2599$.
+		\item
+			Bob: Public key $(e_b,n_b)=(27,4189)$ and private key $d_b=1203$.
+		\end{itemize}
+	
+		\begin{enumerate}
+	
+		\item
+			Suppose Alice wishes to send the following message to Bob,
+			signed and encrypted:
+			\begin{center}
+				\texttt{EVEISLISTENING}
+			\end{center}
+			\begin{enumerate}
+			\item
+				Break the plaintext up into two-character strings,
+				padded with an \texttt{X} if necessary and assign numerical values.
+			\item
+				Sign the text.
+			\item
+				Encrypt the signed text.
+			\end{enumerate}
+	
+		\item Suppose Bob receives the following from Alice:
+	
+			\begin{center}
+				\texttt{0502 0684 2713 1962 3755 1695}
+			\end{center}
+			\begin{enumerate}
+			\item
+				First decrypt the message.
+				The result is signed and hence still unreadable.
+			\item
+				Un-sign the message to reveal the message.
+			\end{enumerate}
+	
+		\end{enumerate}
+	
+	\item
+		Suppose you intercept the following ciphertext from Alice to Bob:
+	
+		\begin{center}
+			\texttt{160574 069934 062359 171345 116991 061338 246034 232780 197240 238665 264414}
+			\\\texttt{062793 213172 090175 151722 269709 259093 194899 145138 280675 059999 147437}
+		\end{center}
+	
+		You know that Bob's public key is $(e,n)=(5201,288319)$.
+		Bob thinks this is secure
+		because he doesn't believe that his $n$ can be factored easily.
+		Factor $n$, find $\phi(n)$, find $d$ and then decrypt the message.
+		Be clear about the steps you take.
+	
+	\item
+		Suppose you intercept the two ciphertext blocks
+		$C_1=4280$ and $C_2=0330$
+		sent to Bob1 and Bob2.
+		You know that the Bobs' public keys are
+		$(e_1,n)=(100,4757)$
+		and
+		$(e_2,n)=(49,4757)$.
+		Use a common modulus attack to find $P$.
+	
+	
+	\item
+		Suppose you intercept the three ciphertext blocks
+		$C_1=1533$, $C_2=3561$, and $C_3=0835$
+		sent to Bob1, Bob2, and Bob3.
+		You know that the Bobs' public keys are
+		$(e_1,n)=(3,5353)$,
+		$(e_2,n)=(3,5251)$,
+		and
+		$(e_3,n)=(3,5893)$.
+		Use a Hastad Broadcast Attack to find $P$.
+	
+	\item
+		Suppose you intercept the ciphertext block
+		$C=0156$ sent to Bob.
+		You know that Bob's public key is $(e_B,n_B)=(27,4189)$
+		so you choose $r=888$ with $\gcd(888,4189)=1$
+		and perform an intercept and resend attack as follows:
+		\begin{enumerate}
+		\item
+			Find the $\overline C$ you would resend to Bob.
+			% \bar C = 888^27 * 0156 = 1099 mod 4189
+	
+		\item
+			Bob attempts to decrypt it and gets trash.
+			% 1099^1203 = 0662 mod 4189
+			You retrieve the trash and find it to be $0662$.
+			Find the multiplicative inverse of $r$
+			and use it to find $P$.
+	
+		\end{enumerate}
+	
+	
+	
+		\end{enumerate}
 
 \end{document}

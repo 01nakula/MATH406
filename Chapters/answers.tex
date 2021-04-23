@@ -42,6 +42,7 @@
 \def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
 \def\ord{{\text{ord}}}
 \def\ind{{\text{ind}}}
+\def\leg#1#2{\left(\frac{#1}{#2}\right)}
 
 \begin{document}
 \setcounter{section}{0}
@@ -1019,6 +1020,207 @@ def Mersenne_Prime (n):
 \setcounter{subsection}{8}
 \subsection{Chapter 9}
 \rule{\textwidth}{1pt}\\
+\subsubsection{}
+\begin{enumerate}
+  \item
+    $\ord_{21}8$ \\\\
+    Since $\phi(21)= 12$ we have $\ord_{21} = 1,2,3,4,6,12$. Then we see,
+    \begin{align*}
+      8^{1} &\equiv 8 \mbox{ mod } 21 \\
+      8^{2} &\equiv 1 \mbox{ mod } 21
+    \end{align*}
+    Therefore, $\ord_{21} 8 = 2$.
+
+  \item
+    $\ord_{25}8$ \\\\
+    Since $\phi(25)= 20$ we have $\ord_{25} = 1,2,4,5,10,20$. Then we see,
+    \begin{align*}
+      8^{1} &\equiv 8 \mbox{ mod } 25 \\
+      8^{2} &\equiv 14 \mbox{ mod } 25 \\
+      8^{4} &\equiv 21 \mbox{ mod } 25 \\
+      8^{5} &\equiv 18 \mbox{ mod } 25 \\
+      8^{10} &\equiv 24 \mbox{ mod } 25 \\
+      8^{20} &\equiv 1 \mbox{ mod } 25
+    \end{align*}
+    Therefore, $\ord_{25} 8 = 20$.
+
+  \end{enumerate}
+
+\subsubsection{}
+We wish to find a primtive root $r$ such that $r^{\phi(n)} \equiv 1\mbox{ mod }n$.
+  First we see that $\phi(50) = 20$ so we want to find an $r$ for $r^{20} \equiv 1\mbox{ mod } 50$.
+  Let $r=3$, we can then observe:
+  \begin{align*}
+    3^{1} &\equiv 3 \mbox{ mod } 50 \\
+    3^{2} &\equiv 9 \mbox{ mod } 50 \\
+    3^{4} &\equiv 31 \mbox{ mod } 50 \\
+    3^{5} &\equiv 43 \mbox{ mod } 50 \\
+    3^{10} &\equiv 49 \mbox{ mod } 50 \\
+    3^{20} &\equiv 1 \mbox{ mod } 50 
+  \end{align*}
+  So we have $r=3$ as a primitive root for $n=50$. Then we see that there are a total of
+  $\phi(\phi(50)) = \phi(20) = 8$ primitive roots for $n=50$. Take $k$ with 
+  $\gcd(k,\phi(50))=1 \implies \gcd(k, 20)=1$. So $k=1,3,7,9,11,13,17,19$. Then,
+  \begin{align*}
+    3^{1} &\equiv 3 \mbox{ mod } 50 \\
+    3^{3} &\equiv 27 \mbox{ mod } 50 \\
+    3^{7} &\equiv 37 \mbox{ mod } 50 \\
+    3^{9} &\equiv 33 \mbox{ mod } 50 \\
+    3^{11} &\equiv 47 \mbox{ mod } 50 \\
+    3^{13} &\equiv 23 \mbox{ mod } 50 \\
+    3^{17} &\equiv 13 \mbox{ mod } 50 \\
+    3^{19} &\equiv 17 \mbox{ mod } 50
+  \end{align*}
+  So we get $3,13,17,23,27,33,37,47$ as the primitive roots of $n=50$.
+
+\subsubsection{}
+\begin{proof}
+	Since $\ord_p a = 2k$ we have that $a^{2k}\equiv 1\mbox{ mod }p$ which implies that
+	$p\mid\left(a^{2k}-1\right)$ where $a^{2k} -1 = (a^k + 1)(a^k -1)$. So we have two cases,
+	\begin{itemize}
+		\item If $p\mid (a^k + 1)$ then we get $a^k \equiv -1 \mbox{ mod }p$.
+		\item If $p\mid (a^k - 1)$ then we get $a^k \equiv 1 \mbox{ mod }p$, but this
+		contradicts the fact that $\ord_p a = 2k$.
+	\end{itemize}
+	Thus, $p$ can only divide $a^k + 1$ and therefore $a^k \equiv -1 \mbox{ mod }p$.
+\end{proof}
+
+\subsubsection{}
+Since $\ord_m a = m-1$ we know that because $\ord_m a\mid \phi(m)$ we have $(m-1)\mid\phi(m)$.
+  But from the definition of the Euler Phi function we know that $\phi(m) \leq m-1$ so therefore
+  $\phi(m) = m-1$. Then it follows that $m$ must be prime.
+
+\subsubsection{}
+\begin{proof}
+	Using the proof in problem three we can see:
+	$$
+		\ind_r a + \left(\frac{p-1}{2}\right) \implies
+		\ind_r a + \ind_r(p-1) \implies
+		\ind_r (ap - a)
+	$$
+	It then follows that
+	$\ind_r(p-a) \equiv \ind_r(ap - a)\mbox{ mod } p-1$.
+	From here we can "un-index" to then get
+	$(p-a) \equiv (ap-a) \mbox{ mod }p$
+	which we know to be true from the definition of congruence.
+	Thus, $\ind_r(p-a)\equiv \ind_ra+\left(\frac{p-1}{2}\right)\mod p-1$.
+\end{proof}
+
+\subsubsection{}
+We will show $\ord_n(ab)=(\ord_n a)(\ord_n b)$ by two directions, 
+  first the left side divides the right and then the right side divides the left.
+  \begin{itemize}
+    \item Observe that 
+    $(ab)^{\ord_n a \cdot \ord_n b} = a^{\ord_n a \cdot \ord_n b} \cdot b^{\ord_n a \cdot \ord_n b}
+    = 1^{\ord_n b} \cdot 1^{\ord_n a} \equiv 1 \mbox{ mod } n$. This implies that $\ord_n (ab) \mid (\ord_n a)(\ord_n b)$.
+
+    \item We know that $(ab)^{\ord_n (ab)}\equiv 1$, so we can see the following.
+    \begin{align*}
+      \begin{split}
+        (ab)^{\ord_n (ab)} &\equiv 1 \\
+        \left((ab)^{\ord_n (ab)}\right)^{\ord_n a} &\equiv 1^{\ord_n a} \\
+        b^{\ord_n (ab) \cdot \ord_n a} &\equiv 1
+      \end{split}
+      \begin{split}
+        (ab)^{\ord_n (ab)} &\equiv 1 \\
+        \left((ab)^{\ord_n (ab)}\right)^{\ord_n b} &\equiv 1^{\ord_n b} \\
+        a^{\ord_n (ab) \cdot \ord_n b} &\equiv 1
+      \end{split}
+    \end{align*}
+    Looking at $b^{\ord_n (ab) \cdot \ord_n a} \equiv 1$ we see that 
+    $\ord_n b \mid (\ord_n (ab))(\ord_n a)$. But, since $\ord_n a$ and $\ord_n b$ are coprime to
+    one another we get,
+    $\ord_n b \mid \ord_n (ab)$. Likewise, the same can be said about $\ord_n a$, therefore
+    $\ord_n a \mid \ord_n (ab)$. Then we have $(\ord_n a)(\ord_n b)\mid \ord_n (ab)$.
+  \end{itemize}
+	Then we see that since $\ord_n (ab)\mid (\ord_n a)(\ord_n b)$ and $(\ord_n a)(\ord_n b)\mid \ord_n (ab)$
+  we get $\ord_n(ab)=(\ord_n a)(\ord_n b)$.
+
+\subsubsection{}
+\begin{proof}
+	Since $p\equiv 1\mbox{ mod } 4$ let $p=4k+1$ for some $k\in\integers$.
+	We know that for a primtive root $r$, $r^{\phi(p)/2} \equiv -1\mbox{ mod }p$.
+	It then follows that $r^{((4k+1)-1)/2} = r^{4k/2} = r^{2k} \equiv -1\mbox{ mod }p$.
+	Thus, $(-r)^{2k} \equiv -1\mbox{ mod }p$ and then taking $-r$ to some power gives us
+	congruence to $r$. Therefore $-r$ is a primtive root of $p$.
+\end{proof}
+
+\subsubsection{}
+\begin{enumerate}
+  \item $ $
+    \begin{figure}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      $a$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\
+      \hline
+      $\ind_7 a$ & 12 & 11 & 8 & 10 & 3 & 7 & 1 & 9 & 4 & 2 & 5 & 6 \\
+      \hline
+    \end{tabular}
+    \end{figure}
+
+  \item
+    \begin{align*}
+      x^{2} &\equiv 12\mbox{ mod } 13 \\
+      \ind_7 (x^2) &\equiv \ind_7 12 \mbox{ mod } \phi(13) \\
+      2\ind_7 x &\equiv 6 \mbox{ mod } 12 \\
+      \ind_7 x &\equiv 3 \mbox{ mod } 6 \\
+      \ind_7 x &\equiv 3,9 \mbox{ mod } 12 \\
+      x &\equiv 5,8 \mbox{ mod } 13
+    \end{align*}
+
+  \item
+    \begin{align*}
+      4^x &\equiv 12\mbox{ mod } 13 \\
+      \ind_7 4^x &\equiv \ind_7 12 \mbox{ mod } \phi(13) \\
+      x\ind_7 4 &\equiv 6 \mbox{ mod } 12 \\
+      10x &\equiv 6 \mbox{ mod } 12 \\
+      5x &\equiv 3 \mbox{ mod } 6 \\
+      (5)(5x) &\equiv (5)(3) \mbox{ mod } 6\\
+      x &\equiv 3 \mbox{ mod } 6 \\
+      x &\equiv 3, 9 \mbox{ mod } 12
+    \end{align*}
+
+  \end{enumerate}
+\subsubsection{}
+\begin{enumerate}
+  \item
+    The problem with this is the use of the fraction $\frac{a}{b}$, we can not
+    always guarantee $\frac{a}{b}$ to be an integer, furthermore there is no such
+    thing as "divison" in this context.
+
+  \item
+    We know that if $\gcd(b,\phi(n))=1$ then $\exists b'$ such that $b\cdot b' \equiv 1\mbox{ mod } \phi(n)$.
+    Then we can substitute $\ind_r (\frac{a}{b})$ with $\ind_r (a\cdot b')$.
+    Formally, if $\gcd(a,n)=\gcd(b,n)=1$ and $r$ is a primitive root then,
+    $$\ind_r a - \ind_r b \equiv \ind_r (a \cdot b') \mbox{ mod } \phi(n)$$
+
+  \item
+    \begin{proof}
+      Suppose $\gcd(a,n) = \gcd(b,n) = 1$ and $r$ is a primitive root.
+      Observe then,
+      \begin{align*}
+        \ind_r a - \ind_r b \mbox{ mod } \phi(n)
+        &\equiv r^{\ind_r a} \cdot r^{-\ind_r b} \mbox{ mod } n \\
+        &\equiv r^{\ind_r a} \cdot r^{\ind_r b'} \mbox{ mod } n \\
+        &\equiv r^{\ind_r (a\cdot b')} \mbox{ mod } n \\
+        &\equiv \ind_r(a\cdot b') \mbox{ mod } \phi(n)
+      \end{align*}
+      Thus, we see then that $\ind_r a - \ind_r b \equiv \ind_r (a \cdot b') \mbox{ mod } \phi(n)$.
+    \end{proof}
+
+  \end{enumerate}
+
+\subsubsection{}
+\begin{proof}
+	If $r_1$ and $r_2$ are primitive roots for some odd prime $p$ we know that,
+	$r_1^{(p-1)} \equiv r_2^{(p-1)} \equiv 1$ but
+	$r_1^{(p-1)/2} \equiv r_2^{(p-1)/2} \equiv -1$. In the first case we see that
+	$(r_1\cdot r_2)^{(p-1)} \equiv r_1^{(p-1)} \cdot r^{(p-1)} \equiv 1$ so that works.
+	In the second case we see that
+	$(r_1\cdot r_2)^{(p-1)/2} \equiv r_1^{(p-1)/2} \cdot r_2^{(p-1)/2} \equiv -1\cdot -1 \equiv 1$.
+	Therefore $r_1 r_2$ is not a primitive root of $p$.
+\end{proof}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
@@ -1026,6 +1228,205 @@ def Mersenne_Prime (n):
 \setcounter{subsection}{10}
 \subsection{Chapter 11}
 \rule{\textwidth}{1pt}\\
+\subsubsection{}
+Observe,
+  \begin{table}[h!]
+  \begin{center}
+  \begin{tabular}{cccc}
+    $1^2\equiv1\mbox{ mod }17$ & $5^2\equiv8\mbox{ mod }17$ & $9^2\equiv13\mbox{ mod }17$ & $13^2\equiv16\mbox{ mod }17$ \\
+    $2^2\equiv4\mbox{ mod }17$ & $6^2\equiv2\mbox{ mod }17$ & $10^2\equiv15\mbox{ mod }17$ & $14^2\equiv9\mbox{ mod }17$ \\
+    $3^2\equiv9\mbox{ mod }17$ & $7^2\equiv15\mbox{ mod }17$ & $11^2\equiv2\mbox{ mod }17$ & $15^2\equiv4\mbox{ mod }17$\\
+    $4^2\equiv16\mbox{ mod }17$ & $8^2\equiv13\mbox{ mod }17$ & $12^2\equiv8\mbox{ mod }17$ & $16^2\equiv1\mbox{ mod }17$
+  \end{tabular}
+  \end{center}
+  \end{table}
+
+  From here we can see that $1,2,4,8,9,13,15,$ and $16$ are Quadratic Residues mod 17.
+\subsubsection{}
+\begin{enumerate}[(a)]
+	\item
+		\begin{align*}
+			\leg{3}{17} \equiv 3^{(17-1)/2} = 3^{8} \equiv 16 \equiv -1\mbox{ mod }17
+		\end{align*}
+		Thus, 3 is a QNR mod 17.
+	\item
+		By Gauss's Lemma we have the set $\{3,2\cdot3, \cdots, ((17-1)/2)\cdot 3\}$ which is $\{3,6,9,12,15,18,21,24\}$.
+		Then we take them mod 17, to get $\{3,6,9,12,15,1,4,7\}$.
+		We want to see how many are greater than $17/2=8.5$, we then see that 3 are greater than 8.5.
+		Then $(-1)^3=-1$, so we have $\leg{3}{17}=-1$ and therefore 3 is a QNR mod 17.
+	\end{enumerate}
+
+\subsubsection{}
+\begin{proof}
+	We wish to show that $\ord_q(-4)=\phi(q)$. Since we know $q$ to be an odd prime, we have that
+	$\phi(q)=q-1\implies (2p+1)-1=2p$. So we then get $\ord_q(-4)\mid 2p$, of which $\ord_q(-4)=1,2,p,$ or $2p$.
+	\begin{itemize}
+		\item If $\ord_q(-4)=1$ then $(-4)^1\equiv 1\mbox{ mod }q \implies q\mid -5 \implies q=5$, but this implies that
+		$p=2$ since $q=2p+1$, and we know both $p$ and $q$ to be odd primes, so $\ord_q(-4)\neq 1$.
+
+		\item If $\ord_q(-4)=2$ then $(-4)^2\equiv 1\mbox{ mod }q \implies s\mid 15 \implies q=5,3$, but this implies
+		$p$ to be either be $1,2$, and we know both $p$ and $q$ to be odd primes, so $\ord_q(-4)\neq 2$.
+
+		\item If $\ord_q(-4)=p$ then $(-4)^p\equiv 1\mbox{ mod }q \implies \frac{-4}{q}\equiv 1\mbox{ mod }q \implies
+		\frac{-1}{2p+1} (1) \equiv 1\mbox{ mod }q \implies -1\equiv 1\mbox{ mod }q$, but this implies $q\mid 2$ which
+		is false.
+	\end{itemize}
+	Thus, by process of elimination the only value that $\ord_q(-4)$ is equivalent to is $2p$.
+\end{proof}
+
+\subsubsection{}
+\begin{proof}
+	We will first prove $4$ to be a Quadratic Residue,
+	$$\leg{-4}{p} = \leg{-1}{p}\leg{2}{p}^2 = 1$$
+	Then, to prove $\frac{p-1}{4}$,
+	$$\leg{\frac{p-1}{4}}{p} = \leg{\frac{p-1}{4}}{p}\leg{4}{p} = \leg{p-1}{p} = \leg{-1}{p} = 1$$
+	We can substitute in $\leg{4}{p}$ during the second step because in the first part of the proof
+	we showed $\leg{4}{p}$ to be a Quadratic Residue. Thus, both -4 and $(p-1)/4$ are Quadratic Residues of $p$
+	when $p\equiv 1\mbox{ mod }4$.
+\end{proof}
+
+\subsubsection{}
+\begin{enumerate}[(a)]
+  \item
+    \begin{align*}
+      \leg{21}{59} &= \leg{3}{59}\leg{7}{59} \text{by splitting.} \\
+      &= \Big[-\leg{59}{3}\Big] \Big[-\leg{59}{7}\Big] \text{by LoQR since }3,7\equiv 3\mbox{ mod }4. \\
+      &= \leg{2}{3}\leg{3}{7} \text{by reducing.} \\
+      &= (-1)^{1} \Big[-\leg{7}{3}\Big] \text{by 2 rule and LoQR since }3\equiv 3\mbox{ mod }4. \\
+      &= \leg{1}{3} \text{by reducing.} \\
+      &= 1
+    \end{align*}
+  \item
+    \begin{align*}
+      \leg{1463}{89} &= \leg{7}{89}\leg{11}{89}\leg{19}{89} \text{by splitting.}\\
+      &= \leg{89}{7}\leg{89}{11}\leg{89}{19} \text{by LoQR.} \\
+      &= \leg{5}{7}\leg{1}{11}\leg{13}{19} \text{by reducing.} \\
+      &= \leg{7}{5}\leg{19}{13} \text{by LoQR.} \\
+      &= \leg{2}{5}\leg{6}{13} \text{by reducing.} \\
+      &= (-1)^{(25-1)/8}\leg{2}{13}\leg{3}{13} \text{by 2 rule and splitting.} \\
+      &= (-1)(-1)^{(13^2-1)/8} \leg{13}{3} \text{by 2 rule and LoQR.} \\
+      &= \leg{1}{3} \text{by reducing.} \\
+      &= 1
+    \end{align*}
+  \item
+    \begin{align*}
+      \leg{1547}{1913} &= \leg{7}{1913}\leg{13}{1913}\leg{17}{1913} \text{by splitting.} \\
+      &= \leg{1913}{7}\leg{1913}{13}\leg{1913}{17} \text{by LoQR.} \\
+      &= \leg{1}{7}\leg{2}{13}\leg{9}{17} \text{by reducing.} \\
+      &= (-1)^{(13^2-1)/8} \text{by 2 rule} \\
+      &= -1
+    \end{align*}
+  \end{enumerate}
+\subsubsection{}
+We have two main cases, $p\equiv 1$ or $p\equiv 3$ mod 4.
+  \begin{enumerate}[1.]
+    \item If $p\equiv 1\mbox{ mod }4 \implies \leg{3}{p}=\leg{p}{3}$. Then,
+    \begin{itemize}
+      \item $p\equiv 1\mbox{ mod }3\implies \leg{p}{3}=\leg{1}{3}=1\implies p\equiv 1\mbox{ mod }12$
+      \item $p\equiv 2\mbox{ mod }3\implies \leg{p}{3}=\leg{2}{3}=-1\implies p\equiv 5\mbox{ mod }12$
+    \end{itemize}
+    \item If $p\equiv 3\mbox{ mod }4 \implies \leg{3}{p}=-\leg{p}{3}$. Then,
+    \begin{itemize}
+      \item $p\equiv 1\mbox{ mod }3\implies -\leg{p}{3}=-\leq{1}{3}=-1\implies p\equiv 7\equiv -5\mbox{ mod }12$
+      \item $p\equiv 2\mbox{ mod }3\implies -\leg{p}{3}=-\leg{2}{3}=1\implies p\equiv 11\equiv -1\mbox{ mod }12$
+    \end{itemize}
+  \end{enumerate}
+
+\subsubsection{}
+By the Law of Quadratic Residues since $5\equiv 1\mbox{ mod }4$ we have that $\leg{5}{p}=\leg{p}{5}$.
+  Then because $\gcd(5,p)=1$ we know that $p\mbox{ mod }5$ can only be $1,2,3$ or $4$.
+  \begin{itemize}
+    \item $p\equiv 1\mbox{ mod }5\implies \leg{1}{5} = 1$
+    \item $p\equiv 2\mbox{ mod }5\implies \leg{2}{5} = -1$
+    \item $p\equiv 3\mbox{ mod }5\implies \leg{3}{5} = -1$
+    \item $p\equiv 4\mbox{ mod }5\implies \leg{4}{5} = 1$
+  \end{itemize}
+  So we see that in order for $\leg{5}{p}=1$, $p$ must be either $1$ or $4$ mod 5.
+
+\subsubsection{}
+\begin{enumerate}[(a)]
+  \item
+    \begin{align*}
+      \leg{5}{21} &= \leg{21}{5} \text{by LoQR since } 5\equiv 1\mbox{ mod }4. \\
+      &= \leg{1}{5} \text{by reducing.} \\
+      &= 1
+    \end{align*}
+
+  \item
+    \begin{align*}
+      \leg{1009}{2307} &= \leg{2307}{1009} \text{by LoQR since } 1009\equiv 1\mbox{ mod }4. \\
+      &= \leg{289}{1009} \text{by reducing.} \\
+      &= \leg{1009}{289} \text{by LoQR since } 289\equiv 1 \mbox{ mod }4. \\
+      &= \leg{142}{289} \text{by reducing.} \\
+      &= \leg{2}{289}\leg{71}{289} \text{by splitting.} \\
+      &= \leg{289}{71} \text{by 2 rule and LoQR since }289\equiv 1\mbox{ mod }4. \\
+      &= \leg{5}{71} \text{by reducing.} \\
+      &= \leg{71}{5} \text{by LoQR since }5\equiv 1\mbox{ mod }4. \\
+      &= \leg{1}{5} \text{by reducing.} \\
+      &= 1
+    \end{align*}
+
+  \item
+    \begin{align*}
+      \leg{27}{101} &= \leg{101}{27} \text{by LoQR since }101\equiv 1\mbox{ mod }4. \\
+      &= \leg{20}{27} \text{by reducing.} \\
+      &= \leg{4}{27}\leg{5}{27} \text{by splitting.} \\
+      &= \leg{27}{5} \text{by LoQR since }5\equiv 1\mbox{ mod }4. \\
+      &= \leg{2}{5} \text{by reducing.} \\
+      &= -1
+    \end{align*}
+  \end{enumerate}
+
+\subsubsection{}
+Observe that $\leg{n}{3}\leg{n}{5}=\leg{n}{15}=\leg{15}{n}=1$.
+  It follows then that for $n\equiv 1\mbox{ mod }4$ we have cases, $\leg{n}{3}=1$ and $\leg{n}{5}=1$,
+  and $\leg{n}{3}=-1$ and $\leg{n}{5}=-1$.
+  \begin{itemize}
+    \item If $\leg{n}{3}=1$ and $\leg{n}{5}=1$ then $n\equiv1\mbox{ mod }3$ and $n\equiv 1,4\mbox{ mod }5$.
+    \item If $\leg{n}{3}=-1$ and $\leg{n}{5}=-1$ then $n\equiv2\mbox{ mod }3$ and $n\equiv2,3\mbox{ mod }5$.
+  \end{itemize}
+  Then, for $n\equiv 3\mbox{ mod }4$ we have cases, $\leg{n}{3}=1$ and $\leg{n}{5}=-1$, and
+  $\leg{n}{3}=-1$ and $\leg{n}{5}=1$.
+  \begin{itemize}
+    \item If $\leg{n}{3}=1$ and $\leg{n}{5}=-1$ then $n\equiv1\mbox{ mod }3$ and $n\equiv 2,3\mbox{ mod }5$.
+    \item If $\leg{n}{5}=-1$ and $\leg{n}{5}=1$ then $n\equiv2\mbox{ mod }3$ and $n\equiv 1,4\mbox{ mod }5$.
+  \end{itemize}
+
+\subsubsection{}
+First observe that the prime factorization of $a$ can include primes to both
+  even and odd powers. Let $p$ denote prime factors of $a$ to odd powers,
+  similarly let $q$ denote prime factors of $a$ to even powers. We then see,
+  $a = p_1\cdots p_i q_1\cdots q_j$.
+  Then from rules of the Jacobi Symbol we can split $\leg{a}{n}$,
+  it follows then that we do not care about the prime factors of $a$ raised to
+  even powers (denoted $q$) since their Jacobi Symbol will always be 1.
+  So then we get
+  $\leg{a}{n}=\leg{p_1}{n}\cdots\leg{p_i}{n}$
+  We then need to handle the specific case of when $p_1$ is 2.
+  If $p_1=2$ we have:
+  \begin{align*}
+    \leg{a}{n} &=\leg{p_1}{n}\cdots\leg{p_i}{n} \\
+    &= \leg{2}{n}\cdots\leg{p_i}{n} \\
+    &= \leg{2}{n}\cdots\leg{n}{p_i} \\
+    &= (-1) \cdots (1) \\
+    &= -1
+  \end{align*}
+  In order for this to work we would need $n$ such that $n\equiv 5\mbox{ mod }8$ (2 rule)
+  and $n\equiv 1\mbox{ mod }p_k$ for all $k$ (LoQR used in line 3). Then for the more general
+  case of $p_1>2$ we have:
+  \begin{align*}
+    \leg{a}{n} &=\leg{p_1}{n}\cdots\leg{p_i}{n} \\
+    &=\leg{n}{p_1}\cdots\leg{n}{p_1} \\
+    &=\leg{x}{p_1}\cdots(1)\\
+    &= -1
+  \end{align*}
+  In order for this to work we would need $n$ such that $n\equiv x\mbox{ mod }p_1$ (where $x$ is a QNR of $p_1$),
+  $n\equiv 1\mbox{ mod }4$, and
+  $n\equiv 1\mbox{ mod }p_k$ for all $k$.
+  Thus, we get
+  $$\text{if }p_1=2, n \equiv\begin{cases}5\mbox{ mod }8 &\\1\mbox{ mod }p_k&\forall k\end{cases}
+  \hspace{5mm}\text{if }p_1>2, n\equiv\begin{cases}x\mbox{ mod }p_1 &(x\text{ is a QNR of }p_1) \\
+    1\mbox{ mod }4 &\\1\mbox{ mod }p_k &\forall k\end{cases}$$
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
