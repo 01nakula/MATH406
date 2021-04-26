@@ -10,7 +10,7 @@
 \usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
-\usepackage[margin=1.75in]{geometry}
+\usepackage[margin=1.5in]{geometry}
 
 \newcommand\blankpage{
     \null,
@@ -24,9 +24,9 @@
 \answersfalse
 \introfalse
 
-\title{Introduction to Number Theory}
+\title{\textsc{Introduction To Number Theory}}
 \author{Neelam Akula}
-\date{Spring 2021}
+\date{}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -35,18 +35,11 @@
 \cfoot{Page \thepage}
 
 \begin{document}
-\makeatletter
-    \begin{titlepage}
-        \begin{center}
-            {\huge \bfseries  \@title }\\[4ex]
-			\includegraphics[width=10cm]{logo.png}\\[4ex]
-            {\large  \@author}\\[4ex] 
-            {\large \@date}
-        \end{center}
-        \vfill
-        Last Updated: \today
-    \end{titlepage}
-\makeatother
+\pagestyle{empty}
+\maketitle
+\pagebreak
+{\null\vfill\small Last Updated: \today}
+\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%   Table of Contents    %%
@@ -81,6 +74,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Import Chapter Content %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}
 \import{Chapters/}{ch1}
 \newpage
 \import{Chapters/}{ch3}

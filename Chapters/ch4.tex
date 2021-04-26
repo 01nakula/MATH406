@@ -367,8 +367,75 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-%\subsection{Factoring Using Pollard's Rho Method}
-%\rule{\textwidth}{1pt}
+% \setcounter{subsection}{5}
+\subsection{Factoring Using Pollard's Rho Method}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+	\item \textbf{Introduction:} John Pollard invented the Rho factorization algorithm in
+	1975. It does a fairly fast job for numbers with small prime factors, even if those numbers
+	themsevles are large, it also has a small memory footprint. So it is a useful tool for
+	inital probing.
+
+	\item \textbf{Idea:} We have some $n$ and wish to find a factor.
+	Suppose $p$ is a prime factor of $n$. The Goal is to look at a sequence of integers
+	$x_0,x_1,x_2,\ldots$ until we find two $x_i$ and $x_j$ with the properties that:
+	$x_i\not\equiv x_j\mbox{ mod }n$ and $x_i\equiv x_j\mbox{ mod }p$.
+	Suppose then, that somehow we obtain such $x_i$ and $x_j$.
+	Then observe $p\mid (x_j-x_i)$ and $p\mid n$,
+	so then $\gcd(x_j-x_i,n)\geq p$. Note: we can calculate the $\gcd$ easily
+	via the Euclidean Algorithm. \\\\
+	So the idea will be to generate a sequence $x_0,x_1,x_2,\dots$
+	and then check $\gcd(x_j-x_i,n)$ but to do this in a way which is systematic
+	and guarantees that eventually we will get $\gcd(x_j-x_i,n)\neq 1$
+	which will then give us a factor. Suppose we are given
+	$x_0,x_1,x_2,\ldots$ if we consider these mod $p$,
+	eventually they repeat since there are only $p$ distinct values mod $p$.
+	Once they repeat, they keep repeating. In other words,
+	if $\alpha,\beta\geq i$ then $x_{\alpha}\equiv x_{\beta}\mbox{ mod }p$ if and only if
+	$(i-j)\mid(\alpha-\beta)$. \\\\
+	Suppose $s$ is the smallest multiple of $(j-i)$ which is larger than $i$.
+	Observe that since $s,2s\geq i$ and $(j-i)\mid s$, we have $(j-i)\mid(2s-s)$ and so
+	$x_{2s}\equiv x_s \mbox{ mod }p$.
+	So instead of checking all combinations of $x_i$ and $x_j$, we will just check $x_{2s}$
+	and $x_s$ when possible.
+
+	\item \textbf{Pollard's Rho Method:} 
+	Generate our $x_0,x_1,x_2,\ldots$ as follows: Let $x_0$ be some starting value, say
+	$x_0=2$. Define $f(x)=x^2+1$ and put $x_1=f(x_0)\mbox{ mod }n$ (so $x_1\equiv x_0^2+1\mbox{ mod }n$).
+	This function creates a pseudorandom sequence of integers mod $n$.
+	Everytime we calculate $x_{2s}$ (even subscript) check $\gcd(x_{2s}-x_s, n)$.
+	Eventually, we will get the gcd to be not equal to 1. \\\\
+	Thus: The assumption that $n$ has a "small" factor $p$, $p\mid n$,
+	suggests that $x_i\equiv x_j\mbox{ mod }p$ fairly quickly
+	which then suggests that $\gcd(x_{2s}-x_s,n)\neq1$ also
+	fairly quickly. \\\\
+	\textbf{Ex.} Let $n=1111$, then set $x_0=2$ and $f(x)=x^2+1$. Then we have,
+	\begin{align*}
+		x_1&\equiv 2^2+1\equiv 5\mbox{ mod }1111 \\
+		x_2&\equiv 5^2+1\equiv 26\mbox{ mod }1111 \implies \gcd(x_2-x_1,n)=\gcd(21,1111)=1 \\
+		x_3&\equiv 26^2+1\equiv 677\mbox{ mod }1111 \\
+		x_4&\equiv 677^2+1\equiv 598\mbox{ mod }1111 \implies \gcd(x_4-x_2,n)=\gcd(572,1111)=11
+	\end{align*}
+	So we get $11$ as a factor of $1111$ (no surprise there). \\\\
+	\textbf{Ex.} Let $n=1189$, then set $x_0=2$ and $f(x)=x^2+1$. Then we have,
+	\begin{align*}
+		x_1&\equiv 5 \\
+		x_2&\equiv 26 \implies \gcd(26-5, 1189)=1\\
+		x_3&\equiv 677 \\
+		x_4&\equiv 565 \implies \gcd(565-26, 1189)=1\\
+		x_5&\equiv 574 \\
+		x_6&\equiv 124 \implies \gcd(124-677,1189)=1\\
+		x_7&\equiv 1109 \\
+		x_8&\equiv 456 \implies \gcd(456-565,1189)=1\\
+		x_9&\equiv 1051 \\
+		x_{10}&\equiv 21 \implies \gcd(21-574,1189)=1\\
+		x_{11}&\equiv 442 \\
+		x_{12}&\equiv 369 \implies \gcd(369-124, 1189)=1\\
+		x_{13}&\equiv 616 \\
+		x_{14}&\equiv 166 \implies \gcd(166-1109, 1189)=41
+	\end{align*}
+	So we get $41$ as a factor of $1189$.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
