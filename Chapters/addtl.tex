@@ -1,0 +1,356 @@
+\documentclass[class=article, crop=false]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{import}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=blue]{hyperref}
+\usepackage{epsfig,amssymb,amsmath,multicol,tikz,pgfplots,amsthm,enumerate}
+
+\def\naturals{{\mathbb N}}
+\def\reals{{\mathbb R}}
+\def\complex{{\mathbb C}}
+\def\poly{{\mathbb P}}
+\def\integers{{\mathbb Z}}
+\def\rationals{{\mathbb Q}}
+\def\irrationals{{\mathbb I}}
+\def\inlinesum#1#2{\overset{#2}{\underset{#1}{\sum}}}
+\def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
+\def\ord{{\text{ord}}}
+\def\ind{{\text{ind}}}
+\def\leg#1#2{\left(\frac{#1}{#2}\right)}
+
+
+\begin{document}
+\setcounter{section}{11}
+\section{Additional Material}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Coin Flipping}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+	\item \textbf{Introduction:} 
+	The whole idea of "coin flipping" is for two parties to agree that a "coinflip"
+	is fair when they are not in the presence of the coin.
+
+	\item \textbf{Theorem:}
+	Suppose $p,q$ are distinct odd primes. Let $A\neq0\mbox{ mod }n=pq$.
+	If $x^2\equiv A\mbox{ mod }n$ has any solutions (if at all) then it has
+	4 distinct solutions mod $n$.
+	\begin{proof}
+		First note that if $x^2\equiv A\mbox{ mod }n$ then $x^2\equiv A\mbox{ mod }p$
+		and $x^2\equiv A\mbox{ mod }q$. Then we know that $x^2\equiv A\mbox{ mod }p,q$
+		have exactly two solutions each. Next observe that by the
+		CRT, solutions to $x^2\equiv A\mbox{ mod }n$ correspond exactly to pairs
+		of solutions to $x^2\equiv A\mbox{ mod }p, q$. Why are they distinct? 
+		\begin{itemize}
+		\item Suppose $x\equiv a\mbox{ mod } n$ is one solution.
+		So $a^2\equiv A\mbox{ mod }n$. Then, consider the system
+		\begin{align*}
+			x&\equiv a\mbox{ mod }p \\
+			x&\equiv a\mbox{ mod }q
+		\end{align*}
+		by the CRT this has a unique solution mod $pq=n$. This solution will
+		satisfy $x^2\equiv a^2\equiv A\mbox{ mod }p$ and $x^2\equiv a^2\equiv A\mbox{ mod }q$.
+		Since $\gcd(p,q)=1$ we have that $x^2\equiv A\mbox{ mod }pq=n$.
+		Call this solution $X$. \\\\
+		Note that $x=-X$ is a solution as well since $(-X)^2\equiv X^2\equiv A\mbox{ mod }n$.
+		Moreover, note that $x=-x$ satisfies the system
+		\begin{align*}
+			x&\equiv -a\mbox{ mod }p \\
+			x&\equiv -a\mbox{ mod }q
+		\end{align*}
+
+		\item Now, consider this system,
+		\begin{align*}
+			x&\equiv a\mbox{ mod }p \\
+			x&\equiv -a\mbox{ mod }q
+		\end{align*}
+		by the CRT this has a unique solution mod $pq=n$. Call this solution $Y$. \\\\
+		likewise, $x=-Y$ is a solution as well. Since it satisfies
+		\begin{align*}
+			x&\equiv -a\mbox{ mod }p \\
+			x&\equiv a\mbox{ mod }q
+		\end{align*}
+	\end{itemize}
+	So, all together we have $x=X,-X, Y, -Y$ as our solution where they are all distinct
+	mod $n=pq$.
+	\end{proof}
+
+	\item \textbf{Theorem:} If $p\equiv 3\mbox{ mod }4$ and if $x^2\equiv A\mbox{ mod }p$ has
+	solutions, we can find them easily.
+	\begin{proof}
+		We know if it has any, it has two. Since $A$ is a QR we know that $\leg{A}{p}=1$
+		and then,
+		$$\left(\pm A^{\frac{p+1}{4}}\right)^2\equiv A^{\frac{p+1}{2}}\equiv A\cdot A^{\frac{p-1}{2}}
+		\equiv A\leg{A}{p}\equiv A\cdot 1\equiv A\mbox{ mod }p$$
+		So we know that $x=\pm A^{\frac{p+1}{4}}$ to be the two solutions.
+	\end{proof}
+
+	\item \textbf{Theorem:} Consider $x^2\equiv A\mbox{ mod }n$, if $n=pq$ and we know $p,q$
+	and if there are solutions, there are 4 and we can find them easily.
+	\begin{proof}
+		Since $x^2\equiv A \mbox{ mod }n$ has solutions so do $x^2\equiv A\mbox{ mod }p$ and
+		$x^2\equiv A\mbox{ mod }q$. We can find these as we have seen.
+		They are $x\equiv\pm A^{\frac{p+1}{4}}\mbox{ mod }p$
+		and $x\equiv\pm A^{\frac{q+1}{4}}\mbox{ mod }q$.
+		This leads us to the 4 systems in the CRT.
+		\begin{itemize}
+			\item We solve,
+			\begin{align*}
+				x&\equiv A^{\frac{p+1}{4}}\mbox{ mod }p \\
+				x&\equiv A^{\frac{q+1}{4}}\mbox{ mod }q
+			\end{align*}
+			Call that result $X$, this also gives us $-X$.
+
+			\item We solve,
+			\begin{align*}
+				x&\equiv A^{\frac{p+1}{4}}\mbox{ mod }p \\
+				x&\equiv -A^{\frac{q+1}{4}}\mbox{ mod }q
+			\end{align*}
+			Call that result $Y$, this also gives us $-Y$.
+		\end{itemize}
+		So we have 4 solutions.
+	\end{proof}
+
+	\noindent\textbf{Ex.} Supose $p=31,q=43$ so $n=pq=1333$.
+	Suppose we know $x^2\equiv 669\mbox{ mod }1333$ has solutions. Find them!
+	\begin{itemize}
+		\item Solve,
+		\begin{align*}
+			x&\equiv 669^{(31+1)/4}\equiv 7\mbox{ mod }31 \\
+			x&\equiv 669^{(43+1)/4}\equiv 14\mbox{ mod }43
+		\end{align*}
+		Which gives us $X=100\mbox{ mod }1333$ and $-X=100\mbox{ mod }1333$.
+		
+		\item Solve
+		\begin{align*}
+			x&\equiv 669^{(31+1)/4}\equiv 7\mbox{ mod }31 \\
+			x&\equiv -669^{(43+1)/4}\equiv -14\mbox{ mod }43
+		\end{align*}
+		Which gives us $Y=1061\mbox{ mod }1333$ and $-X=-1061\equiv 272\mbox{ mod }1333$.
+	\end{itemize}
+	So our 4 solutions are; $100,-100,1061,272$.
+
+	\item \textbf{Theorem:}
+	Knowing one of $\pm X$ and one of $\pm Y$ is equivalent to factoring $n$.
+	\begin{proof}
+		$ $\\
+		$\rightarrow$ Suppose we know $X$ and $Y$. Observe that $X+Y\equiv a+a\equiv 2a\mbox{ mod }p$
+		(we know that $2a\not\equiv 0\mbox{ mod }p$ since $p\nmid 2$ and $p\nmid a$)
+		and $X+Y\equiv a+(-a)\equiv 0\mbox{ mod }q$.
+		So $q\mid (X+Y)$ and $p\nmid (X+Y)$, since if $p\mid(X+Y$ then $p\mid 2a$
+		but then $p\mid a$ so $a\equiv 0\mbox{ mod }p$. Which leads to a contradiction.
+		So $\gcd(X+Y,n)=q$, thus we can find $q$ and then $p$ follows as $p=\frac{n}{q}$.
+		Similar arguments work for knowing $X$ and $-Y$, $-X$ and $Y$, $-X$ and $-Y$. \\\\
+		$\leftarrow$ This is obvious, we did it above.
+	\end{proof}
+
+	\item \textbf{Process:}
+	\begin{enumerate}[(a)]
+		\item Alice picks primes $p,q$ both congruent to 3 mod 4, both of which are distinct and odd.
+		She finds $n=pq$. She sends $n$ to Bob.
+
+		\item Bob picks $0<b<n$ and calculates $S\equiv b^2\mbox{ mod }n$. He knows that $X^2\equiv S$
+		has 4 solutions but he can't find all of them since he can't factor $n$. He only has two solutions,
+		which are $b$ and $-b$. Bob then sends $S$ back to Alice.
+
+		\item Alice finds the 4 solutions to $x^2\equiv S\mbox{ mod }n$. She gets $X,-X,Y,-Y$,
+		one of these corresponds to Bob's $b$ but she does not know which.
+
+		\item Alice chooses one and sends it back to Bob.
+		
+		\item If she sends back $\pm b$, it does not help Bob. However, if she sends back
+		either of the others, he can factor $n$. If Bob can factor $n$ he wins! (50\% chance that he gets
+		an integer that helps him factor $n$.)
+	\end{enumerate}
+
+	\item \textbf{Ex.} Alice chooses $p=31$ and $q=43$ so $n=1333$.
+	She sends 1333 to Bob. Bob chooses $b=100$, and finds $S\equiv b^2\equiv 669\mbox{ mod }1333$.
+	He then sends it to Alice, Alice solves $x^2\equiv 669\equiv 669\mbox{ mod }1333$.
+	She gets $100,272,1061,1233$ as the solutions. Alice knows that Bob's $b$ corresponds to
+	one of these, but she has no way of determining which one that is. She then picks one and sends it to Bob.
+	If she sends back $100,1233(\equiv -100)$ Bob can't factor $n$.
+	If she sends back $272,1061$ Bob can factor $n$, since $\gcd(100\pm272, 1333)$ and $\gcd(100\pm1061, 1333)$
+	will give him either $31$ or $43$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{El-Gamal Cryptosystem}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+	\item \textbf{Introduction:}
+	This system is based on the difficulty of calculating discrete logarithms.
+	Like RSA this is asymmetric.
+
+	\item \textbf{Key Creation:}
+	Bob chooses one large prime $p$, a primitive root $r\mbox{ mod }p$,
+	and an integer $a$ with $1\leq a\leq p-2$. He keeps $a$ secret.
+	He then calculates $b\equiv r^a\mbox{ mod }p$. Then he makes $(p, r, b)$
+	public. Observe that $a\equiv \ind_r b\mbox{ mod }p-1$ (this is
+	extremely difficult to calculate).
+
+	\item \textbf{Encryption:}
+	Suppose Alice wishes to send the plaintext block $P$ to Bob.
+	She first chooses a random integer $k$ with $1\leq k\leq p-2$,
+	then she encrypts via $\epsilon(P)\equiv (r^k, Pb^k)\mbox{ mod }p$.
+	This produces a pair $(\gamma ,\delta)$ which is the ciphertext,
+	i.e. $\gamma\equiv r^k\mbox{ mod }p$ and $\delta\equiv Pb^k\mbox{ mod }p$. \\\\
+	Note: By choosing a different (randomly) $k$ each time,
+	we can ensure that the same $P$, if encrypted multiple times,
+	will yield different ciphertext. Which can alleviate issues of
+	frequency analysis.
+
+	\item \textbf{Decryption:}
+	Bob recieves $(\gamma, \delta)$, we claim that $P\equiv \gamma^{p-1-a}\delta\mbox{ mod }p$
+	(note that $p-1-a\geq 1$). To see this note:
+	\begin{align*}
+		\gamma^{p-1-a}\delta &\equiv (r^k)^{p-1-a}(Pb^k)\mbox{ mod }p \\
+		&\equiv (r^{p-1})^k(r^a)^{-k}b^k P \mbox{ mod }p \\
+		&\equiv (1^k)(b^{-k})b^k P\mbox{ mod }p
+	\end{align*}
+	\text{mult. inverse of $r^a\exists$ since $p$ is prime and...}
+	Some notes about the derivation above, we know $(r^a)^{-k}$ since it is the
+	multiplicative inverse of $r^a$ which we knows exists since $p$ is prime,
+	furthermore we know that $r^a\equiv b$ and $b\leq p-1$ and $p$ is prime.
+	For $(r^{p-1})^k$ we have that $r^{p-1}\equiv 1$ since $r$ is a primitive root. 
+	Thus we have $\epsilon^{-1}(\gamma, \delta) \equiv \gamma^{p-1-a}\delta\mbox{ mod }p$.
+
+	\item \textbf{Ex.}
+	Bob selects $p=2539$ and $r=2$ (a PR) and $a=42$ (kept private).
+	Bob calculates $b = 2^{42}\equiv 1305\mbox{ mod }2539$, so his public key is
+	$(p, r, b)=(2539, 2, 1305)$. Eve knows $2^a\equiv 1305\mbox{ mod }2539$
+	but she can't find $a$ (this is the problem that is hard to solve).
+	Alice wants to send \verb|OHNO|, she breaks it into 2 blocks of size 2;
+	\verb|OH|=1407, \verb|NO|=1314.
+	Then she encrypts: \\\\
+		1407: She chooses $k=100$ then she does
+		\begin{align*}
+			\epsilon(1407)&=(2^{100}, 1407\cdot 1305^{100})\mbox{ mod }2359 \\
+			&=(613, 635)\mbox{ mod }2539
+		\end{align*}
+		
+		1314: She chooses $k=200$ then she does
+		\begin{align*}
+			\epsilon(1314)&=(2^{200}, 1314\cdot 1305^{200})\mbox{ mod }2359 \\
+			&= (2356, 1494)\mbox{ mod }2539
+		\end{align*}
+	So she then sends (613, 635) and (2356, 1494). \\\\
+	Bob then gets those and he decrypts: \\\\
+	(613, 635): $\epsilon^{-1}(613, 635) \equiv 613^{2539-1-42} \cdot 635\equiv 1407\mbox{ mod }2539$. \\
+	(2356, 1494): $\epsilon^{-1}(2356, 1394)\equiv 2356^{2359-1-42}\cdot 1494\equiv 1314\mbox{ mod }2539$.
+	Then he is done.
+
+	\item \textbf{Comments:}
+	\begin{enumerate}[(a)]
+		\item To decrypt we need $a$, and getting this from $b$ is hard.
+		\item In theory we could try $a^x$ for lots of $x$ but,
+		\item Use different $k$ each time so if $P_1 = P_2$ we get $c_1\neq c_2$.
+		\item Ciphertext is two times longer than the plaintext, which is a disadvantage,
+		but it has security given above.
+		\item Typically ElGamel and RSA (asymmetric encrpytion schemes) are actually not used for the entire message.
+		They are used to exchange a symmetric key which is then used to transmit data since
+		it is fast.
+		\item Signing messages is possible but not as easy. Alice can not simply use her own $d$
+		since there is no obvious mechanism for getting a random $k$ involved.
+		\item While verifying primitive roots can be hard, Bob's PR need not be public.
+		Alice could give it to him, in fact so could Eve!
+		\item Alice should definetly use a different (random) $k$ each time.
+		If Alice uses the same $k$ for $P_1$ and $P_2$ then \textit{if} Eve figures out $P_1$
+		she can figure out $P_2$. This is because Eve will know
+		$\gamma_1\equiv P_1b^k$ and $\gamma_2\equiv P_2b^k$ then observe that
+		$P_2\equiv \gamma_2(b^k)^{-1}\equiv \gamma_2\left(\gamma_1 P_1^{-1}\right)^{-1}
+		\equiv \gamma_2\gamma_1^{-1}P_1\mbox{ mod }p$.
+	\end{enumerate}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+% \subsection{Homomorphic Encryption}
+% \rule{\textwidth}{1pt}\\
+
+%%%%%%%%%%%%%%%
+%%% Section %%%
+%%%%%%%%%%%%%%%
+\subsection{Problems}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}
+\item
+	Use Pollard's Rho method
+	to obtain a factor of each of the following.
+	Use $x_0=2$ and $x_{n+1}=x_n^2+1$.
+
+	\begin{enumerate}
+
+	\item
+		$n=143$
+
+	\item
+		$n=5473$
+
+	\item
+		$n = 234643$
+
+	\end{enumerate}
+
+
+\item
+	From the context of class and notes,
+	show that knowing $X$ and $-Y$ is enough to factor $n$.
+
+\item
+	Emulate/rewrite the final coin-flip example from class
+	with $p=67$, $q=83$, and $b=123$.
+	Describe Alice's choices, Bob's choice,
+	who sends what to whom,
+	the equation Alice solves,
+	what those solutions are,
+	and what possibilities might emerge.
+
+	For the equation Alice solves
+	write down the details as in the example of Theorem 3
+	in the notes
+	but you can use technology to do the gritty calculations.
+
+\item
+	These relate to the El-Gamal Cryptosystem
+	\begin{enumerate}
+	\item
+		Choose a prime $p$ with $2525<p<10000$
+		(just hunt for lists of primes on the internet)
+		and find a primitive root $r$ of $p$.
+		Don't do this just by googling,
+		do this by making sure you understand what a primitive root is
+		(what properties must it have?)
+		and by sampling some possibilities (Wolfram Alpha can help)
+		until you find one.
+		Make sure you explain the process you followed
+		so it's clear to the grader how you tested and validated.
+		If you're not sure how to do this, ask!
+
+	\item
+		Choose some $a$ with $0\leq a\leq p-1$ and find the least nonnegative
+		residue $b\equiv r^a\mod p$.
+		What is your public key?
+
+	\item
+		Create a message of your choosing with between 15 and 20 characters
+		and encrypt it.
+		Show as much work as we do in class,
+		the actual calculations can be done elsewhere.
+
+\end{enumerate}
+	
+	\end{enumerate}
+
+\end{document}
