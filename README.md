@@ -1,15 +1,12 @@
 # MATH406 Introduction to Number Theory
 
-![Ulam's Spiral](ulams-spiral.png)
-
-
 University of Maryland MATH406 Spring 2021 Lecture Notes and Homeworks.
 
 ## Course Topics
-* Integers `complete`
-* Primes and Greatest Common Divisors `complete`
-* Congruences `in progress`
-* Special Congruences `in progress`
+* Integers
+* Primes and Greatest Common Divisors
+* Congruences
+* Special Congruences
 * Multiplicative Functions
 * Primitive Roots
 * Quadratic Residues

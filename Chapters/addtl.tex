@@ -276,8 +276,139 @@
 %%%%%%%%%%%%%%%
 %%% Section %%%
 %%%%%%%%%%%%%%%
-% \subsection{Homomorphic Encryption}
-% \rule{\textwidth}{1pt}\\
+\subsection{Homomorphic Encryption}
+\rule{\textwidth}{1pt}\\
+\begin{enumerate}[1.]
+	\item \textbf{Idea in Abstract:} Suppose Bob has data and needs calculations
+	done with it. He wants Alice to do the calculation for him, but at the same time
+	he doesn't want Alice to understand what she is doing. So, what Bob wants to do 
+	is to encrypt data, send it to Alice, she
+	does the calculation on the encrypted data without decrypting it,
+	and return the result to Bob so he can decrypt the answer.
+
+	\item \textbf{Basic Level/Goal:} Can we at least do it with addition and multipliction?
+	
+	\item \textbf{Simple Obfuscation of Data:} Suppose Bob wants Alice to 
+	calculate $AB$ with $A,B\in\integers^+$ without knowing $A,B$.
+	He defines an encryption function $\epsilon(x) =\lg x$.
+	He calculates $\epsilon(A) = \lg A$ and $\epsilon(B) = \lg B$, which he sends to Alice
+	with the simple instruction: \verb|Add these|. She does $\lg A + \lg B$ and returns it.
+	Bob uses $D(x) = 2^x$, since $D(\lg A + \lg B) = 2^{\lg A + \lg B}= 2^{\lg A}2^{\lg B} = AB$.
+	Provided Alice does not know what is going on, Bob is safe. \\\\
+	Note: This allows only $AB$, not $A+B$. 
+	If he wanted only $AB$, he could do $\epsilon(x)= 2^x$ and $D(x)=\lg x$.
+	Then he tells Alice to multiply. Can he find an $\epsilon$ and $D$ which allows both?
+	This is symmetric---knowing $\epsilon\equiv$ knowing $D$.
+
+	\item \textbf{Rings \& Ring Homomorphisms and Isomorphisms:}
+	\begin{enumerate}[(a)]
+		\item \textbf{Definition:} A ring (loosely speaking) is a set of numbers (objects)
+		with two operations, typically addition and multiplication. \\
+		\textbf{Ex.}
+		\begin{itemize}
+			\item $\integers_6 = \{0,1,2,3,4,5\}$ with addition and multiplication mod 6.
+			\item $2\integers =$ even integers. 
+			\item $\complex$
+			\item $M_2\reals = $ set of $2\times 2$ matrices with entries in $\reals$.
+			\item $\integers_2\times\integers_3 = \{(x,y)\mid x\in\integers_2, y\in\integers_3\}$ operations are componentwise.
+			The first is mod 2, and the second mod 3. So $(1,2) + (0, 2) = (1+0, 2+2) = (1,1)$.
+		\end{itemize}
+
+		\item \textbf{Definition:} Given two rings $R$ and $S$ a ring homomorphism is a mapping (function)
+		$\phi:R\rightarrow S$ with two properties; $$\phi(xy)=\phi(x)\phi(y)$$ 
+		$$\phi(x+y)=\phi(x) + \phi(y)$$
+		\textbf{Ex.} Define $\phi:\integers\rightarrow\integers_6$ by $\phi(x)=x\mbox{ mod }6$.
+		So $\phi(3)=3$, $\phi(10)=4$, etc\dots Observe then that 
+		$$\phi(xy)=xy\mbox{ mod }6 = (x\mbox{ mod }6)(y\mbox{ mod }6)=\phi(x)\phi(y)$$
+		$$\phi(x+y)=(x+y)\mbox{ mod }6 = (x\mbox{ mod }6)+ (y\mbox{ mod }6) = \phi(x) + \phi(y)$$
+
+		\item \textbf{Definition:} A ring isomorphism is a ring homomorphism which is one-to-one and onto.\\
+		\textbf{Ex.} Our example above is not since it is not one-to-one, $\phi(0)=\phi(6)=\phi(12)=\cdots$. \\
+		\textbf{Ex.} $\phi: \integers_6\rightarrow \integers_2\times\integers_3$ by:
+		\begin{align*}
+			\phi(0)=(0,0),\hspace{2mm} \phi(1)=(1,1),\hspace{2mm} \phi(2)=(0,2)\\
+			\phi(3)=(1,0),\hspace{2mm} \phi(4)=(0,1),\hspace{2mm} \phi(5)=(1,2)
+		\end{align*}
+		This mapping is a ring isomorphism (this is not obvious). We can see that it's one-to-one and onto.
+		The two properties are not obvious but lets verify an example with 3 and 5.
+		$$\phi(3+5) = \phi(2) = (0, 2) = (1,0)+(1,2) = \phi(3)+\phi(5)$$
+		$$\phi(3\cdot 5)= \phi(3) = (1, 0) = (1,0)(1,2) =\phi(3)\phi(5)$$
+		Bob could use this $\phi$ as an encryption function, he would set $\epsilon =\phi$ and $D=\phi^{-1}$.
+		Bob wants Alice to do $3\cdot 5 +2$. He calculates $\{\epsilon(3), \epsilon(5),\epsilon(2)\} = \{(1,0), (1,2), (0,2)\}$
+		and sends to Alice with instructions to multiply the first two and add the third.
+		Alice then does $(1,0)(1,2) + (0,2) = (1,0) + (0,2) = (1,2)$ and sends it back to Bob.
+		Bob then does $D(1,2)=5$ and he gets his result, $3\cdot 5+2=5\in\integers_6$.
+	\end{enumerate}
+
+	\item \textbf{Noise:}
+	In some encryption methods (Lattic Based methods) some noise is added to the encrypted data as
+	part of the process. That noise can be corrected for during decryption. We've actually seen this (sort of)
+	as a side effect, we just never actually did it. \\\\
+	Recall our $\epsilon(x) =\lg x$. Bob wants Alice to calulcate $3\cdot 5$, we said he would
+	send her $\lg 3$ and $\lg 5$ \dots what does he actually send her? "$\lg 3$"? That gives away our encryption
+	function. What about $\lg 3=1.584962500721156\ldots$, how many digits does he send her? \\\\
+	Suppose he sends 1.58 for $\lg 3$ and 2.32 for $\lg 5$. Alice calculates $1.58 + 2.32=3.90$ and sends it to Bob.
+	Bob then takes 3.9 and raises it base 2, $2^{3.9}=14.92852786\ldots\approx 15$. Can he conclude that two digits beyond
+	the decimal point is good enough? Let's see \\\\
+	Define $R(x,n)$ to be $x$ rounded to the closest decimal with $n$ digits beyond the decimal,
+	i.e. $R(1.584, 2) = 1.58$. With this notation we have Bob's encryption/decryption functions as
+	$$\epsilon(x) = R(\lg x, 2)$$
+	$$D(x) = R(2^x, 0)$$
+	Lets look at $3^2\cdot 5\cdot 7$, Bob calculates his two digit approximations
+	\begin{align*}
+		\epsilon(3) &= R(\lg 3, 2) = 1.58 \\
+		\epsilon(5) &= R(\lg 5, 2) = 2.32 \\
+		\epsilon(7) &= R(\lg 7, 2) = 2.81
+	\end{align*}
+	He then sends (1.58, 1.58, 2.32, 2.81) to Alice with instructions to sum them all.
+	She does so and gets 8.29 which she sends back to Bob who then uses his decryption function.
+	$$D(2^{8.29}) = R(2^{8.29}, 0) = 313$$
+	This is wrong. The correct answer is $3^2\cdot 5\cdot 7 = 315$. \\\\
+	What we're seeing here is as the calculations include more and more operations (complicated)
+	the more complex the noise accumulates. A few ways to adjust for this are:
+	\begin{enumerate}[(a)]
+		\item Bob could only send simple calculations.
+		\item Bob could pre-emptively determine how bad the noise could be and adjust what he sends accordingly.
+		\item Bob could give Alice some obscure instructions which would allow her to correct for the noise without realizing
+		that she is correcting for the noise.
+	\end{enumerate}
+
+	\item \textbf{Relation to Other Cryptosystems:}
+	\begin{enumerate}[(a)]
+		\item RSA is partially homomorphic, meaning it works for one operation. We have $\epsilon(x) = x^e\mbox{ mod }n$
+		Observe then that $\epsilon (xy) \equiv (xy)^e\mbox{ mod n} \equiv (x^e\mbox{ mod }n) (y^e\mbox{ mod }n)\equiv \epsilon(x)\epsilon(y)$.
+		But $\epsilon(x+y)\neq \epsilon(x) + \epsilon(y) \mbox{ mod }n$.
+
+		\item El Gamal is partially homomorphic. We have $\epsilon(x) = (r^k, xb^k) \mbox{ mod }p$
+		provided we understand that $xy$ is encrypted using $k_x+k_y$ where $kx$ is the random for $x$ and $ky$ is the random for $y$.
+		Then, 
+		$$\epsilon (xy) = (r^{k_x + k_y}, (xy)b^{k_x + k_y}) \equiv (r^{k_x}r^{k_y}, (xy)b^{k_x}b^{x_y})\equiv \epsilon(x) \epsilon(y) \mbox{ mod }P$$
+	
+		\item Shift ciphers and affine ciphers and not even partially homomorphic. These systems work with neither addition or multiplication.
+		
+		\item The Benaloh Cryptosystem works by doing $\epsilon(x) = g^x u^k$. Here we get:
+		$$\epsilon(x+y) = g^{x+y} u^{k_x + k_y} \equiv g^x g^y u^{k_x} u^{k_y} \equiv \epsilon(x) \epsilon(y)\mbox{ mod }n$$
+		Which maps addition to multiplication, making Benaloh a partially homomorphic system.
+	\end{enumerate}
+
+	\item \textbf{Lattice-Based Cryptography:}
+	This was first developed in the mid 2000s (super recent).
+	Lattice-Based is nice because factoring and discrete logarithms can be done in polynomial time (quickly)
+	on a quantum computer, but Lattice problems\dots it is thought that the problems are quantum resistant. \\\\
+	\textbf{Lattice-Based Problem:}
+	Consider the basis of $\reals^2$ given by $[86, 21]$ and $[79, -85]$.
+	What is the shortest vector you can build using integer combinations of these?
+	Now try this in $\reals^{10000}$\ldots, this is the Shortest Vector Problem.
+
+	\item \textbf{Brief History:}
+	\begin{enumerate}[(a)]
+		\item Up until the early 2000s it was not clear that asymmetric homomorphic encryption could even exist.
+		\item In about 2005 Lattice-based cryptography appears and people go "hmm". Thinking that this could be used to build a homomorphic encryption scheme.
+		\item In 2009 Craig Gentry (PhD Thesis) confirms that fully homomorphic encryption schemes can be built upon Lattices. But this has a lot of noise with  it.
+		\item The current state of research is trying to reduce noise as well as tweaking these homomorphic schemes.
+	\end{enumerate}
+
+\end{enumerate}
 
 %%%%%%%%%%%%%%%
 %%% Section %%%
