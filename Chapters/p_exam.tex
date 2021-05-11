@@ -22,6 +22,7 @@
 \def\inlineprod#1#2{\overset{#2}{\underset{#1}{\prod}}}
 \def\ord{{\text{ord}}}
 \def\ind{{\text{ind}}}
+\def\leg#1#2{\left(\frac{#1}{#2}\right)}
 
 \begin{document}
 \addcontentsline{toc}{section}{Practice Exams}
@@ -223,5 +224,73 @@
 \addcontentsline{toc}{subsection}{Final Exam Sample A}
 \subsection*{Final Exam Sample A}
 \rule{\textwidth}{1pt}\\
+\begin{enumerate}[1.]
+	\item Given $A=6259162$ and $B=206346$.
+	\begin{enumerate}[(a)]
+		\item Find the prime factorizations of $A$ and $B$ and use them to find $\gcd(A,B)$.
+		\item Find $\gcd(A,B)$ using the Euclidean Algorithm.
+	\end{enumerate}
+
+	\item Use the Chinese Remainder Theorem to find the smallest and second smallest nonnegative solutions
+	to the system:\begin{align*}
+		x&\equiv 2\mbox{ mod }5\\
+		x&\equiv 5\mbox{ mod }8\\
+		x&\equiv 15\mbox{ mod }17
+	\end{align*}
+
+	\item For each of $n=19, 309, 5672, 37699$ find the exact value $p_n$ of the $n^{\text{th}}$ prime
+	(however you want) and then approximate value $a_n$ of the $n^{\text{th}}$ prime (using the Prime Number Theorem
+	Corollary). Calculate the percentage error $$\frac{100 |p_n - a_n|}{p_n}$$ for each.
+
+	\item Find all incongruent solutions mod 124 to the linear system: $$52x\equiv 4\mbox{ mod }124$$
+	
+	\item Find all primitive roots for $n=13$ as follows: First find the smallest positive primitive root.
+	Then use the Theorem from class which yields all the remaining ones. Final answers should be least nonnegative residues.
+
+	\item It's a fact that $r=6$ is a primitive root mod 11.
+	\begin{enumerate}[(a)]
+		\item Use this to construct a table of indices for this primitive root.
+		\item Use the table of indices to solve the equation: $x^8\equiv 5\mbox{ mod }11$. Your answer(s) should be mod 11.
+		\item Use the table of indices to solve the equation: $3^x\equiv 5\mbox{ mod }11$. Your answer(s) should be mod 10.
+	\end{enumerate}
+
+	\item Calculate the following Jacobi symbols:
+	\begin{enumerate}[(a)]
+		\item $\leg{1141}{667}$
+		\item $\leg{1141}{51127}$
+	\end{enumerate}
+
+	\item Suppose you intercept the following ciphertext from Alice to Bob:
+	\begin{center}
+		\verb|2982 2237 3239 1364 8541 7043|
+	\end{center}
+	You know that Bob's public key is $(e,n)=(1655, 11639)$. Bob thinks this is secure because he
+	doesn't believe that his $n$ can be factored easily. Factor $n=11639$, find $\phi(n)$, find $d$ and then
+	decrypt the message. Be clear about the steps you take.
+
+	\item Determine if each of the following sets is well-ordered. If a set is not well-ordered give evidence.
+	If a set is well-ordered no evidence is required. 
+	\begin{enumerate}[(a)]
+		\item $\{0\}\cup \{(n+4)/n \mid n\in\integers^+\}$
+		\item $2\integers$
+		\item $\{\lfloor\sqrt{n}\rfloor \mid n\in\integers^+\}$
+	\end{enumerate}
+
+	\item Suppose $p\geq 11$ is an unknown prime. Find all solutions to $x^2+8\equiv 6x\mbox{ mod }p$. Note that
+	your solutions will be mod $p$.
+
+	\item Consider the inequality: $$3^n<n!$$
+	\begin{enumerate}[(a)]
+		\item Find the smallest positive integer $n_0$ for which this is true. Do this however you wish.
+		\item Prove by induction that $3^n<n!$ for all $n\geq n_0$.
+	\end{enumerate}
+
+	\item Suppose $p$ is an odd prime such that there is some $a$ so that $a$ is a quadratic residue of $p$
+	but $2a$ is a quadratice non-residue of $p$. Prove that $p\equiv \pm 3\mbox{ mod }8$.
+
+	\item Prove that for $a,b\in\integers$ and $n\in\integers^+$ that if $a^n\mid b^n$ then $a\mid b$.
+	
+	\item Prove that if $a,b,c\in\integers$ with $\gcd(a,b)=1$ and $c\mid (a+b)$ then $\gcd(c,a)=\gcd(c,b)=1$.
+\end{enumerate}
 
 \end{document}
